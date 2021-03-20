@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="RegistTimeHourV" Height="450" Width="800">
+        Title="日時入力" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="2" Margin="5">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="日時入力" FontSize="20"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
     </Grid>
 </Window>

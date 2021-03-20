@@ -11,8 +11,8 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="47*"/>
-            <RowDefinition Height="387*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="行動入力" FontSize="20"/>

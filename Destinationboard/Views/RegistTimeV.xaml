@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="RegistTimeV" Height="450" Width="800">
+        Title="時間入力" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
+    </Window.Resources>
     <Grid>
         
     </Grid>
