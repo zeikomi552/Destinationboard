@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="日時入力" Height="450" Width="800">
+        Title="日時入力" Height="300" Width="1000">
     <Window.Resources>
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Window.Resources>
@@ -44,6 +44,7 @@
                 </StackPanel>
 
             </Grid>
+            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
 
         </Grid>
     </Grid>
