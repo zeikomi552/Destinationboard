@@ -5,8 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="SettingStaffV" Height="450" Width="800">
+        Title="氏名設定画面" Height="600" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="317*"/>
+                <ColumnDefinition Width="83*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Width="120" TextAlignment="Center" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="氏名" FontSize="20"/>
+                <TextBox Margin="5" Grid.Column="1" Text=""  FontSize="20"/>
+
+                <TextBlock Width="120" TextAlignment="Center" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Text="従業員番号" FontSize="20"/>
+                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" Text=""  FontSize="20"/>
+
+            </Grid>
+            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="25"/>
+
+        </Grid>
+
+        <GroupBox Margin="5" FontSize="15" Header="氏名一覧" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="氏名"/>
+                        <DataGridTextColumn Width="*" Header="従業員番号"/>
+                        <DataGridTextColumn Width="100" Header="表示"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Margin="5" Grid.Row="1" Content="↑"/>
+                    <Button Margin="5" Grid.Row="2" Content="-"/>
+                    <Button Margin="5" Grid.Row="3" Content="↓"/>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>
