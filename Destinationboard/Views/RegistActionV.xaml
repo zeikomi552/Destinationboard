@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="出勤・退勤入力" Height="600" Width="900">
+        Title="行動入力" Height="600" Width="900">
     <Window.Resources>
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Window.Resources>
@@ -15,45 +15,30 @@
             <RowDefinition Height="387*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="出勤・退勤入力" FontSize="20"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="行動入力" FontSize="20"/>
         </Border>
-
-        <Grid Margin="5" Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="大隈重信" FontSize="{DynamicResource FontSize10}"/>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="2020/03/21(日)" FontSize="{DynamicResource FontSize08}"/>
-                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="8:00" FontSize="{DynamicResource FontSize10}"/>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Margin="5" Content="出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
-                <Button Margin="5" Grid.Column="1" Content="テレワーク出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
-                <Button Margin="5" Grid.Column="2" Content="帰宅" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
-
-            </Grid>
-
-
-
+            <TextBlock Margin="5" Text="行動" FontSize="{DynamicResource FontSize08}"/>
+            <WrapPanel Margin="5" Grid.Row="1">
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="出張" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="有給" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+            </WrapPanel>
+            <TextBlock Grid.Row="2" Margin="5" Text="行先" FontSize="{DynamicResource FontSize08}"/>
+            <WrapPanel Grid.Row="3" Margin="5">
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室1" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室2" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室3" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+            </WrapPanel>
         </Grid>
+
     </Grid>
 
 </Window>
