@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="日時入力" Height="600" Width="1200">
+        Title="日時入力" Height="auto" Width="auto">
     <Window.Resources>
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Window.Resources>
