@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard"
         mc:Ignorable="d"
-        Title="メイン画面" Height="900" Width="800">
+        Title="メイン画面" Height="900" Width="800"
+    xmlns:System="clr-namespace:System;assembly=System.Runtime">
+    <Window.Resources>
+        <ResourceDictionary Source="./Common/Themes/DestinationboardBaseThemes.xaml"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -18,12 +23,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="27" Text="行動予定表" Grid.ColumnSpan="2"/>
+                <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{DynamicResource ButtonLargeFontSize}" Text="行動予定表" Grid.ColumnSpan="2"/>
                 <TextBlock Margin="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Text="2021/03/21(日) 06:45"/>
             </Grid>
         </Border>
 
-        <GroupBox Header="詳細" FontSize="20" Grid.Row="1">
+        <GroupBox Header="詳細" FontSize="{DynamicResource ButtonMiddleFontSize}" Grid.Row="1">
             <StackPanel>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -32,10 +37,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="50" Margin="5" Content="氏名" FontSize="25"/>
-                    <Button Height="50" Margin="5" Grid.Column="1" Content="行先" FontSize="25"/>
-                    <Button Height="50" Margin="5" Grid.Column="2" Content="時間" FontSize="25"/>
-                    <Button Height="50" Margin="5" Grid.Column="3" Content="備考" FontSize="25"/>
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Content="氏名"/>
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="1" Content="行先"/>
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="2" Content="時間"/>
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="3" Content="備考" />
                 </Grid>
             </StackPanel>
         </GroupBox>
