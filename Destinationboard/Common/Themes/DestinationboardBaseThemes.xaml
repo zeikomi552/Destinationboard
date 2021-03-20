@@ -1,8 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:System="clr-namespace:System;assembly=System.Runtime">
+    <System:Double x:Key="ButtonSuperSuperLargeFontSize">40</System:Double>
     <System:Double x:Key="ButtonSuperLargeFontSize">30</System:Double>
     <System:Double x:Key="ButtonLargeFontSize">25</System:Double>
     <System:Double x:Key="ButtonMiddleFontSize">20</System:Double>
+
+    <System:Double x:Key="FontSize10">40</System:Double>
+    <System:Double x:Key="FontSize09">35</System:Double>
+    <System:Double x:Key="FontSize08">30</System:Double>
+    <System:Double x:Key="FontSize07">25</System:Double>
+    <System:Double x:Key="FontSize06">20</System:Double>
+    <System:Double x:Key="FontSize05">18</System:Double>
+    <System:Double x:Key="FontSize04">16</System:Double>
+    <System:Double x:Key="FontSize03">14</System:Double>
+    <System:Double x:Key="FontSize02">12</System:Double>
+    <System:Double x:Key="FontSize01">10</System:Double>
 
 </ResourceDictionary>
