@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Destinationboard.ViewModels
 {
-    class MainWindowVM
+    class RegistTimeVM
     {
     }
 }

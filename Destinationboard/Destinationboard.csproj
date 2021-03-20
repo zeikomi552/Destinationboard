@@ -1,18 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Converters\" />
-    <Folder Include="Common\Behaviors\" />
-    <Folder Include="Common\Actions\" />
-    <Folder Include="Common\Helpers\" />
-    <Folder Include="Common\Utilities\" />
-    <Folder Include="Views\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
