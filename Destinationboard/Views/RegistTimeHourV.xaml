@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="日時入力" Height="300" Width="1000">
+        Title="日時入力" Height="600" Width="1200">
     <Window.Resources>
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Window.Resources>
@@ -15,37 +15,45 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="日時入力" FontSize="20"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="時間入力" FontSize="20"/>
         </Border>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                </StackPanel>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="100" Height="100" Content="-" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="100" Height="100" Content="0" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="1" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="2" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="3" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="4" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="5" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="6" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="7" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="8" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="9" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
 
-            </Grid>
-            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="100" Height="100" Content="10" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="11" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="12" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="13" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="14" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="15" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="16" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="17" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="18" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="19" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="100" Height="100" Content="20" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="21" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="22" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" Width="100" Height="100" Content="23" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
 
-        </Grid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
