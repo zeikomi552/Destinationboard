@@ -33,9 +33,9 @@
             </WrapPanel>
             <TextBlock Grid.Row="2" Margin="5" Text="行先" FontSize="{DynamicResource FontSize08}"/>
             <WrapPanel Grid.Row="3" Margin="5">
-                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室1" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
-                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室2" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
-                <ToggleButton Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室3" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室1" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室2" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+                <Button Margin="5" MinWidth="200" MinHeight="100" Width="auto" Height="auto" Content="会議室3" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
             </WrapPanel>
         </Grid>
 
