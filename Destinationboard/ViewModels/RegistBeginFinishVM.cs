@@ -9,5 +9,24 @@ namespace Destinationboard.ViewModels
 {
     public class RegistBeginFinishVM : ViewModelBase
     {
+        #region 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        public override void Init()
+        {
+
+        }
+        #endregion
+
+        #region 閉じる処理
+        /// <summary>
+        /// 閉じる処理
+        /// </summary>
+        public override void Close()
+        {
+
+        }
+        #endregion
     }
 }

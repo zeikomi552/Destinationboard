@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace Destinationboard.Common.Utilities
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
+		/// <summary>
+		/// 初期化処理
+		/// </summary>
+		public abstract void Init();
+
+		public abstract void Close();
+
 		#region INotifyPropertyChanged 
 		public event PropertyChangedEventHandler PropertyChanged;
 
