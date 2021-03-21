@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Destinationboard.Views
 {
     /// <summary>
-    /// RegistApplicationV.xaml の相互作用ロジック
+    /// SettingApplicationV.xaml の相互作用ロジック
     /// </summary>
-    public partial class RegistApplicationV : Window
+    public partial class SettingApplicationV : Window
     {
-        public RegistApplicationV()
+        public SettingApplicationV()
         {
             InitializeComponent();
         }

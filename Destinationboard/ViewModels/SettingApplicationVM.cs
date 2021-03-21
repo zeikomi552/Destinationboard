@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Destinationboard.ViewModels
 {
-    public class RegistApplicationVM : ViewModelBase
+    public class SettingApplicationVM : ViewModelBase
     {
     }
 }

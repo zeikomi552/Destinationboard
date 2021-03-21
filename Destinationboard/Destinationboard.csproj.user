@@ -10,9 +10,6 @@
     <Compile Update="Views\RegistActionV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\RegistApplicationV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\RegistBeginFinishV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +25,9 @@
     <Compile Update="Views\SettingActionV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SettingApplicationV.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingStaffV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,9 +37,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RegistActionV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistApplicationV.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RegistBeginFinishV.xaml">
@@ -55,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingActionV.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingApplicationV.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingStaffV.xaml">
