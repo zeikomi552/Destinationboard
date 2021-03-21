@@ -10,6 +10,11 @@ namespace Destinationboard.Common.Utilities
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
 		/// <summary>
+		/// ロガー
+		/// </summary>
+		protected static readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+		/// <summary>
 		/// 初期化処理
 		/// </summary>
 		public abstract void Init();
