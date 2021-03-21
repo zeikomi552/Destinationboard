@@ -49,7 +49,7 @@ namespace Destinationboard.Common.Utilities
 		#region INotifyPropertyChanged 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void NotifyPropertyChanged(String info)
+		protected void NotifyPropertyChanged(String info)
 		{
 			if (PropertyChanged != null)
 			{
