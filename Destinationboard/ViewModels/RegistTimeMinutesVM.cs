@@ -15,7 +15,14 @@ namespace Destinationboard.ViewModels
         /// </summary>
         public override void Init()
         {
-
+            try
+            {
+            }
+            catch (Exception e)
+            {
+                _logger.Error("致命的なエラー", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
         }
         #endregion
 
@@ -25,7 +32,14 @@ namespace Destinationboard.ViewModels
         /// </summary>
         public override void Close()
         {
-
+            try
+            {
+            }
+            catch (Exception e)
+            {
+                _logger.Error("致命的なエラー", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
         }
         #endregion
     }
