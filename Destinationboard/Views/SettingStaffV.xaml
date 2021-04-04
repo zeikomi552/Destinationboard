@@ -11,65 +11,45 @@
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
-            </Grid.ColumnDefinitions>
+        <GroupBox Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Width="120" TextAlignment="Center" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="氏名" FontSize="{DynamicResource ButtonMiddleFontSize}"/>
-                <TextBox Margin="5" Grid.Column="1" Text=""  FontSize="20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="氏名"/>
+                            <DataGridTextColumn Width="*" Header="従業員番号"/>
+                            <DataGridTextColumn Width="100" Header="表示"/>
+                        </DataGrid.Columns>
 
-                <TextBlock Width="120" TextAlignment="Center" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Text="従業員番号" FontSize="{DynamicResource ButtonMiddleFontSize}"/>
-                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" Text=""  FontSize="20"/>
+                    </DataGrid>
 
-            </Grid>
-            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperLargeFontSize}"/>
-
-        </Grid>
-
-        <GroupBox Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <DataGrid Margin="5">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="*" Header="氏名"/>
-                        <DataGridTextColumn Width="*" Header="従業員番号"/>
-                        <DataGridTextColumn Width="100" Header="表示"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
-                    <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
-                    <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
+                        <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
+                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
+                    </Grid>
                 </Grid>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
+                    <Button Margin="5" Width="100" Content="登録"/>
+                    <Button Margin="5" Width="100" Content="キャンセル"/>
+                </StackPanel>
             </Grid>
         </GroupBox>
-
     </Grid>
 </Window>

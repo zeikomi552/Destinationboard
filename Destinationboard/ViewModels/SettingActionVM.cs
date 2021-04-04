@@ -26,6 +26,25 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 行動の登録処理
+        /// <summary>
+        /// 行動の登録処理
+        /// </summary>
+        public void RegistAction()
+        {
+        }
+        #endregion
+
+        #region 行動の削除処理
+        /// <summary>
+        /// 行動の削除処理
+        /// </summary>
+        public void DeleteAction()
+        {
+        }
+        #endregion
+
+
         #region 閉じる処理
         /// <summary>
         /// 閉じる処理

@@ -21,7 +21,7 @@ namespace Destinationboard.ViewModels
             }
             catch (Exception e)
             {
-                _logger.Error("fatal error", e);
+                _logger.Error("Fatal error", e);
             }
         }
         #endregion
