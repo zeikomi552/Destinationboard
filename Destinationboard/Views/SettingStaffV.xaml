@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="氏名設定画面" Height="600" Width="800">
+        Title="従業員設定画面" Height="600" Width="800">
 
     <Window.Resources>
         <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
@@ -25,7 +25,7 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid Margin="5">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="氏名"/>
+                            <DataGridTextColumn Width="*" Header="従業員名"/>
                             <DataGridTextColumn Width="*" Header="従業員番号"/>
                             <DataGridTextColumn Width="100" Header="表示"/>
                         </DataGrid.Columns>
