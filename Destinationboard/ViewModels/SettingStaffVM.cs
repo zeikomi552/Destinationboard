@@ -20,11 +20,26 @@ namespace Destinationboard.ViewModels
             }
             catch (Exception e)
             {
-                _logger.Error("致命的なエラー", e);
+                _logger.Error("Fatal Error", e);
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
         #endregion
+
+        public void SetStaffMaster()
+        {
+            try
+            {
+
+
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
 
         #region 閉じる処理
         /// <summary>
@@ -37,7 +52,7 @@ namespace Destinationboard.ViewModels
             }
             catch (Exception e)
             {
-                _logger.Error("致命的なエラー", e);
+                _logger.Error("Fatal Error", e);
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
