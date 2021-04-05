@@ -1,4 +1,5 @@
-﻿using Destinationboard.Common.Utilities;
+﻿using Destinationboard.Common;
+using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
 using Grpc.Core;
 using System;
@@ -46,6 +47,31 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // チャネルの作成
+                var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName,
+                    CommonValues.GetInstance().Port, ChannelCredentials.Insecure);
+
+                // クライアントの作成
+                var client = new DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient(channel);
+
+                // リクエストの作成
+                GetStaffsRequest tmp = new GetStaffsRequest();
+                
+                // データの取得
+                var reply = client.GetStaffs(tmp);
+
+                // データの移し替え
+                StaffInfoCollectionM staff_list = new StaffInfoCollectionM();
+
+                // スタッフ情報のリスト作成
+                foreach (var reply_item in reply.StaffInfoList)
+                {
+                    staff_list.Add(reply_item);
+                }
+
+                // 画面に表示
+                this.StaffItems = staff_list;
+
             }
             catch (Exception e)
             {
@@ -55,6 +81,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
         #region スタッフの登録処理
         /// <summary>
         /// スタッフの登録処理
@@ -63,11 +90,12 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-
-                var channel = new Grpc.Core.Channel("127.0.0.1", 552, ChannelCredentials.Insecure);
+                
+                var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName, CommonValues.GetInstance().Port,
+                    ChannelCredentials.Insecure);
                 var client = new DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient(channel);
 
-                RegstStaffRequest request = new RegstStaffRequest();
+                RegistStaffRequest request = new RegistStaffRequest();
                 request.UserName = Environment.UserName;
 
                 foreach (var tmp in this.StaffItems.Items)
@@ -82,7 +110,7 @@ namespace Destinationboard.ViewModels
                 }
 
 
-                var reply = client.RegstStaff(request);
+                var reply = client.RegistStaff(request);
 
             }
             catch (Exception e)

@@ -15,6 +15,11 @@
         <ViewModels:SettingStaffVM/>
     </Window.DataContext>
     <Grid>
+        <b:Interaction.Triggers>
+            <b:EventTrigger>
+                <b:CallMethodAction TargetObject="{Binding}" MethodName="Init"/>
+            </b:EventTrigger>
+        </b:Interaction.Triggers>
         <GroupBox Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧">
             <Grid>
                 <Grid.RowDefinitions>

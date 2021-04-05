@@ -9,5 +9,12 @@ namespace Destinationboard.Models
 {
     public class StaffInfoCollectionM : ModelList<StaffInfoM>
     {
+        public void Add(StaffMasterReply reply)
+        {
+            StaffInfoM info = new StaffInfoM(reply);
+
+            this.Items.Add(info);
+
+        }
     }
 }
