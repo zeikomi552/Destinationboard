@@ -90,14 +90,18 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                
+                // チャネルの取得
                 var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName, CommonValues.GetInstance().Port,
                     ChannelCredentials.Insecure);
                 var client = new DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient(channel);
 
+                // リクエストの作成
                 RegistStaffRequest request = new RegistStaffRequest();
+
+                // ユーザー名の作成
                 request.UserName = Environment.UserName;
 
+                // スタッフ情報の作成
                 foreach (var tmp in this.StaffItems.Items)
                 {
                     StaffMasterRequest staff_item = new StaffMasterRequest();
@@ -109,8 +113,10 @@ namespace Destinationboard.ViewModels
                     request.StaffInfoList.Add(staff_item);
                 }
 
-
+                // 送信
                 var reply = client.RegistStaff(request);
+
+                ShowMessage.ShowNoticeOK("登録しました", "通知");
 
             }
             catch (Exception e)
