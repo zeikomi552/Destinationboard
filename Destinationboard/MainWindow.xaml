@@ -54,9 +54,15 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
-                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="1" Content="行先"/>
-                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="2" Content="時間"/>
-                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="3" Content="備考" />
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="1" Content="行先">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveSettingActionV"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+                    <Button IsEnabled="False" FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="2" Content="時間"/>
+                    <Button IsEnabled="False" FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="3" Content="備考" />
                 </Grid>
             </StackPanel>
         </GroupBox>
