@@ -137,6 +137,9 @@ namespace Destinationboard.ViewModels
 
                 ShowMessage.ShowNoticeOK("登録しました", "通知");
 
+                // 閉じる処理
+                this.DialogResult = true;
+
             }
             catch (Exception e)
             {
@@ -154,6 +157,10 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                if (ShowMessage.ShowQuestionYesNo("変更内容は登録されません。よろしいですか？", "確認") == System.Windows.MessageBoxResult.Yes)
+                {
+                    this.DialogResult = false;
+                }
             }
             catch (Exception e)
             {
