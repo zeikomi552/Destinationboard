@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding StaffItems.Items}" SelectedItem="{Binding StaffItems.SelectedItem}">
+                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding StaffItems.Items}" SelectedItem="{Binding StaffItems.SelectedItem,TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="従業員名" Binding="{Binding StaffName}"/>
                             <DataGridTextColumn Width="*" Header="従業員番号" Binding="{Binding StaffID}"/>
