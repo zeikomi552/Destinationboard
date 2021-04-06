@@ -14,7 +14,8 @@ namespace Destinationboard.Models
         /// </summary>
         public StaffInfoM()
         {
-
+            // 初期化時にtrueをセットする
+            this.Display = true;
         }
 
         /// <summary>

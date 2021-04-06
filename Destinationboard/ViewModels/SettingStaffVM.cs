@@ -38,7 +38,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -80,7 +79,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
 
         #region スタッフの登録処理
         /// <summary>
@@ -135,6 +133,58 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 上へ移動
+        /// </summary>
+        public void MoveUp()
+        {
+            try
+            {
+                this.StaffItems.MoveUp();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+
+        #region 下へ移動処理
+        /// <summary>
+        /// 下へ移動処理
+        /// </summary>
+        public void MoveDown()
+        {
+            try
+            {
+                this.StaffItems.MoveDown();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 削除処理
+        /// <summary>
+        /// 削除処理
+        /// </summary>
+        public void Delete()
+        {
+            try
+            {
+                this.StaffItems.DeleteSelectedItem();
             }
             catch (Exception e)
             {
