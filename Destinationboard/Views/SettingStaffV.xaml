@@ -17,65 +17,72 @@
         <ViewModels:SettingStaffVM/>
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <b:Interaction.Triggers>
             <b:EventTrigger>
                 <b:CallMethodAction TargetObject="{Binding}" MethodName="Init"/>
             </b:EventTrigger>
         </b:Interaction.Triggers>
-        <GroupBox Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧">
+        <Grid>
+            <Border BorderBrush="AliceBlue" BorderThickness="5" CornerRadius="5">
+                <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text="従業員登録画面"/>
+            </Border>
+        </Grid>
+        <GroupBox Grid.Row="1" Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
+                <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding StaffItems.Items}" SelectedItem="{Binding StaffItems.SelectedItem,TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="従業員名" Binding="{Binding StaffName}"/>
+                        <DataGridTextColumn Width="*" Header="従業員番号" Binding="{Binding StaffID}"/>
+                        <DataGridTextColumn Width="100" Header="表示" Binding="{Binding Display}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding StaffItems.Items}" SelectedItem="{Binding StaffItems.SelectedItem,TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="従業員名" Binding="{Binding StaffName}"/>
-                            <DataGridTextColumn Width="*" Header="従業員番号" Binding="{Binding StaffID}"/>
-                            <DataGridTextColumn Width="100" Header="表示" Binding="{Binding Display}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
 
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-
-                        </Button>
-                        <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="Delete"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Button>
-                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Button>
-                    </Grid>
+                    </Button>
+                    <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Delete"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+                    <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
                 </Grid>
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="2">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
                     <Button Margin="5" Width="100" Content="登録">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -92,6 +99,5 @@
                     </Button>
                 </StackPanel>
             </Grid>
-        </GroupBox>
     </Grid>
 </Window>
