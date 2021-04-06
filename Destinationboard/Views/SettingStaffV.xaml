@@ -29,7 +29,7 @@
         </b:Interaction.Triggers>
         <Grid>
             <Border BorderBrush="AliceBlue" BorderThickness="5" CornerRadius="5">
-                <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text="従業員登録画面"/>
+                <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text="従業員設定画面"/>
             </Border>
         </Grid>
         <GroupBox Grid.Row="1" Margin="5"  FontSize="{DynamicResource ButtonMiddleFontSize}" Header="氏名一覧">
