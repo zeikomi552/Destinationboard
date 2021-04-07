@@ -114,7 +114,7 @@ namespace Destinationboard.ViewModels
                 RegistStaffRequest request = new RegistStaffRequest();
 
                 // ユーザー名の作成
-                request.UserName = Environment.UserName;
+                request.IP = CommonValues.GetInstance().OwnIP;
 
                 RefreshSortOrder(); // ソート順の更新
 
@@ -124,7 +124,6 @@ namespace Destinationboard.ViewModels
                     StaffMasterRequest staff_item = new StaffMasterRequest();
                     staff_item.StaffID = tmp.StaffID;
                     staff_item.SortOrder = tmp.SortOrder;
-
                     staff_item.StaffName = tmp.StaffName;
                     staff_item.Display = tmp.Display;
                     staff_item.CreateUser = Environment.UserName;

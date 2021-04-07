@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Destinationboard.Common
 {
-    public class CommonValues : ModelBase
+	public class CommonValues : ModelBase
 	{
 		#region インスタンス
 		/// <summary>
@@ -21,9 +22,9 @@ namespace Destinationboard.Common
 		/// コンストラクタ
 		/// </summary>
 		private CommonValues()
-        {
+		{
 
-        }
+		}
 		#endregion
 
 		#region インスタンスの取得処理
@@ -32,10 +33,10 @@ namespace Destinationboard.Common
 		/// </summary>
 		/// <returns></returns>
 		public static CommonValues GetInstance()
-        {
-            return _Instance;
+		{
+			return _Instance;
 
-        }
+		}
 		#endregion
 
 		#region サーバー名[ServerName]プロパティ
@@ -62,6 +63,7 @@ namespace Destinationboard.Common
 			}
 		}
 		#endregion
+
 		#region ポート番号[Port]プロパティ
 		/// <summary>
 		/// ポート番号[Port]プロパティ用変数
@@ -87,6 +89,31 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		#region 自PCのIPアドレス
+		/// <summary>
+		/// 自PCのIPアドレス
+		/// </summary>
+		public string OwnIP
+		{
+            get
+            {
+                // ホスト名を取得する
+                string hostname = Dns.GetHostName();
 
+                // ホスト名からIPアドレスを取得する
+                IPAddress[] adrList = Dns.GetHostAddresses(hostname);
+
+				if (adrList.Length > 0)
+
+				{
+					return adrList.ElementAt(0).ToString();
+				}
+				else
+				{
+					return string.Empty;
+				}
+			}
+		}
+		#endregion
 	}
 }

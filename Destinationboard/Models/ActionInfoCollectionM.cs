@@ -7,13 +7,7 @@ using System.Threading.Tasks;
 
 namespace Destinationboard.Models
 {
-    public class ActualManageM : ModelBase
-    {
-        /// <summary>
-        /// 現在の行動取得関数
-        /// </summary>
-        public void GetActualAction()
-        {
-        }
-    }
+    public class ActionInfoCollectionM : ModelList<ActionInfoM>
+	{
+	}
 }
