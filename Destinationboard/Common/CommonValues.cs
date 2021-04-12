@@ -1,4 +1,5 @@
 ﻿using Destinationboard.Common.Utilities;
+using Grpc.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,5 +116,18 @@ namespace Destinationboard.Common
 			}
 		}
 		#endregion
+
+		public DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient GetClient()
+		{
+			// チャネルの取得
+			var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName, CommonValues.GetInstance().Port,
+				ChannelCredentials.Insecure);
+
+			// 通信用クライアントの取得
+			var client = new DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient(channel);
+
+			// クライアントの返却
+			return client;
+		}
 	}
 }

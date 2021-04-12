@@ -46,9 +46,12 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid Margin="5" ItemsSource="{Binding ActionLists.Items}" SelectedItem="{Binding ActionLists.SelectedItem}">
+                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding ActionLists.Items}" SelectedItem="{Binding ActionLists.SelectedItem}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="行動"/>
+                            <DataGridTextColumn Width="*" Header="行動ID" Binding="{Binding ActionID}"/>
+                            <DataGridTextColumn Width="*" Header="行動" Binding="{Binding ActionName}"/>
+                            <DataGridTextColumn Width="*" Header="登録日" Binding="{Binding CreateDate}"/>
+                            <DataGridTextColumn Width="*" Header="登録者" Binding="{Binding CreateUser}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -72,9 +75,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Margin="5" ItemsSource="{Binding DestinationItems.Items}" SelectedItem="{Binding DestinationItems.SelectedItem}">
+                    <DataGrid AutoGenerateColumns="False" Margin="5"
+                              ItemsSource="{Binding ActionLists.SelectedItem.DestinationItems.Items}"
+                              SelectedItem="{Binding ActionLists.SelectedItem.DestinationItems.SelectedItem}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="行動"/>
+                            <DataGridTextColumn Width="*" Header="行先" Binding="{Binding DestinationName}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 

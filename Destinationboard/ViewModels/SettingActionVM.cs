@@ -37,30 +37,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 行先リスト[DestinationItems]プロパティ
-        /// <summary>
-        /// 行先リスト[DestinationItems]プロパティ用変数
-        /// </summary>
-        DestinationInfoCollectionM _DestinationItems = new DestinationInfoCollectionM();
-        /// <summary>
-        /// 行先リスト[DestinationItems]プロパティ
-        /// </summary>
-        public DestinationInfoCollectionM DestinationItems
-        {
-            get
-            {
-                return _DestinationItems;
-            }
-            set
-            {
-                if (_DestinationItems == null || !_DestinationItems.Equals(value))
-                {
-                    _DestinationItems = value;
-                    NotifyPropertyChanged("DestinationItems");
-                }
-            }
-        }
-        #endregion
+        
 
         #region 行先情報の全データ[DestinationItemsAll]プロパティ
         /// <summary>
@@ -108,6 +85,32 @@ namespace Destinationboard.ViewModels
 
                 // データの取得
                 GetActionsReply actions_reply = client.GetActions(actions_request);
+
+                ActionInfoCollectionM action_list = new ActionInfoCollectionM();
+
+
+                // 行動マスター情報の取り出し
+                foreach (var action in actions_reply.ActionList)
+                {
+                    // 該当するIDの行先情報を登録する
+                    var dist = (from x in actions_reply.DestinationList
+                               where x.ActionID.Equals(action.ActionID)
+                               select x).ToList<DestinationMasterReply>();
+
+                    // 行動情報のコピー
+                    action_list.Add(new ActionInfoM(action, dist));
+                }
+
+                this.ActionLists = action_list;
+
+
+                DestinationInfoCollectionM dist_list = new DestinationInfoCollectionM();
+                foreach (var tmp2 in actions_reply.DestinationList)
+                {
+                    // 行先情報をコピーする
+                    dist_list.Add(new DestinationInfoM(tmp2));
+                }
+
             }
             catch (Exception e)
             {
@@ -117,59 +120,142 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        public void Regist()
+        #region ソート順の更新
+        /// <summary>
+        /// ソート順の更新
+        /// </summary>
+        private void RefreshSortOrder()
+        {
+            // 行動リスト分ソート順の更新を行う
+            for(int iCnt = 0; iCnt < this.ActionLists.Items.Count; iCnt ++ )
+            {
+                // 行動の取り出し
+                var temp_action = this.ActionLists.Items.ElementAt(iCnt);
+
+                // ソート順の更新
+                temp_action.SortOrder = iCnt;
+
+                // 行動に合致する行先を取得
+                var action_destinatios = from x in this.DestinationItemsAll.Items
+                                      where x.ActionID.Equals(temp_action.ActionID)
+                                      select x;
+
+                // 行先分ソート順の更新を行う
+                for (int iCnt2 = 0; iCnt < action_destinatios.Count(); iCnt2++)
+                {
+                    // 行先の取り出し
+                    var destination_tmp = action_destinatios.ElementAt(iCnt2);
+
+                    // ソート順の更新
+                    destination_tmp.SortOrder = iCnt2;
+                }
+            }
+        }
+        #endregion
+
+        #region 行先情報用の連結キーを更新
+        /// <summary>
+        /// 行先情報用の連結キーを更新
+        /// </summary>
+        public void RefleshDestinationActionID()
         {
             try
             {
-                try
+                for (int iCnt = 0; iCnt < this.ActionLists.Items.Count; iCnt++)
                 {
-                    // チャネルの取得
-                    var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName, CommonValues.GetInstance().Port,
-                        ChannelCredentials.Insecure);
-                    var client = new DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient(channel);
+                    var elem = this.ActionLists.ElementAt(iCnt);
 
-                    // リクエストの作成
-                    RegistActionsRequest request = new RegistActionsRequest();
-
-                    // ユーザー名の作成
-                    request.IP = Environment.MachineName;
-
-                    //RefreshSortOrder(); // ソート順の更新
-
-                    //// スタッフ情報の作成
-                    //foreach (var tmp in this.StaffItems.Items)
-                    //{
-                    //    StaffMasterRequest staff_item = new StaffMasterRequest();
-                    //    staff_item.StaffID = tmp.StaffID;
-                    //    staff_item.SortOrder = tmp.SortOrder;
-                    //    staff_item.StaffName = tmp.StaffName;
-                    //    staff_item.Display = tmp.Display;
-                    //    staff_item.CreateUser = Environment.UserName;
-                    //    staff_item.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
-                    //    request.StaffInfoList.Add(staff_item);
-                    //}
-
-                    //// 送信
-                    //var reply = client.RegistStaff(request);
-
-                    //ShowMessage.ShowNoticeOK("登録しました", "通知");
-
-                    // 閉じる処理
-                    this.DialogResult = true;
-
-                }
-                catch (Exception e)
-                {
-                    _logger.Error("Fatal Error", e);
-                    ShowMessage.ShowErrorOK(e.Message, "Error");
+                    // 行動ID
+                    elem.RefleshDestinationActionID();
                 }
             }
             catch (Exception e)
             {
-                _logger.Error("致命的なエラー", e);
+                _logger.Error("Fatal Error", e);
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
+
+        #region 登録処理
+        /// <summary>
+        /// 登録処理
+        /// </summary>
+        public void Regist()
+        {
+
+            try
+            {
+                DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient client =
+                    CommonValues.GetInstance().GetClient();
+
+                // ソート順の更新
+                RefreshSortOrder();
+
+                // 行先情報のActionIDを更新
+                RefleshDestinationActionID();
+
+                string own_ip = CommonValues.GetInstance().OwnIP;   // 自PCのIPの取得
+                RegistActionsRequest action_request = new RegistActionsRequest();
+                action_request.IP = own_ip;
+
+                DestinationInfoCollectionM dist_all = new DestinationInfoCollectionM();
+
+
+                // 行動情報分要求に詰め込む
+                foreach (var tmp in this.ActionLists.Items)
+                {
+                    ActionMasterRequest action_master = new ActionMasterRequest();
+                    action_master.ActionID = tmp.ActionID;
+                    action_master.ActionName = tmp.ActionName;
+                    action_master.CreateDate = tmp.CreateDate.ToString("yyyy/MM/dd");
+                    action_master.CreateUser = tmp.CreateUser;
+                    action_master.UpdateDate = tmp.UpdateDate.ToString("yyyy/MM/dd");
+                    action_master.UpdateUser = tmp.UpdateUser;
+                    action_master.SortOrder = tmp.SortOrder;
+
+                    action_request.ActionMasterList.Add(action_master);
+
+                    foreach (var dist_tmp in tmp.DestinationItems.Items)
+                    {
+                        dist_all.Add(dist_tmp);
+                    }
+                }
+
+                // 行先情報分要求に詰め込む
+                foreach (var tmp in dist_all.Items)
+                {
+                    DestinationMasterRequest destination_master = new DestinationMasterRequest();
+                    destination_master.ActionID = tmp.ActionID;
+                    destination_master.CreateDate = tmp.CreateDate.ToString("yyyy/MM/dd");
+                    destination_master.CreateUser = tmp.CreateUser;
+                    destination_master.UpdateDate = tmp.UpdateDate.ToString("yyyy/MM/dd");
+                    destination_master.UpdateUser = tmp.UpdateUser;
+                    destination_master.SortOrder = tmp.SortOrder;
+                    destination_master.DestinationID = tmp.DestinationID;
+                    destination_master.DestinationName = tmp.DestinationName;
+
+                    action_request.DestinationMasterList.Add(destination_master);
+                }
+
+                // 送信
+                var reply = client.RegistActions(action_request);
+
+                ShowMessage.ShowNoticeOK("登録しました", "通知");
+
+                // 閉じる処理
+                this.DialogResult = true;
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+
+
+        }
+        #endregion
 
         #region 閉じる処理
         /// <summary>

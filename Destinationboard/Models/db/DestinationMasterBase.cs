@@ -45,6 +45,32 @@ namespace Destinationboard.Models.db
 		}
 		#endregion
 
+		#region ソート順[SortOrder]プロパティ
+		/// <summary>
+		/// ソート順[SortOrder]プロパティ用変数
+		/// </summary>
+		Int32 _SortOrder = 0;
+		/// <summary>
+		/// ソート順[SortOrder]プロパティ
+		/// </summary>
+		[Column("SortOrder")]
+		public Int32 SortOrder
+		{
+			get
+			{
+				return _SortOrder;
+			}
+			set
+			{
+				if (!_SortOrder.Equals(value))
+				{
+					_SortOrder = value;
+					NotifyPropertyChanged("SortOrder");
+				}
+			}
+		}
+		#endregion
+
 		#region 行先名[DestinationName]プロパティ
 		/// <summary>
 		/// 行先名[DestinationName]プロパティ用変数
@@ -236,6 +262,8 @@ namespace Destinationboard.Models.db
 		{
 			this.DestinationID = item.DestinationID;
 
+			this.SortOrder = item.SortOrder;
+
 			this.DestinationName = item.DestinationName;
 
 			this.ActionID = item.ActionID;
@@ -251,8 +279,9 @@ namespace Destinationboard.Models.db
 
 		}
 		#endregion
-
 		#endregion
+
 	}
+
 
 }

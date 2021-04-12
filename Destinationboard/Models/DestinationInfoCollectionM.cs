@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Destinationboard.Models
 {
-    public class DestinationInfoCollectionM : ModelList<DestinationMasterBase>
+    public class DestinationInfoCollectionM : ModelList<DestinationInfoM>
     {
     }
 }
