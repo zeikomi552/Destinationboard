@@ -121,6 +121,7 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
+                    
                 }
 
             }

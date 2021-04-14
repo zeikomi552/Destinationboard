@@ -1,5 +1,7 @@
 ﻿using Destinationboard.Common.Utilities;
 using Destinationboard.Models.db;
+using Destinationboard.ViewModels;
+using Destinationboard.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,5 +64,23 @@ namespace Destinationboard.Models
             this.Memo = reply.Memo;
         }
         #endregion
+
+        /// <summary>
+        /// 出退勤を登録する
+        /// </summary>
+        public void MoveRegistBeginFinishV()
+        {
+            var wnd = new RegistBeginFinishV();
+            var vm = wnd.DataContext as RegistBeginFinishVM;
+            vm.ActionPlan.StaffID = this.StaffID;
+            vm.ActionPlan.StaffName = this.StaffName;
+
+            // 画面遷移
+            if (wnd.ShowDialog() == true)
+            {
+
+            }
+        }
+
     }
 }

@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
         Title="分入力" Height="auto" Width="auto">
-    <Window.Resources>
-        <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

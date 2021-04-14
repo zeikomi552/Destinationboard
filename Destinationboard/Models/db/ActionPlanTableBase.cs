@@ -1,4 +1,6 @@
 ﻿using Destinationboard.Common.Utilities;
+using Destinationboard.ViewModels;
+using Destinationboard.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -66,6 +68,32 @@ namespace Destinationboard.Models.db
 				{
 					_StaffName = value;
 					NotifyPropertyChanged("StaffName");
+				}
+			}
+		}
+		#endregion
+
+		#region 0:帰宅 1:出勤 2:テレワーク出勤[Status]プロパティ
+		/// <summary>
+		/// 0:帰宅 1:出勤 2:テレワーク出勤[Status]プロパティ用変数
+		/// </summary>
+		Int32 _Status = 0;
+		/// <summary>
+		/// 0:帰宅 1:出勤 2:テレワーク出勤[Status]プロパティ
+		/// </summary>
+		[Column("Status")]
+		public Int32 Status
+		{
+			get
+			{
+				return _Status;
+			}
+			set
+			{
+				if (!_Status.Equals(value))
+				{
+					_Status = value;
+					NotifyPropertyChanged("Status");
 				}
 			}
 		}
@@ -290,6 +318,8 @@ namespace Destinationboard.Models.db
 
 			this.StaffName = item.StaffName;
 
+			this.Status = item.Status;
+
 			this.ActionID = item.ActionID;
 
 			this.ActionName = item.ActionName;
@@ -310,5 +340,6 @@ namespace Destinationboard.Models.db
 
 		#endregion
 	}
+
 
 }

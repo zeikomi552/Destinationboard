@@ -10,9 +10,6 @@
         Title="従業員設定画面" Height="600" Width="800" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
     WindowStartupLocation="CenterScreen" WindowStyle="None">
 
-    <Window.Resources>
-        <ResourceDictionary Source="../Common/Themes/DestinationboardBaseThemes.xaml"/>
-    </Window.Resources>
     <Window.DataContext>
         <ViewModels:SettingStaffVM/>
     </Window.DataContext>

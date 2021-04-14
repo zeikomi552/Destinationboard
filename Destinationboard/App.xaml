@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Destinationboard"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="./Common/Themes/DestinationboardBaseThemes.xaml"/>
     </Application.Resources>
 </Application>
