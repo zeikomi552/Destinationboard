@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
+        xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Class="Destinationboard.Views.RegistBeginFinishV"
         mc:Ignorable="d"
-        Title="出勤・退勤入力" Height="600" Width="900">
+        Title="出勤・退勤入力" Height="600" Width="900" hlp:DialogResultHelper.DialogResult="{Binding DialogResult}">
     <Window.Resources>
         <Converters:IntToBooleanConverter x:Key="IntToBooleanConverter"/>
     </Window.Resources>
@@ -44,8 +45,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="2020/03/21(日)" FontSize="{DynamicResource FontSize08}"/>
-                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="8:00" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Language="ja-jp" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd)}" FontSize="{DynamicResource FontSize08}"/>
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=H:mm}" FontSize="{DynamicResource FontSize10}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -55,9 +56,27 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Margin="5" Content="出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <ToggleButton Margin="5" Grid.Column="1" Content="テレワーク出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <ToggleButton Margin="5" Grid.Column="2" Content="帰宅" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ToggleButton Margin="5" Content="出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton Margin="5" Grid.Column="1" Content="テレワーク出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton Margin="5" Grid.Column="2" Content="帰宅" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ToggleButton>
 
             </Grid>
 
