@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistTimeV"
         mc:Ignorable="d"
-        Title="日時入力" Height="600" Width="1200" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        Title="日時入力" Height="auto" Width="1200" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
     <Window.DataContext>
         <ViewModels:RegistTimeVM/>
@@ -26,7 +26,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,6 +33,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
+                    <Border Margin="5" BorderThickness="5" BorderBrush="Black">
+                        <TextBlock  FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="開始日時"/>
+                    </Border>
                     <Viewbox Width="400" Height="400" Margin="20" Stretch="Fill">
                         <Calendar SelectedDate="{Binding ActionPlan.FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   FontSize="{DynamicResource FontSize10}"/>
@@ -68,6 +70,9 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
+                    <Border Margin="5" BorderThickness="5" BorderBrush="Black">
+                        <TextBlock  FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="終了日時"/>
+                    </Border>
                     <Viewbox Width="400" Height="400" Margin="20" Stretch="Fill">
                         <Calendar SelectedDate="{Binding ActionPlan.ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   FontSize="{DynamicResource FontSize10}"/>
@@ -100,25 +105,38 @@
                             </b:Interaction.Triggers>
                         </Button>
                     </Grid>
+
                 </StackPanel>
             </Grid>
 
-            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Click">
-                        <b:CallMethodAction TargetObject="{Binding}" MethodName="Regist"/>
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </Button>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <Button Height="100" Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Regist"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
 
-            <Button Margin="5" Grid.Column="2" Content="キャンセル" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Click">
-                        <b:CallMethodAction TargetObject="{Binding}" MethodName="Regist"/>
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </Button>
+                    <Button Height="100" Margin="5" Grid.Column="2" Content="キャンセル" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
 
+
+                    <Button Height="200" Margin="5,120" Grid.Column="2" Content="クリア" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Clear"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

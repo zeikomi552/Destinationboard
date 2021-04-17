@@ -60,6 +60,13 @@ namespace Destinationboard.ViewModels
         /// <param name="e"></param>
         void timer_Tick(object sender, EventArgs e)
         {
+            // 日付の変化チェック
+            if (!this.CurrentTime.Date.Equals(DateTime.Today))
+            {
+                // 日付が変わったので全ての日付データを更新
+                Init();
+            }
+            
             this.CurrentTime = DateTime.Now;    // 現在時刻の更新
         }
         #endregion

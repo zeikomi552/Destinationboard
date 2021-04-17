@@ -8,11 +8,16 @@
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels"
         xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:Converters="clr-namespace:Destinationboard.Common.Converters"
         hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         x:Class="Destinationboard.MainWindow"
         mc:Ignorable="d"
         Title="メイン画面" Height="900" Width="800"
     >
+
+    <Window.Resources>
+        <Converters:DateTextConverter x:Key="DateTextConverter"/>
+    </Window.Resources>
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -76,7 +81,7 @@
                 <Grid Grid.Row="1" >
                     <ItemsControl Margin="5" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items}">
                         <ItemsControl.Template>
-                            <ControlTemplate TargetType="ItemsControl">
+                            <ControlTemplate TargetType="{x:Type ItemsControl}">
                                 <Border BorderThickness="1" BorderBrush="Black" Background="Azure">
                                     <ScrollViewer>
                                         <ItemsPresenter Margin="10" />
@@ -109,32 +114,30 @@
                                         </b:Interaction.Triggers>
                                     </Button>
                                     <Button Height="50" Margin="5" Grid.Column="1">
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding ActionName}"/>
-                                                <TextBlock Text=":"/>
-                                                <TextBlock Text="{Binding DestinationName}"/>
-                                            </StackPanel>
-                                        </Button.Content>
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
                                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistAction"/>
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding ActionName}"/>
+                                            <TextBlock Text=":"/>
+                                            <TextBlock Text="{Binding DestinationName}"/>
+                                        </StackPanel>
                                     </Button>
                                     <Grid Grid.Column="2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Height="50" Margin="5" Content="{Binding FromTimeText}">
+                                        <Button Height="50" Margin="5" Content="{Binding FromTime, Converter={StaticResource DateTextConverter}}">
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
                                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistStartTime"/>
                                                 </b:EventTrigger>
                                             </b:Interaction.Triggers>
                                         </Button>
-                                        <Button Height="50" Margin="5" Grid.Column="1" Content="{Binding ToTimeText}">
+                                        <Button Height="50" Margin="5" Grid.Column="1" Content="{Binding ToTime, Converter={StaticResource DateTextConverter}}">
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
                                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistEndTime"/>

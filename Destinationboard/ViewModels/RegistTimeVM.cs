@@ -177,6 +177,23 @@ namespace Destinationboard.ViewModels
             }
         }
 
+        /// <summary>
+        /// 時間情報をクリアする
+        /// </summary>
+        public void Clear()
+        {
+            try
+            {
+                this.ActionPlan.FromTime = null;    // null設定
+                this.ActionPlan.ToTime = null;      // null設定
+            }
+            catch (Exception e)
+            {
+                _logger.Error("致命的なエラー", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+
         #region 登録処理
         /// <summary>
         /// 登録処理
