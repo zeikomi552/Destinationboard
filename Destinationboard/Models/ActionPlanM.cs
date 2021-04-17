@@ -14,6 +14,29 @@ namespace Destinationboard.Models
 {
     public class ActionPlanM : ActionPlanTableBase
     {
+        // 従業員名のクリックイベント
+        public event EventHandler ClickRegistBeginFinish;
+
+        /// <summary>
+        /// 行動ボタンのクリックイベント
+        /// </summary>
+        public event EventHandler ClickRegistAction;
+
+        /// <summary>
+        /// 開始時刻のクリックイベント
+        /// </summary>
+        public event EventHandler ClickStartTime;
+
+        /// <summary>
+        /// 終了時刻のクリックイベント
+        /// </summary>
+        public event EventHandler ClickEndTime;
+
+        /// <summary>
+        /// メモのクリックイベント
+        /// </summary>
+        public event EventHandler ClickMemo;
+
         #region コンストラクタ
         /// <summary>
         /// コンストラクタ
@@ -195,90 +218,69 @@ namespace Destinationboard.Models
         }
         #endregion
 
-        #region 出退勤を登録する
+        #region 従業員名ボタンが押された処理
         /// <summary>
-        /// 出退勤を登録する
+        /// 従業員名ボタンが押された処理
         /// </summary>
-        public void MoveRegistBeginFinishV()
+        public void RegistBeginFinish()
         {
-            var wnd = new RegistBeginFinishV();
-            var vm = wnd.DataContext as RegistBeginFinishVM;
-            vm.ActionPlan.Copy(this);
-
-            // 画面遷移
-            if (wnd.ShowDialog() == true)
+            if (this.ClickRegistBeginFinish != null)
             {
-                // 行動予定の登録
-                RegistActionPlanTable(vm.ActionPlan);
+                this.ClickRegistBeginFinish(this, EventArgs.Empty);
             }
         }
         #endregion
 
-        #region 行動登録画面への画面遷移
+        #region 行先ボタンが押された処理
         /// <summary>
-        /// 行動登録画面への画面遷移
+        /// 行先ボタンが押された処理
         /// </summary>
-        public void MoveRegistActionV()
+        public void RegistAction()
         {
-            try
+            if (this.ClickRegistAction != null)
             {
-                RegistActionV wnd = new RegistActionV();
-                RegistActionVM vm = wnd.DataContext as RegistActionVM;
-
-                // 画面を開く
-                if (wnd.ShowDialog() == true)
-                {
-                    //Init();
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error("fatal error", e);
-                ShowMessage.ShowErrorOK(e.Message, "Error");
+                this.ClickRegistAction(this, EventArgs.Empty);
             }
         }
         #endregion
 
+        #region 開始時刻が押された処理
         /// <summary>
-        /// 開始時刻の登録画面へ画面遷移
+        /// 開始時刻が押された処理
         /// </summary>
-        public void MoveFromRegistTime()
+        public void RegistStartTime()
         {
-            MoveRegistTimeV();
-        }
-
-        /// <summary>
-        /// 終了時刻の登録画面への画面遷移
-        /// </summary>
-        public void MoveToRegistTime()
-        {
-            MoveRegistTimeV();
-        }
-
-        #region 時間登録画面への画面遷移
-        /// <summary>
-        /// 時間登録画面への画面遷移
-        /// </summary>
-        public void MoveRegistTimeV()
-        {
-            try
+            if (this.ClickStartTime != null)
             {
-                RegistTimeV wnd = new RegistTimeV();
-                RegistTimeVM vm = wnd.DataContext as RegistTimeVM;
-
-                // 画面を開く
-                if (wnd.ShowDialog() == true)
-                {
-                    //Init();
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error("fatal error", e);
-                ShowMessage.ShowErrorOK(e.Message, "Error");
+                this.ClickStartTime(this, EventArgs.Empty);
             }
         }
         #endregion
 
+        #region 終了時刻が押された処理
+        /// <summary>
+        /// 終了時刻が押された処理
+        /// </summary>
+        public void RegistEndTime()
+        {
+            if (this.ClickEndTime != null)
+            {
+                this.ClickEndTime(this, EventArgs.Empty);
+            }
+        }
+        #endregion
+
+        #region メモが押された処理
+        /// <summary>
+        /// メモが押された処理
+        /// </summary>
+        public void RegistMemo()
+        {
+            if (this.ClickMemo != null)
+            {
+                this.ClickMemo(this, EventArgs.Empty);
+            }
+        }
+        #endregion
     }
 }

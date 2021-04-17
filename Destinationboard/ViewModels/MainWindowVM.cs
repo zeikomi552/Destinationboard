@@ -89,6 +89,94 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region イベントの初期化処理
+        /// <summary>
+        /// イベントの初期化処理
+        /// </summary>
+        public void InitEvent()
+        {
+            foreach (var staff in this.ActionPlans.Items)
+            {
+                staff.ClickRegistBeginFinish -= Staff_ClickRegistBeginFinish;
+                staff.ClickRegistBeginFinish += Staff_ClickRegistBeginFinish;
+
+                staff.ClickRegistAction -= Staff_ClickRegistAction;
+                staff.ClickRegistAction += Staff_ClickRegistAction;
+
+                staff.ClickMemo -= Staff_ClickMemo;
+                staff.ClickMemo += Staff_ClickMemo;
+
+                staff.ClickStartTime -= Staff_ClickStartTime;
+                staff.ClickStartTime += Staff_ClickStartTime;
+
+                staff.ClickEndTime -= Staff_ClickEndTime;
+                staff.ClickEndTime += Staff_ClickEndTime;
+            }
+        }
+
+        private void Staff_ClickEndTime(object sender, EventArgs e)
+        {
+            MoveRegistTimeV();
+        }
+
+        private void Staff_ClickStartTime(object sender, EventArgs e)
+        {
+            MoveRegistTimeV();
+        }
+
+        private void Staff_ClickMemo(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Staff_ClickRegistAction(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistActionV wnd = new RegistActionV();
+                RegistActionVM vm = wnd.DataContext as RegistActionVM;
+
+                // 画面を開く
+                if (wnd.ShowDialog() == true)
+                {
+                    Init();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
+            }
+        }
+
+        #region 従業員ステータスの登録画面へ遷移する
+        /// <summary>
+        /// 従業員ステータスの登録画面へ遷移する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Staff_ClickRegistBeginFinish(object sender, EventArgs e)
+        {
+            var wnd = new RegistBeginFinishV();
+            wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
+            wnd.WindowStyle = System.Windows.WindowStyle.None;
+
+            var vm = wnd.DataContext as RegistBeginFinishVM;
+
+            var action_plan = sender as ActionPlanM;
+            vm.ActionPlan.Copy(action_plan);
+
+            // 画面遷移
+            if (wnd.ShowDialog() == true)
+            {
+                // 行動予定の登録
+                ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
+                Init();
+            }
+        }
+        #endregion
+        #endregion
+
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -147,6 +235,9 @@ namespace Destinationboard.ViewModels
 
                 // 画面に表示
                 this.ActionPlans = action_list;
+
+                // イベント登録処理
+                InitEvent();
 
             }
             catch (Exception e)
@@ -234,7 +325,31 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-       
+
+        #region 時間登録画面への画面遷移
+        /// <summary>
+        /// 時間登録画面への画面遷移
+        /// </summary>
+        public void MoveRegistTimeV()
+        {
+            try
+            {
+                RegistTimeV wnd = new RegistTimeV();
+                RegistTimeVM vm = wnd.DataContext as RegistTimeVM;
+
+                // 画面を開く
+                if (wnd.ShowDialog() == true)
+                {
+                    //Init();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
 
         #region 閉じる処理
         /// <summary>

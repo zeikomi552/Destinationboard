@@ -104,14 +104,14 @@
                                     <Button Height="50" Margin="5" Content="{Binding StaffName}">
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
-                                                <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveRegistBeginFinishV"/>
+                                                <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistBeginFinish"/>
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
                                     </Button>
                                     <Button Height="50" Margin="5" Grid.Column="1" Content="{Binding DestinationName}">
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
-                                                <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveRegistActionV"/>
+                                                <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistAction"/>
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
                                     </Button>
@@ -123,19 +123,25 @@
                                         <Button Height="50" Margin="5" Content="{Binding FromTime}">
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
-                                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveFromRegistTime"/>
+                                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistStartTime"/>
                                                 </b:EventTrigger>
                                             </b:Interaction.Triggers>
                                         </Button>
                                         <Button Height="50" Margin="5" Grid.Column="1" Content="{Binding ToTime}">
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
-                                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveToRegistTime"/>
+                                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistEndTime"/>
                                                 </b:EventTrigger>
                                             </b:Interaction.Triggers>
                                         </Button>
                                     </Grid>
-                                    <Button Height="50" Margin="5" Grid.Column="3" Content="{Binding Memo}"/>
+                                    <Button Height="50" Margin="5" Grid.Column="3" Content="{Binding Memo}">
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="Click">
+                                                <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistMemo"/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </Button>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
