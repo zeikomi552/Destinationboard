@@ -12,6 +12,8 @@ namespace Destinationboard.ViewModels
     public class RegistTimeVM : ViewModelBase
     {
 
+        public bool FromTimeF { get; set; } = false;
+
         #region 個人の行動予定[ActionPlan]プロパティ
         /// <summary>
         /// 個人の行動予定[ActionPlan]プロパティ用変数
@@ -56,6 +58,31 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+        public void FromTime_MoveRegistTimeMinutesV()
+        {
+            try
+            {
+                this.ActionPlan.FromTime = MoveRegistTimeMinutesV(this.ActionPlan.FromTime);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("致命的なエラー", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        public void ToTime_MoveRegistTimeMinutesV()
+        {
+            try
+            {
+                this.ActionPlan.ToTime = MoveRegistTimeMinutesV(this.ActionPlan.ToTime);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("致命的なエラー", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
 
         public void FromTime_MoveRegistTimeHourV()
         {
@@ -107,6 +134,41 @@ namespace Destinationboard.ViewModels
                 {
                     // 時間データを足し合わせて返却する
                     return tmp_date.Date.AddHours(vm.ClickNumber);
+                }
+            }
+            else
+            {
+                return org_time;
+            }
+        }
+
+        private DateTime? MoveRegistTimeMinutesV(DateTime? org_time)
+        {
+            var wnd = new RegistTimeMinutesV();
+            var vm = wnd.DataContext as RegistTimeMinutesVM;
+
+            if (wnd.ShowDialog() == true)
+            {
+                DateTime tmp_date = DateTime.Today;
+                // 日付を持っている？
+                if (org_time.HasValue)
+                {
+                    // 日付データに変更（時間データを削除）
+                    tmp_date = org_time.Value.Date;
+                    // 時間を足す
+                    tmp_date = tmp_date.AddHours(org_time.Value.Hour);
+                }
+
+                // 押された時間が-の場合
+                if (vm.ClickNumber <= 0)
+                {
+                    // 分は0の状態で返却する
+                    return tmp_date;
+                }
+                else
+                {
+                    // 分データを足し合わせて返却する
+                    return tmp_date.AddMinutes(vm.ClickNumber);
                 }
             }
             else

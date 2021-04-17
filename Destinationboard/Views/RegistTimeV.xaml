@@ -54,11 +54,16 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Button>
-                        <TextBlock Grid.Column="1" TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
+                        <TextBlock Grid.Column="1" TextAlignment="Center"  Margin="20" FontSize="{DynamicResource FontSize10}"/>
                         <Button Margin="5" Grid.Column="2" Background="AntiqueWhite" FontSize="{DynamicResource FontSize10}">
                             <Button.Content>
                                 <TextBlock Text="{Binding ActionPlan.FromTime, StringFormat=mm}"/>
                             </Button.Content>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="FromTime_MoveRegistTimeMinutesV"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
                         </Button>
                     </Grid>
                 </StackPanel>
@@ -88,6 +93,11 @@
                             <Button.Content>
                                 <TextBlock Text="{Binding ActionPlan.ToTime, StringFormat=mm}"/>
                             </Button.Content>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="ToTime_MoveRegistTimeMinutesV"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
                         </Button>
                     </Grid>
                 </StackPanel>

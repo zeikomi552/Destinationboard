@@ -124,7 +124,8 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                MoveRegistTimeV();
+                // 終了時刻での呼び出し
+                MoveRegistTimeV(sender, ev);
                 Init();
             }
             catch (Exception ex)
@@ -145,7 +146,8 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                MoveRegistTimeV();
+                // 開始時刻での呼び出し
+                MoveRegistTimeV(sender, e);
                 Init();
 
             }
@@ -407,17 +409,24 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// 時間登録画面への画面遷移
         /// </summary>
-        public void MoveRegistTimeV()
+        public void MoveRegistTimeV(object sender, EventArgs ev)
         {
             try
             {
                 RegistTimeV wnd = new RegistTimeV();
+                wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
+                wnd.WindowStyle = System.Windows.WindowStyle.None;
+
                 RegistTimeVM vm = wnd.DataContext as RegistTimeVM;
+                var action_plan = sender as ActionPlanM;
+                vm.ActionPlan.Copy(action_plan);
 
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
-                    //Init();
+                    // 行動予定の登録
+                    ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
+                    Init();
                 }
             }
             catch (Exception ex)

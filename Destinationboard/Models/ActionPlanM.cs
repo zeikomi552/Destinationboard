@@ -42,9 +42,9 @@ namespace Destinationboard.Models
         /// コンストラクタ
         /// </summary>
         public ActionPlanM()
-		{
+        {
 
-		}
+        }
         #endregion
 
         #region コンストラクタ
@@ -269,6 +269,49 @@ namespace Destinationboard.Models
             }
         }
         #endregion
+
+        public string FromTimeText
+        {
+            get
+            {
+                if (this.FromTime.HasValue)
+                {
+                    if (this.FromTime.Value.Date.Equals(DateTime.Today))
+                    {
+                        return this.FromTime.Value.ToString("H:mm");
+                    }
+                    else
+                    {
+                        return this.FromTime.Value.ToString("M/dd(ddd)");
+                    }
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+        public string ToTimeText
+        {
+            get
+            {
+                if (this.ToTime.HasValue)
+                {
+                    if (this.ToTime.Value.Date.Equals(DateTime.Today))
+                    {
+                        return this.ToTime.Value.ToString("H:mm");
+                    }
+                    else
+                    {
+                        return this.ToTime.Value.ToString("M/dd(ddd)");
+                    }
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
 
         #region メモが押された処理
         /// <summary>
