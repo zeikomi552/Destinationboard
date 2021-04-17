@@ -196,6 +196,11 @@ namespace Destinationboard.ViewModels
             {
                 RegistActionV wnd = new RegistActionV();
                 RegistActionVM vm = wnd.DataContext as RegistActionVM;
+                wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
+                wnd.WindowStyle = System.Windows.WindowStyle.None;
+
+                var action_plan = sender as ActionPlanM;
+                vm.ActionPlan.Copy(action_plan);
 
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
