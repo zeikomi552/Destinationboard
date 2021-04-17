@@ -12,6 +12,32 @@ namespace Destinationboard.Models
 {
     public class ActionInfoCollectionM : ModelList<ActionInfoM>
 	{
+        #region コンストラクタ
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public ActionInfoCollectionM()
+        {
+
+        }
+        #endregion
+
+        #region コンストラクタ
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="item">List</param>
+        public ActionInfoCollectionM(List<ActionInfoM> item)
+        {
+            this.Items = new System.Collections.ObjectModel.ObservableCollection<ActionInfoM>(item);
+        }
+        #endregion
+
+        #region 行動一覧の取得処理
+        /// <summary>
+        /// 行動一覧の取得処理
+        /// </summary>
+        /// <returns>行動一覧</returns>
         public static ActionInfoCollectionM GetActionInfo()
 		{
             // チャネルの作成
@@ -45,9 +71,10 @@ namespace Destinationboard.Models
             // 行動リストの返却
             return action_list;
         }
+        #endregion
 
-		#region INotifyPropertyChanged 
-		public new event PropertyChangedEventHandler PropertyChanged;
+        #region INotifyPropertyChanged 
+        public new event PropertyChangedEventHandler PropertyChanged;
 
 		private void NotifyPropertyChanged(String info)
 		{

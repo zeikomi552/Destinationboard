@@ -37,8 +37,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        
-
         #region 行先情報の全データ[DestinationItemsAll]プロパティ
         /// <summary>
         /// 行先情報の全データ[DestinationItemsAll]プロパティ用変数
@@ -64,7 +62,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -73,7 +70,13 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.ActionLists = ActionInfoCollectionM.GetActionInfo();
+                // 行動一覧の取得
+                var tmp = ActionInfoCollectionM.GetActionInfo();
+
+                // ソート順でソート
+                this.ActionLists = new ActionInfoCollectionM((from x in tmp.Items
+                                                              orderby x.SortOrder
+                                                              select x).ToList<ActionInfoM>());
             }
             catch (Exception e)
             {
@@ -217,6 +220,62 @@ namespace Destinationboard.ViewModels
             }
 
 
+        }
+        #endregion
+
+        #region 上へ移動
+        /// <summary>
+        /// 上へ移動
+        /// </summary>
+        public void MoveUp()
+        {
+            try
+            {
+                this.ActionLists.MoveUp();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 下へ移動処理
+        /// <summary>
+        /// 下へ移動処理
+        /// </summary>
+        public void MoveDown()
+        {
+            try
+            {
+                this.ActionLists.MoveDown();
+                RefreshSortOrder(); // ソート順の更新
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 削除処理
+        /// <summary>
+        /// 削除処理
+        /// </summary>
+        public void Delete()
+        {
+            try
+            {
+                this.ActionLists.DeleteSelectedItem();
+                RefreshSortOrder(); // ソート順の更新
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
         }
         #endregion
 
