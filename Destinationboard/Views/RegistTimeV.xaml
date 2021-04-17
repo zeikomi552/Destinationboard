@@ -100,7 +100,7 @@
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="終了日時"/>
                     </Border>
                     <Viewbox Width="400" Height="500" Margin="20" Stretch="Fill">
-                        <Calendar Language="ja-jp" FontSize="{DynamicResource FontSize10}"/>
+                        <Calendar SelectedDate="{Binding ActionPlan.ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Language="ja-jp" FontSize="{DynamicResource FontSize10}"/>
                     </Viewbox>
                     <Grid>
                         <Grid.ColumnDefinitions>
