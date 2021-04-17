@@ -84,7 +84,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
-                                <ToggleButton Width="100" Height="50" Content="{Binding ActionName}"
+                                <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Width="100" Height="50" Content="{Binding ActionName}"
                                           IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <b:Interaction.Triggers>
                                         <b:EventTrigger EventName="Checked">
@@ -125,7 +125,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
-                                <ToggleButton Width="100" Height="50" Content="{Binding DestinationName}" IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Width="100" Height="50" Content="{Binding DestinationName}" IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <b:Interaction.Triggers>
                                         <b:EventTrigger EventName="Checked">
                                             <b:CallMethodAction TargetObject="{Binding}" MethodName="Selection"/>

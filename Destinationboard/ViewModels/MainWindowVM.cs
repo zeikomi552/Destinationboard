@@ -240,8 +240,6 @@ namespace Destinationboard.ViewModels
 
                 var wnd = new RegistBeginFinishV();
                 wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
-                wnd.WindowStyle = System.Windows.WindowStyle.None;
-
                 var vm = wnd.DataContext as RegistBeginFinishVM;
 
                 var action_plan = sender as ActionPlanM;

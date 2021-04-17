@@ -65,7 +65,6 @@
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-
                     </Button>
                     <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
                         <b:Interaction.Triggers>

@@ -55,28 +55,44 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Viewbox Margin="5" Stretch="Fill">
 
-                <ToggleButton Margin="5" Content="出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton Margin="5" Grid.Column="1" Content="テレワーク出社" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton Margin="5" Grid.Column="2" Content="帰宅" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </ToggleButton>
+                    <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <TextBlock FontSize="10" Text="出社"/>
+                        </ToggleButton.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ToggleButton>
+                </Viewbox>
+                <Viewbox Margin="5" Grid.Column="1">
+                    <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <TextBlock FontSize="10" Text="テレワーク"/>
+                         </ToggleButton.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ToggleButton>
+                </Viewbox>
+                <Viewbox Margin="5" Grid.Column="2" Stretch="Fill">
+                    <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}" IsChecked="{Binding ActionPlan.Status, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="40">
+                        <ToggleButton.Content>
+                            <TextBlock FontSize="10" Text="帰宅"/>
+                        </ToggleButton.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ToggleButton>
+
+                </Viewbox>
 
             </Grid>
 
