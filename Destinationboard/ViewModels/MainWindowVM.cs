@@ -436,6 +436,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                Environment.Exit(0);
             }
             catch (Exception e)
             {
