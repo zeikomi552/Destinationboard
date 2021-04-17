@@ -37,7 +37,7 @@ namespace Destinationboard.Models
         }
         #endregion
 
-
+        #region コンストラクタ
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -50,6 +50,7 @@ namespace Destinationboard.Models
 			this.UpdateDate = DateTime.Today;
 			this.UpdateUser = Environment.UserName;
 		}
+
         /// <summary>
         /// コンストラクタ(StaffMasterReplyを変換する)
         /// </summary>
@@ -58,6 +59,7 @@ namespace Destinationboard.Models
         {
             this.Copy(reply, list);
         }
+        #endregion
 
         #region 行先のチェックを外す
         /// <summary>
@@ -73,6 +75,7 @@ namespace Destinationboard.Models
         }
         #endregion
 
+        #region 選択処理
         /// <summary>
         /// 選択処理
         /// </summary>
@@ -85,7 +88,9 @@ namespace Destinationboard.Models
                 SelectionEvent(this, EventArgs.Empty);
             }
         }
+        #endregion
 
+        #region Copy処理(ActionMasterReplyを変換する)
         /// <summary>
         /// Copy処理(ActionMasterReplyを変換する)
         /// </summary>
@@ -110,6 +115,20 @@ namespace Destinationboard.Models
             }
             this.DestinationItems = dist;
         }
+        #endregion
+
+        #region 行先情報のソート
+        /// <summary>
+        /// 行先情報のソート
+        /// </summary>
+        /// <returns>ソート後の行先情報</returns>
+        public DestinationInfoCollectionM SortDestination()
+        {
+            return new DestinationInfoCollectionM((from x in this.DestinationItems.Items
+                                                   orderby x.SortOrder
+                                                   select x).ToList<DestinationInfoM>());
+        }
+        #endregion
 
         #region 行先リスト[DestinationItems]プロパティ
         /// <summary>

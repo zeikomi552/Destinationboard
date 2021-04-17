@@ -103,9 +103,27 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
-                        <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
-                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}"/>
+                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUpDestination"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                        <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="DeleteDestination"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDownDestination"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
                     </Grid>
                 </Grid>
             </GroupBox>

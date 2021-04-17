@@ -73,6 +73,33 @@ namespace Destinationboard.Models
         }
         #endregion
 
+        #region 行動情報および行先情報をソートする
+        /// <summary>
+        /// 行動情報および行先情報をソートする
+        /// </summary>
+        /// <returns></returns>
+        public ActionInfoCollectionM Sort()
+        {
+            // 行動の情報をソート
+            ActionInfoCollectionM items = new ActionInfoCollectionM((from x in this.Items
+                                                                     orderby x.SortOrder
+                                                                     select x).ToList<ActionInfoM>());
+
+            // 行動の数だけまわす
+            for (int index = 0; index < this.Items.Count; index++)
+            {
+                // 行動を取り出す
+                var elem = this.Items.ElementAt(index);
+
+                // 行先情報のソート
+                elem.DestinationItems = elem.SortDestination();
+            }
+
+
+            return items;
+        }
+        #endregion
+
         #region INotifyPropertyChanged 
         public new event PropertyChangedEventHandler PropertyChanged;
 

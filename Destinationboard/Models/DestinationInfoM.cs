@@ -71,6 +71,7 @@ namespace Destinationboard.Models
             this.ActionID = reply.ActionID;
             this.DestinationID = reply.DestinationID;
             this.DestinationName = reply.DestinationName;
+            this.SortOrder = reply.SortOrder;
             this.CreateDate = DateTime.ParseExact(reply.CreateDate, "yyyy/MM/dd", null);
             this.CreateUser = reply.CreateUser;
             this.UpdateDate = DateTime.ParseExact(reply.UpdateDate, "yyyy/MM/dd", null);

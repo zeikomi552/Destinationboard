@@ -37,31 +37,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 行先情報の全データ[DestinationItemsAll]プロパティ
-        /// <summary>
-        /// 行先情報の全データ[DestinationItemsAll]プロパティ用変数
-        /// </summary>
-        DestinationInfoCollectionM _DestinationItemsAll = new DestinationInfoCollectionM();
-        /// <summary>
-        /// 行先情報の全データ[DestinationItemsAll]プロパティ
-        /// </summary>
-        public DestinationInfoCollectionM DestinationItemsAll
-        {
-            get
-            {
-                return _DestinationItemsAll;
-            }
-            set
-            {
-                if (_DestinationItemsAll == null || !_DestinationItemsAll.Equals(value))
-                {
-                    _DestinationItemsAll = value;
-                    NotifyPropertyChanged("DestinationItemsAll");
-                }
-            }
-        }
-        #endregion
-
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -74,9 +49,7 @@ namespace Destinationboard.ViewModels
                 var tmp = ActionInfoCollectionM.GetActionInfo();
 
                 // ソート順でソート
-                this.ActionLists = new ActionInfoCollectionM((from x in tmp.Items
-                                                              orderby x.SortOrder
-                                                              select x).ToList<ActionInfoM>());
+                this.ActionLists = tmp.Sort();
             }
             catch (Exception e)
             {
@@ -102,12 +75,12 @@ namespace Destinationboard.ViewModels
                 temp_action.SortOrder = iCnt;
 
                 // 行動に合致する行先を取得
-                var action_destinatios = from x in this.DestinationItemsAll.Items
+                var action_destinatios = from x in temp_action.DestinationItems.Items
                                       where x.ActionID.Equals(temp_action.ActionID)
                                       select x;
 
                 // 行先分ソート順の更新を行う
-                for (int iCnt2 = 0; iCnt < action_destinatios.Count(); iCnt2++)
+                for (int iCnt2 = 0; iCnt2 < action_destinatios.Count(); iCnt2++)
                 {
                     // 行先の取り出し
                     var destination_tmp = action_destinatios.ElementAt(iCnt2);
@@ -232,6 +205,7 @@ namespace Destinationboard.ViewModels
             try
             {
                 this.ActionLists.MoveUp();
+                RefreshSortOrder(); // ソート順の更新
             }
             catch (Exception e)
             {
@@ -279,6 +253,76 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 上へ移動(行先)
+        /// <summary>
+        /// 上へ移動(行先)
+        /// </summary>
+        public void MoveUpDestination()
+        {
+            try
+            {
+                // nullチェック
+                if (this.ActionLists.SelectedItem != null)
+                {
+                    // 上へ移動
+                    this.ActionLists.SelectedItem.DestinationItems.MoveUp();
+                    RefreshSortOrder(); // ソート順の更新
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 下へ移動処理(行先)
+        /// <summary>
+        /// 下へ移動処理(行先)
+        /// </summary>
+        public void MoveDownDestination()
+        {
+            try
+            {
+                // nullチェック
+                if (this.ActionLists.SelectedItem != null)
+                {
+                    // 下へ移動
+                    this.ActionLists.SelectedItem.DestinationItems.MoveDown();
+                    RefreshSortOrder(); // ソート順の更新
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 削除処理(行先)
+        /// <summary>
+        /// 削除処理(行先)
+        /// </summary>
+        public void DeleteDestination()
+        {
+            try
+            {
+                // nullチェック
+                if (this.ActionLists.SelectedItem != null)
+                {
+                    this.ActionLists.SelectedItem.DestinationItems.DeleteSelectedItem();
+                    RefreshSortOrder(); // ソート順の更新
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
         #region 閉じる処理
         /// <summary>
         /// 閉じる処理
