@@ -114,22 +114,83 @@ namespace Destinationboard.ViewModels
             }
         }
 
-        private void Staff_ClickEndTime(object sender, EventArgs e)
+        #region 終了時刻のボタン押下処理
+        /// <summary>
+        /// 終了時刻のボタン押下処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Staff_ClickEndTime(object sender, EventArgs ev)
         {
-            MoveRegistTimeV();
+            try
+            {
+                MoveRegistTimeV();
+                Init();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
         }
+        #endregion
 
+        #region 開始時刻の登録処理
+        /// <summary>
+        /// 開始時刻の登録処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Staff_ClickStartTime(object sender, EventArgs e)
         {
-            MoveRegistTimeV();
-        }
+            try
+            {
+                MoveRegistTimeV();
+                Init();
 
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+        #endregion
+
+        #region 備考情報の登録処理
+        /// <summary>
+        /// 備考情報の登録処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Staff_ClickMemo(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                RegistMemoV wnd = new RegistMemoV();
+                RegistMemoVM vm = wnd.DataContext as RegistMemoVM;
 
-        private void Staff_ClickRegistAction(object sender, EventArgs e)
+                // 画面を開く
+                if (wnd.ShowDialog() == true)
+                {
+                    Init();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+        #endregion
+
+        #region 行先情報の登録処理
+        /// <summary>
+        /// 行先情報の登録処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
+        private void Staff_ClickRegistAction(object sender, EventArgs ev)
         {
             try
             {
@@ -144,10 +205,11 @@ namespace Destinationboard.ViewModels
             }
             catch (Exception ex)
             {
-                _logger.Error("fatal error", ex);
-                ShowMessage.ShowErrorOK(ex.Message, "Error");
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
+        #endregion
 
         #region 従業員ステータスの登録画面へ遷移する
         /// <summary>
@@ -157,21 +219,30 @@ namespace Destinationboard.ViewModels
         /// <param name="e"></param>
         private void Staff_ClickRegistBeginFinish(object sender, EventArgs e)
         {
-            var wnd = new RegistBeginFinishV();
-            wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
-            wnd.WindowStyle = System.Windows.WindowStyle.None;
-
-            var vm = wnd.DataContext as RegistBeginFinishVM;
-
-            var action_plan = sender as ActionPlanM;
-            vm.ActionPlan.Copy(action_plan);
-
-            // 画面遷移
-            if (wnd.ShowDialog() == true)
+            try
             {
-                // 行動予定の登録
-                ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
-                Init();
+
+                var wnd = new RegistBeginFinishV();
+                wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
+                wnd.WindowStyle = System.Windows.WindowStyle.None;
+
+                var vm = wnd.DataContext as RegistBeginFinishVM;
+
+                var action_plan = sender as ActionPlanM;
+                vm.ActionPlan.Copy(action_plan);
+
+                // 画面遷移
+                if (wnd.ShowDialog() == true)
+                {
+                    // 行動予定の登録
+                    ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
+                    Init();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion
@@ -240,10 +311,10 @@ namespace Destinationboard.ViewModels
                 InitEvent();
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error("Fatal Error", e);
-                ShowMessage.ShowErrorOK(e.Message, "Error");
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion
@@ -325,7 +396,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 時間登録画面への画面遷移
         /// <summary>
         /// 時間登録画面への画面遷移
@@ -343,10 +413,10 @@ namespace Destinationboard.ViewModels
                     //Init();
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error("fatal error", e);
-                ShowMessage.ShowErrorOK(e.Message, "Error");
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion

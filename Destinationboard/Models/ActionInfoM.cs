@@ -10,14 +10,41 @@ namespace Destinationboard.Models
 {
     public class ActionInfoM : ActionMasterBase
 	{
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		public ActionInfoM()
+        public event EventHandler SelectionEvent = null;
+
+        #region 選択されているかどうかを示すフラグ[IsSelected]プロパティ
+        /// <summary>
+        /// 選択されているかどうかを示すフラグ[IsSelected]プロパティ用変数
+        /// </summary>
+        bool _IsSelected = false;
+        /// <summary>
+        /// 選択されているかどうかを示すフラグ[IsSelected]プロパティ
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                if (!_IsSelected.Equals(value))
+                {
+                    _IsSelected = value;
+                    NotifyPropertyChanged("IsSelected");
+                }
+            }
+        }
+        #endregion
+
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public ActionInfoM()
 		{
 			Guid guidValue = Guid.NewGuid();
 			this.ActionID = guidValue.ToString();
-
 			this.CreateDate = DateTime.Today;
 			this.CreateUser = Environment.UserName;
 			this.UpdateDate = DateTime.Today;
@@ -30,6 +57,19 @@ namespace Destinationboard.Models
         public ActionInfoM(ActionMasterReply reply, List<DestinationMasterReply> list)
         {
             this.Copy(reply, list);
+        }
+
+        /// <summary>
+        /// 選択処理
+        /// </summary>
+        public void Selection()
+        {
+            // イベント登録されているかどうかの確認
+            if (SelectionEvent != null)
+            {
+                // 選択されたイベントを発生させる
+                SelectionEvent(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>

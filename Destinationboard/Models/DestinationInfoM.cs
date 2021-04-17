@@ -9,6 +9,46 @@ namespace Destinationboard.Models
 {
     public class DestinationInfoM : DestinationMasterBase
     {
+        public event EventHandler SelectionEvent = null;
+
+        /// <summary>
+        /// 選択処理
+        /// </summary>
+        public void Selection()
+        {
+            // イベント登録されているかどうかの確認
+            if (SelectionEvent != null)
+            {
+                // 選択されたイベントを発生させる
+                SelectionEvent(this, EventArgs.Empty);
+            }
+        }
+
+        #region 選択されているかどうかを示すフラグ[IsSelected]プロパティ
+        /// <summary>
+        /// 選択されているかどうかを示すフラグ[IsSelected]プロパティ用変数
+        /// </summary>
+        bool _IsSelected = false;
+        /// <summary>
+        /// 選択されているかどうかを示すフラグ[IsSelected]プロパティ
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                if (!_IsSelected.Equals(value))
+                {
+                    _IsSelected = value;
+                    NotifyPropertyChanged("IsSelected");
+                }
+            }
+        }
+        #endregion
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
