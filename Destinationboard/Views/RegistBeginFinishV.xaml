@@ -45,8 +45,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Language="ja-jp" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd)}" FontSize="{DynamicResource FontSize08}"/>
-                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=H:mm}" FontSize="{DynamicResource FontSize10}"/>
+                    <TextBlock Language="ja-jp" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd)}"/>
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=H:mm}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">

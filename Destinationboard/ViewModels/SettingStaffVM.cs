@@ -177,7 +177,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.StaffItems.MoveUp();
+                this.StaffItems.MoveUp();   
             }
             catch (Exception e)
             {

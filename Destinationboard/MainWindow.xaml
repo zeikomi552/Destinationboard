@@ -29,7 +29,7 @@
         <ViewModels:MainWindowVM/>
     </Window.DataContext>
 
-    <Grid>
+    <Grid Language="ja-JP">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
