@@ -7,63 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\RegistActionV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\RegistBeginFinishV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\RegistMemoV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\RegistTimeHourV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\RegistTimeMinutesV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\RegistTimeV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\SettingActionV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\SettingApplicationV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\SettingStaffV.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Page Update="Common\Themes\DestinationboardBaseThemes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistActionV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistBeginFinishV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistMemoV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistTimeHourV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistTimeMinutesV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\RegistTimeV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\SettingActionV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\SettingApplicationV.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\SettingStaffV.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

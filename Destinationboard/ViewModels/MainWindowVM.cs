@@ -304,6 +304,10 @@ namespace Destinationboard.ViewModels
                                       where x.StaffID.Equals(staff.StaffID)
                                       select x).FirstOrDefault();
 
+                    // 非表示の場合
+                    if (!staff.Display)
+                        continue;
+
                     // 行動情報が見つかった場合
                     if (staff_action != null)
                     {

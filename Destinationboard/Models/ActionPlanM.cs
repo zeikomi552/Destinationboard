@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Destinationboard.Models
 {
@@ -36,6 +37,7 @@ namespace Destinationboard.Models
         /// メモのクリックイベント
         /// </summary>
         public event EventHandler ClickMemo;
+
 
         #region コンストラクタ
         /// <summary>
