@@ -108,6 +108,21 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Button Height="50" Margin="5" >
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="0">
+                                                        <Setter Property="Background" Value="LightGray"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="1">
+                                                        <Setter Property="Background" Value="Yellow"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="2">
+                                                        <Setter Property="Background" Value="LightYellow"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding StaffName}"/>
