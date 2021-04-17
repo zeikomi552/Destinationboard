@@ -158,12 +158,15 @@ namespace Destinationboard.ViewModels
             {
                 // 要素の取り出し
                 var tmp = this.ActionLists.Items.ElementAt(index);
+                // 行先のチェックを全て外す
+                tmp.ClearDestinationSelection();
 
                 // 選択された要素と比較
                 if (tmp.Equals(sender))
                 {
                     // 一致したのでこれが選択された
                     tmp.IsSelected = true;
+
                     // 選択アイテムのセット
                     this.ActionLists.SelectedItem = tmp;
                 }
@@ -188,8 +191,17 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // 行動IDを一旦消す
+                this.ActionPlan.ActionID = string.Empty;
+                // 行動名を一旦消す
+                this.ActionPlan.ActionName = string.Empty;
+                // 行先IDのセット
+                this.ActionPlan.DestinationID = string.Empty;
+                // 行先名のセット
+                this.ActionPlan.DestinationName = string.Empty;
+
                 // nullチェック
-                if(this.ActionLists.SelectedItem != null)
+                if (this.ActionLists.SelectedItem != null)
                 {
                     // 行動IDのセット
                     this.ActionPlan.ActionID = this.ActionLists.SelectedItem.ActionID;

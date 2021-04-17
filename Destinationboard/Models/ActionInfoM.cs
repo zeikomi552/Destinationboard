@@ -59,6 +59,20 @@ namespace Destinationboard.Models
             this.Copy(reply, list);
         }
 
+        #region 行先のチェックを外す
+        /// <summary>
+        /// 行先のチェックを外す
+        /// </summary>
+        public void ClearDestinationSelection()
+        {
+            for (int index = 0; index < this.DestinationItems.Items.Count; index++)
+            {
+                var item = this.DestinationItems.ElementAt(index);
+                item.IsSelected = false;
+            }
+        }
+        #endregion
+
         /// <summary>
         /// 選択処理
         /// </summary>

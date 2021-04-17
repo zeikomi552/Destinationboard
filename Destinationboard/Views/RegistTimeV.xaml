@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="日時入力" Height="auto" Width="auto">
+        Title="日時入力" Height="900" Width="1200">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,27 +22,43 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Viewbox Width="400" Height="400" Margin="20" Stretch="Fill">
+                        <Calendar FontSize="{DynamicResource FontSize10}"/>
+                    </Viewbox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Background="AntiqueWhite"  Width="100" Margin="20" Content="-" FontSize="{DynamicResource FontSize10}"/>
+                        <TextBlock Grid.Column="1" TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
+                        <Button Grid.Column="2" Background="AntiqueWhite"  Width="100" Margin="20" Content="-" FontSize="{DynamicResource FontSize10}"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Margin="20" Text="日付" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Margin="20" Text="2021/03/21(日)" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
-                    <TextBlock Background="AntiqueWhite" TextAlignment="Center" Width="100" Margin="20" Text="-" FontSize="{DynamicResource FontSize10}"/>
+                <StackPanel Grid.Column="1">
+                    <Viewbox Width="400" Height="400" Margin="20" Stretch="Fill">
+                        <Calendar FontSize="{DynamicResource FontSize10}"/>
+                    </Viewbox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Background="AntiqueWhite"  Width="100" Margin="20" Content="-" FontSize="{DynamicResource FontSize10}"/>
+                        <TextBlock Grid.Column="1" TextAlignment="Center"  Margin="20" Text=":" FontSize="{DynamicResource FontSize10}"/>
+                        <Button Grid.Column="2" Background="AntiqueWhite"  Width="100" Margin="20" Content="-" FontSize="{DynamicResource FontSize10}"/>
+                    </Grid>
                 </StackPanel>
-
             </Grid>
-            <Button Width="200" Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
+
+            <Button Margin="5" Grid.Column="1" Content="登録" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}"/>
 
         </Grid>
     </Grid>
