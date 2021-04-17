@@ -111,6 +111,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                if (this.ActionPlan.Status <= 0)
+                {
+                    this._ActionPlan.Status = 0;
+                }
+
                 this.DialogResult = true;
             }
             catch (Exception e)
