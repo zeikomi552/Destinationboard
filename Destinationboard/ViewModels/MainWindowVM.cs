@@ -205,6 +205,8 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
+                    // 行動予定の登録
+                    ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
                     Init();
                 }
             }

@@ -129,6 +129,8 @@ namespace Destinationboard.ViewModels
                     {
                         // 一致したのでこれが選択された
                         dest_tmp.IsSelected = true;
+                        // 選択アイテムのセット
+                        tmp.DestinationItems.SelectedItem = dest_tmp;
                     }
                     else
                     {
@@ -186,6 +188,25 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // nullチェック
+                if(this.ActionLists.SelectedItem != null)
+                {
+                    // 行動IDのセット
+                    this.ActionPlan.ActionID = this.ActionLists.SelectedItem.ActionID;
+                    // 行動名のセット
+                    this.ActionPlan.ActionName = this.ActionLists.SelectedItem.ActionName;
+
+                    // nullチェック
+                    if (this.ActionLists.SelectedItem.DestinationItems.SelectedItem != null)
+                    {
+                        // 行先IDのセット
+                        this.ActionPlan.DestinationID = this.ActionLists.SelectedItem.DestinationItems.SelectedItem.DestinationID;
+                        // 行先名のセット
+                        this.ActionPlan.DestinationName = this.ActionLists.SelectedItem.DestinationItems.SelectedItem.DestinationName;
+                    }
+                }
+
+                
                 this.DialogResult = true;
             }
             catch (Exception e)
