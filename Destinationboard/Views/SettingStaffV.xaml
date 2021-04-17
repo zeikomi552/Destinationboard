@@ -40,7 +40,14 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Header="従業員名" Binding="{Binding StaffName}"/>
                         <DataGridTextColumn Width="*" Header="従業員番号" Binding="{Binding StaffID}"/>
-                        <DataGridTextColumn Width="100" Header="表示" Binding="{Binding Display}"/>
+                        <DataGridTemplateColumn IsReadOnly="True" Header="表示">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Display, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
