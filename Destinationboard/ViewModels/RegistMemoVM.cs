@@ -111,10 +111,6 @@ namespace Destinationboard.ViewModels
                         else
                             MessageBox.Show("Recognition failed");
                     }
-                    else
-                    {
-                        MessageBox.Show("No stroke detected");
-                    }
                 }
             }
         }
