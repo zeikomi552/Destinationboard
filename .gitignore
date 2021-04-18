@@ -6,3 +6,5 @@
 /.vs/Destinationboard/v16
 /Destinationboard/bin/Debug/net5.0-windows
 /.vs/Destinationboard/DesignTimeBuild
+/Destinationboard/bin/Release/net5.0-windows/runtimes
+/Destinationboard/bin/Release/net5.0-windows
