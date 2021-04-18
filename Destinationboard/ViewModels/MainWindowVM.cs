@@ -186,6 +186,12 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
+                    var action_plan = sender as ActionPlanM;
+                    action_plan.Memo = vm.InputText;
+
+                    // 行動予定の登録
+                    ActionPlanM.RegistActionPlanTable(action_plan);
+
                     Init();
                 }
             }
