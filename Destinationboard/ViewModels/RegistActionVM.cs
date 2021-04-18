@@ -35,6 +35,48 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 行動情報および行先情報のクリア
+        /// <summary>
+        /// 行動情報および行先情報のクリア
+        /// </summary>
+        public void Clear()
+        {
+            this.ActionPlan.ActionID = string.Empty;        // 行動ID
+            this.ActionPlan.ActionName = string.Empty;      // 行動名
+            this.ActionPlan.DestinationID = string.Empty;   // 行先ID
+            this.ActionPlan.DestinationName = string.Empty; // 行先名
+
+            ClearActionDestination();
+        }
+        #endregion
+
+        #region 行動予定の選択解除
+        /// <summary>
+        /// 行動予定の選択解除
+        /// </summary>
+        private void ClearActionDestination()
+        {
+            // 行動の検索
+            foreach (var action in this.ActionLists.Items)
+            {
+                action.IsSelected = false;
+                this.ActionLists.SelectedItem = null;
+
+                foreach (var destination in action.DestinationItems.Items)
+                {
+                    destination.IsSelected = false;
+                    action.DestinationItems.SelectedItem = null;
+                }
+            }
+            NotifyPropertyChanged("ActionLists");
+        }
+        #endregion
+
+        #region 行動予定として登録されているものを画面上に反映する
+        /// <summary>
+        /// 行動予定として登録されているものを画面上に反映する
+        /// </summary>
+        /// <param name="action_plan"></param>
         public void SetSelectAction(ActionPlanM action_plan)
         {
             // 行動の検索
@@ -72,6 +114,7 @@ namespace Destinationboard.ViewModels
             }
             NotifyPropertyChanged("ActionLists");
         }
+        #endregion
 
         #region 個人の行動予定[ActionPlan]プロパティ
         /// <summary>
