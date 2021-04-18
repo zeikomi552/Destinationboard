@@ -87,6 +87,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region イベントの初期化処理
         /// <summary>
         /// イベントの初期化処理
         /// </summary>
@@ -104,6 +105,7 @@ namespace Destinationboard.ViewModels
                 }
             }
         }
+        #endregion
 
         #region 行先の選択処理
         /// <summary>
