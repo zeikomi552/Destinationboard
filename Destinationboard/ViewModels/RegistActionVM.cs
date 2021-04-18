@@ -35,6 +35,43 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        public void SetSelectAction(ActionPlanM action_plan)
+        {
+            // 行動の検索
+            foreach (var action in this.ActionLists.Items)
+            {
+                // 行動一覧の行動IDと行動計画の行動IDが一致した
+                if (action_plan.ActionID.Equals(action.ActionID))
+                {
+                    // 選択要素のセット
+                    action.IsSelected = true;
+                    // 選択アイテムのセット
+                    this.ActionLists.SelectedItem = action;
+
+                    // 選択要素の行先一覧を検索
+                    foreach (var destination in action.DestinationItems.Items)
+                    {
+                        // 行先が行動計画の行先IDと一致した
+                        if (destination.DestinationID.Equals(action_plan.DestinationID))
+                        {
+                            destination.IsSelected = true;
+                            // 選択アイテムのセット
+                            this.ActionLists.SelectedItem.DestinationItems.SelectedItem = destination;
+                        }
+                        else
+                        {
+                            destination.IsSelected = false;
+                        }
+                    }
+                }
+                else
+                {
+                    // 選択要素のセット
+                    action.IsSelected = false;
+                }
+            }
+            NotifyPropertyChanged("ActionLists");
+        }
 
         #region 個人の行動予定[ActionPlan]プロパティ
         /// <summary>
@@ -61,7 +98,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -71,10 +107,16 @@ namespace Destinationboard.ViewModels
             try
             {
                 // 行動情報の取得処理
-                this.ActionLists = ActionInfoCollectionM.GetActionInfo();
+                var action_tmp = ActionInfoCollectionM.GetActionInfo();
+
+                // ソート処理
+                this.ActionLists = action_tmp.Sort();
 
                 // 行動予定の取得処理
                 this.ActionPlan = ActionPlanM.GetActionPlan(this.ActionPlan.StaffID);
+
+                // 行動予定から選択要素をセット   
+                SetSelectAction(this.ActionPlan);
 
                 // イベントの初期化処理
                 InitEvent();
@@ -182,8 +224,6 @@ namespace Destinationboard.ViewModels
             NotifyPropertyChanged("ActionLists");
         }
         #endregion
-
-
 
         #region 登録処理
         /// <summary>
