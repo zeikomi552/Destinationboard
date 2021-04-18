@@ -43,7 +43,8 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding ActionLists.Items}" SelectedItem="{Binding ActionLists.SelectedItem}">
+                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding ActionLists.Items}"
+                              SelectedItem="{Binding ActionLists.SelectedItem, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="行動" Binding="{Binding ActionName}"/>
                         </DataGrid.Columns>
@@ -89,7 +90,7 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid AutoGenerateColumns="False" Margin="5"
                               ItemsSource="{Binding ActionLists.SelectedItem.DestinationItems.Items}"
-                              SelectedItem="{Binding ActionLists.SelectedItem.DestinationItems.SelectedItem}">
+                              SelectedItem="{Binding ActionLists.SelectedItem.DestinationItems.SelectedItem, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="行先" Binding="{Binding DestinationName}"/>
                         </DataGrid.Columns>
