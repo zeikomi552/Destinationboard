@@ -24,6 +24,10 @@ namespace Destinationboard.ViewModels
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
+
+            // コンフィグデータの読み込み
+            CommonValues.GetInstance().ReadConfig();
+
         }
         #endregion
 

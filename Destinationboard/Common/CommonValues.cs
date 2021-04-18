@@ -118,6 +118,17 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		/// <summary>
+		/// Configデータのセット
+		/// </summary>
+		public void ReadConfig()
+		{
+			ConfigManager conf = new ConfigManager();
+			conf.LoadConfig();
+			ServerName = conf.ServerName;
+			Port = conf.Port;
+		}
+
 		public DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient GetClient()
 		{
 			// チャネルの取得
