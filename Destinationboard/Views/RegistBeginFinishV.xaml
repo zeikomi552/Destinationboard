@@ -39,14 +39,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ActionPlan.StaffName}" FontSize="{DynamicResource FontSize10}"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ActionPlan.StaffName}" FontSize="80"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Language="ja-jp" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd)}"/>
-                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=H:mm}"/>
+                    <TextBlock Language="ja-jp" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd)}"/>
+                    <TextBlock Grid.Row="1" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CurrentTime, Mode=OneWay, StringFormat=H:mm}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">

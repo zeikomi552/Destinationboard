@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" x:Class="Destinationboard.Views.RegistTimeHourV"
         mc:Ignorable="d"
-        Title="日時入力" Height="800" Width="1200" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        Title="日時入力" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
     <Window.DataContext>
         <ViewModels:RegistTimeHourVM/>
@@ -22,81 +22,72 @@
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="時間入力" FontSize="20"/>
         </Border>
 
-        <StackPanel Grid.Row="1">
+        <StackPanel Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="100" Height="100" Content="-" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="0" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="100" Height="100" Content="0" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="1" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="1" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="2" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="2" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="3" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="3" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="4" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="4" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="5" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="5" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="6" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="6" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="7" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="7" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="8" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="8" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="100" Height="100" Content="9" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="9" FontSize="40" Cursor="Hand">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
@@ -106,70 +97,70 @@
 
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="100" Height="100" Content="10" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="10" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="11" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="11" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="12" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="12" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="13" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="13" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="14" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="14" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="15" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="15" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="16" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="16" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="17" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="17" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="18" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="18" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="19" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="19" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
@@ -178,28 +169,28 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="100" Height="100" Content="20" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="20" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="21" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="21" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="22" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="22" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="100" Height="100" Content="23" FontSize="{DynamicResource ButtonSuperSuperLargeFontSize}">
+                <Button Margin="5" Width="100" Height="100" Content="23" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetHour"/>
