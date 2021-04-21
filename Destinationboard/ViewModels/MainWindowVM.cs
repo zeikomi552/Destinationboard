@@ -14,17 +14,14 @@ namespace Destinationboard.ViewModels
 {
     public class MainWindowVM : ViewModelBase
     {
+        DispatcherTimer _timer = new DispatcherTimer();
+        DispatcherTimer _timer2 = new DispatcherTimer();
         #region コンストラクタ
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindowVM()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
-
             // コンフィグデータの読み込み
             CommonValues.GetInstance().ReadConfig();
 
@@ -68,12 +65,18 @@ namespace Destinationboard.ViewModels
             if (!this.CurrentTime.Date.Equals(DateTime.Today))
             {
                 // 日付が変わったので全ての日付データを更新
-                Init();
+                GetPlans();
             }
             
             this.CurrentTime = DateTime.Now;    // 現在時刻の更新
         }
         #endregion
+
+        void Refresh_Tick(object sender, EventArgs e)
+        {
+            GetPlans();
+        }
+
 
         #region 行動予定一覧[ActionPlans]プロパティ
         /// <summary>
@@ -137,7 +140,7 @@ namespace Destinationboard.ViewModels
             {
                 // 終了時刻での呼び出し
                 MoveRegistTimeV(sender, ev);
-                Init();
+                GetPlans();
             }
             catch (Exception ex)
             {
@@ -159,7 +162,7 @@ namespace Destinationboard.ViewModels
             {
                 // 開始時刻での呼び出し
                 MoveRegistTimeV(sender, e);
-                Init();
+                GetPlans();
 
             }
             catch (Exception ex)
@@ -192,7 +195,7 @@ namespace Destinationboard.ViewModels
                     // 行動予定の登録
                     ActionPlanM.RegistActionPlanTable(action_plan);
 
-                    Init();
+                    GetPlans();
                 }
             }
             catch (Exception ex)
@@ -226,7 +229,7 @@ namespace Destinationboard.ViewModels
                 {
                     // 行動予定の登録
                     ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
-                    Init();
+                    GetPlans();
                 }
             }
             catch (Exception ex)
@@ -260,7 +263,7 @@ namespace Destinationboard.ViewModels
                 {
                     // 行動予定の登録
                     ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
-                    Init();
+                    GetPlans();
                 }
             }
             catch (Exception ex)
@@ -277,6 +280,33 @@ namespace Destinationboard.ViewModels
         /// 初期化処理
         /// </summary>
         public override void Init()
+        {
+            try
+            {
+                _timer.Tick += timer_Tick;
+                _timer.Interval = new TimeSpan(0, 0, 1);
+                _timer.Start();
+
+
+                _timer2.Tick += Refresh_Tick;
+                _timer2.Interval = new TimeSpan(0, 0, 30);
+                _timer2.Start();
+
+                GetPlans();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+        #endregion
+
+        #region 行動予定の取得処理
+        /// <summary>
+        /// 行動予定の取得処理
+        /// </summary>
+        public void GetPlans()
         {
             try
             {
@@ -362,7 +392,7 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
-                    Init();
+                    GetPlans();
                 }
 
             }
@@ -388,7 +418,7 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
-                    Init();
+                    GetPlans();
                 }
             }
             catch (Exception e)
@@ -413,7 +443,7 @@ namespace Destinationboard.ViewModels
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
-                    Init();
+                    GetPlans();
                 }
 
             }
@@ -446,7 +476,7 @@ namespace Destinationboard.ViewModels
                 {
                     // 行動予定の登録
                     ActionPlanM.RegistActionPlanTable(vm.ActionPlan);
-                    Init();
+                    GetPlans();
                 }
             }
             catch (Exception ex)
@@ -465,6 +495,9 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                _timer.Stop();  // タイマー破棄
+                _timer2.Stop(); // タイマー破棄
+
                 Environment.Exit(0);
             }
             catch (Exception e)

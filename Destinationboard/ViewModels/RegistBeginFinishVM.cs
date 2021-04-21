@@ -13,16 +13,16 @@ namespace Destinationboard.ViewModels
 {
     public class RegistBeginFinishVM : ViewModelBase
     {
+        DispatcherTimer _timer = new DispatcherTimer();
         #region コンストラクタ
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public RegistBeginFinishVM()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
+            _timer.Tick += timer_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 1);
+            _timer.Start();
         }
         #endregion
 
@@ -133,6 +133,7 @@ namespace Destinationboard.ViewModels
                 }
                 else
                 {
+                    _timer.Stop();  // タイマーのストップ
                     // 画面を閉じる
                     this.DialogResult = true;
                 }

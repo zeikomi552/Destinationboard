@@ -24,6 +24,9 @@
         <b:EventTrigger EventName="Loaded">
             <b:CallMethodAction TargetObject="{Binding}" MethodName="Init"/>
         </b:EventTrigger>
+        <b:EventTrigger EventName="Closing">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+        </b:EventTrigger>
     </b:Interaction.Triggers>
 
     <Window.DataContext>
