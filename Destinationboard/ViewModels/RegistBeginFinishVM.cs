@@ -13,6 +13,7 @@ namespace Destinationboard.ViewModels
 {
     public class RegistBeginFinishVM : ViewModelBase
     {
+        #region コンストラクタ
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -23,6 +24,8 @@ namespace Destinationboard.ViewModels
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
         }
+        #endregion
+
         #region 現在時刻[CurrentTime]プロパティ
         /// <summary>
         /// 現在時刻[CurrentTime]プロパティ用変数
@@ -85,6 +88,13 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region ステータスのバックアップ
+        /// <summary>
+        /// ステータスのバックアップ
+        /// </summary>
+        private int StatusBak = 0;
+        #endregion
+
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -93,7 +103,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // 行動計画の取得
                 this.ActionPlan = ActionPlanM.GetActionPlan(this.ActionPlan.StaffID);
+
+                // ステータスを保持
+                this.StatusBak = this.ActionPlan.Status;
             }
             catch (Exception e)
             {
@@ -111,12 +125,17 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                if (this.ActionPlan.Status <= 0)
+                // ステータスの確認（負の値の場合）
+                if (this.ActionPlan.Status < 0)
                 {
-                    this._ActionPlan.Status = 0;
+                    // ステータスを戻す
+                    this._ActionPlan.Status = this.StatusBak;
                 }
-
-                this.DialogResult = true;
+                else
+                {
+                    // 画面を閉じる
+                    this.DialogResult = true;
+                }
             }
             catch (Exception e)
             {

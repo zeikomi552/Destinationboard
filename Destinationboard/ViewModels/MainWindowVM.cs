@@ -319,6 +319,7 @@ namespace Destinationboard.ViewModels
                     // 行動情報が見つかった場合
                     if (staff_action != null)
                     {
+                        staff_action.StaffName = staff.StaffName;   // 名前は従業員マスターのものを使用する
                         // その行動情報を登録する
                         action_list.Add(new ActionPlanM(staff_action));
                     }
