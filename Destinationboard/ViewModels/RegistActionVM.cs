@@ -285,21 +285,25 @@ namespace Destinationboard.ViewModels
                 // 行先名のセット
                 this.ActionPlan.DestinationName = string.Empty;
 
-                // nullチェック
-                if (this.ActionLists.SelectedItem != null)
+                var action_select = this.ActionLists.SelectedItem;
+
+                // nullチェックかつ選択チェック
+                if (action_select != null && action_select.IsSelected)
                 {
                     // 行動IDのセット
-                    this.ActionPlan.ActionID = this.ActionLists.SelectedItem.ActionID;
+                    this.ActionPlan.ActionID = action_select.ActionID;
                     // 行動名のセット
-                    this.ActionPlan.ActionName = this.ActionLists.SelectedItem.ActionName;
+                    this.ActionPlan.ActionName = action_select.ActionName;
 
-                    // nullチェック
-                    if (this.ActionLists.SelectedItem.DestinationItems.SelectedItem != null)
+                    var dest_select = action_select.DestinationItems.SelectedItem;
+
+                    // nullチェックかつ選択チェック
+                    if (dest_select != null && dest_select.IsSelected)
                     {
                         // 行先IDのセット
-                        this.ActionPlan.DestinationID = this.ActionLists.SelectedItem.DestinationItems.SelectedItem.DestinationID;
+                        this.ActionPlan.DestinationID = dest_select.DestinationID;
                         // 行先名のセット
-                        this.ActionPlan.DestinationName = this.ActionLists.SelectedItem.DestinationItems.SelectedItem.DestinationName;
+                        this.ActionPlan.DestinationName = dest_select.DestinationName;
                     }
                 }
 
