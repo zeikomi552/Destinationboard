@@ -6,7 +6,7 @@
         xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistMemoV"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="RegistMemoV" Height="450" Width="800" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
     <Window.DataContext>
         <ViewModels:RegistMemoVM/>

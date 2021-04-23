@@ -11,7 +11,7 @@
         xmlns:Converters="clr-namespace:Destinationboard.Common.Converters"
         hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         x:Class="Destinationboard.MainWindow"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized"
         Title="メイン画面" Height="900" Width="800" Icon="/Common/Themes/icon/app-icon.ico"
     >
 
