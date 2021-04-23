@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Common\Themes\icon\app-icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
@@ -27,6 +31,10 @@
       <HintPath>Common\dll\Microsoft.Ink.dll</HintPath>
       <Private>true</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Common\Themes\icon\app-icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -287,7 +287,6 @@ namespace Destinationboard.ViewModels
                 _timer.Interval = new TimeSpan(0, 0, 1);
                 _timer.Start();
 
-
                 _timer2.Tick += Refresh_Tick;
                 _timer2.Interval = new TimeSpan(0, 0, 30);
                 _timer2.Start();
