@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistTimeMinutesV"
         mc:Ignorable="d"
-        Title="分入力" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        Title="分入力" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
 
     <Window.DataContext>
         <ViewModels:RegistTimeMinutesVM/>

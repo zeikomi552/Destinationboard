@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistMemoV"
         mc:Ignorable="d"
-        Title="RegistMemoV" Height="450" Width="800" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+        Title="RegistMemoV" Height="450" Width="800" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
     <Window.DataContext>
         <ViewModels:RegistMemoVM/>
     </Window.DataContext>

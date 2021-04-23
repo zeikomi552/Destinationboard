@@ -12,7 +12,7 @@
         hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         x:Class="Destinationboard.MainWindow"
         mc:Ignorable="d"
-        Title="メイン画面" Height="900" Width="800"
+        Title="メイン画面" Height="900" Width="800" Icon="/Common/Themes/icon/app-icon.ico"
     >
 
     <Window.Resources>

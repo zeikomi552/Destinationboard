@@ -7,7 +7,7 @@
         xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Class="Destinationboard.Views.RegistBeginFinishV"
         mc:Ignorable="d"
-        Title="出勤・退勤入力" Height="600" Width="900" hlp:DialogResultHelper.DialogResult="{Binding DialogResult}">
+        Title="出勤・退勤入力" Height="600" Width="900" hlp:DialogResultHelper.DialogResult="{Binding DialogResult}" Icon="/Common/Themes/icon/app-icon.ico">
     <Window.Resources>
         <Converters:IntToBooleanConverter x:Key="IntToBooleanConverter"/>
     </Window.Resources>

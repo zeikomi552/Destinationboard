@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Destinationboard.Views"
         mc:Ignorable="d"
-        Title="アプリケーション設定" Height="450" Width="800">
+        Title="アプリケーション設定" Height="450" Width="800" Icon="/Common/Themes/icon/app-icon.ico">
 
     <Grid>
         <Grid.RowDefinitions>
