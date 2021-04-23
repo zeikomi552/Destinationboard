@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistTimeV"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" 
-        Title="日時入力" Height="800" Width="1200" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
+        Title="日時入力" Height="auto" Width="1000" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
 
     <Window.DataContext>
         <ViewModels:RegistTimeVM/>
@@ -18,29 +18,36 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="5">
+        <Border Height="50" BorderBrush="Black" BorderThickness="2" Margin="5">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="日時入力" FontSize="20"/>
         </Border>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid>
+
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
                     <Border Height="50" Margin="5" BorderThickness="5" BorderBrush="Black">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="開始日時"/>
                     </Border>
-                    <Viewbox Width="400" Height="500" Margin="20" Stretch="Fill">
+                    <Viewbox Grid.Row="1" Width="400" Height="500" Margin="20" Stretch="Fill">
                         <Calendar Language="ja-jp" SelectedDate="{Binding ActionPlan.FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   FontSize="{DynamicResource FontSize10}"/>
                     </Viewbox>
-                    <Grid>
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="auto"/>
@@ -94,15 +101,20 @@
                             </b:Interaction.Triggers>
                         </Button>
                     </Grid>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
                     <Border Height="50" Margin="5" BorderThickness="5" BorderBrush="Black">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="終了日時"/>
                     </Border>
-                    <Viewbox Width="400" Height="500" Margin="20" Stretch="Fill">
+                    <Viewbox Grid.Row="1" Width="400" Height="500" Margin="20" Stretch="Fill">
                         <Calendar SelectedDate="{Binding ActionPlan.ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Language="ja-jp" FontSize="{DynamicResource FontSize10}"/>
                     </Viewbox>
-                    <Grid>
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="auto"/>
@@ -157,37 +169,43 @@
                         </Button>
                     </Grid>
 
-                </StackPanel>
+                </Grid>
             </Grid>
 
             <Grid Grid.Column="1">
-                <StackPanel>
-                    <Button Height="100" Margin="5" Grid.Column="1" Content="登録">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Regist"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <Button Height="100" Margin="5" Grid.Column="2" Content="キャンセル">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
+                <Button Grid.Row="1"  Height="50" Margin="5" Content="登録" Cursor="Hand">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Regist"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Grid.Row="2"  Height="50" Margin="5" Grid.Column="2" Content="クリア">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Clear"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Grid.Row="3"  Height="50" Margin="5" Content="キャンセル">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="Close"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
 
 
-                    <Button Height="200" Margin="5,120" Grid.Column="2" Content="クリア">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Clear"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-                </StackPanel>
             </Grid>
+
         </Grid>
     </Grid>
 </Window>
