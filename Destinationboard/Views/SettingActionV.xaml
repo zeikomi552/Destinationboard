@@ -43,8 +43,9 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding ActionLists.Items}"
-                              SelectedItem="{Binding ActionLists.SelectedItem, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
+                    <DataGrid AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding ActionLists.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding ActionLists.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                              TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="行動" Binding="{Binding ActionName}"/>
                         </DataGrid.Columns>
@@ -58,13 +59,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}" Cursor="Hand">
+                        <RepeatButton Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}" Cursor="Hand">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
-                        </Button>
+                        </RepeatButton>
                         <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
@@ -72,13 +73,13 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Button>
-                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <RepeatButton Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}" Cursor="Hand">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
-                        </Button>
+                        </RepeatButton>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -90,10 +91,12 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid AutoGenerateColumns="False" Margin="5"
                               ItemsSource="{Binding ActionLists.SelectedItem.DestinationItems.Items}"
-                              SelectedItem="{Binding ActionLists.SelectedItem.DestinationItems.SelectedItem, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
+                              SelectedItem="{Binding ActionLists.SelectedItem.DestinationItems.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                              TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="行先" Binding="{Binding DestinationName}"/>
                         </DataGrid.Columns>
+                        
                     </DataGrid>
 
                     <Grid Grid.Column="1">
@@ -104,13 +107,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Button Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <RepeatButton Margin="5" Grid.Row="1" Content="↑"  FontSize="{DynamicResource ButtonLargeFontSize}" Cursor="Hand">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUpDestination"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
-                        </Button>
+                        </RepeatButton>
                         <Button Margin="5" Grid.Row="2" Content="-"  FontSize="{DynamicResource ButtonLargeFontSize}">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
@@ -118,13 +121,13 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Button>
-                        <Button Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
+                        <RepeatButton Margin="5" Grid.Row="3" Content="↓"  FontSize="{DynamicResource ButtonLargeFontSize}">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDownDestination"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
-                        </Button>
+                        </RepeatButton>
                     </Grid>
                 </Grid>
             </GroupBox>

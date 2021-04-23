@@ -177,7 +177,9 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.StaffItems.MoveUp();   
+                this.StaffItems.MoveUp();
+                RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("StaffItems");
             }
             catch (Exception e)
             {
@@ -197,6 +199,7 @@ namespace Destinationboard.ViewModels
             {
                 this.StaffItems.MoveDown();
                 RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("StaffItems");
             }
             catch (Exception e)
             {
@@ -216,6 +219,7 @@ namespace Destinationboard.ViewModels
             {
                 this.StaffItems.DeleteSelectedItem();
                 RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("StaffItems");
             }
             catch (Exception e)
             {

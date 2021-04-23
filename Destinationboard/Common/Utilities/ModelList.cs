@@ -119,8 +119,23 @@ namespace Destinationboard.Common.Utilities
 			// nullチェック
 			if (this.SelectedItem != null)
 			{
+				int index = this.Items.IndexOf(this.SelectedItem);
+
 				// 要素の削除
 				this.Items.Remove(this.SelectedItem);
+
+				// 最終行を選択している場合
+				if(index >= this.Items.Count)
+                {
+					// 最終行が削除されたので一つ下のインデックスに移動する
+					index = this.Items.Count - 1;
+				}
+
+				// 行の削除によってアイテムがなくなった場合の判定
+				if (this.Items.Count > 0)
+				{
+					this.SelectedItem = this.Items.ElementAt(index);
+				}
 			}
 		}
 		#endregion

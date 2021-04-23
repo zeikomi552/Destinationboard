@@ -206,6 +206,7 @@ namespace Destinationboard.ViewModels
             {
                 this.ActionLists.MoveUp();
                 RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("ActionLists");
             }
             catch (Exception e)
             {
@@ -225,6 +226,7 @@ namespace Destinationboard.ViewModels
             {
                 this.ActionLists.MoveDown();
                 RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("ActionLists");
             }
             catch (Exception e)
             {
@@ -244,6 +246,7 @@ namespace Destinationboard.ViewModels
             {
                 this.ActionLists.DeleteSelectedItem();
                 RefreshSortOrder(); // ソート順の更新
+                NotifyPropertyChanged("ActionLists");
             }
             catch (Exception e)
             {
@@ -267,6 +270,7 @@ namespace Destinationboard.ViewModels
                     // 上へ移動
                     this.ActionLists.SelectedItem.DestinationItems.MoveUp();
                     RefreshSortOrder(); // ソート順の更新
+                    NotifyPropertyChanged("ActionLists");
                 }
             }
             catch (Exception e)
@@ -291,6 +295,7 @@ namespace Destinationboard.ViewModels
                     // 下へ移動
                     this.ActionLists.SelectedItem.DestinationItems.MoveDown();
                     RefreshSortOrder(); // ソート順の更新
+                    NotifyPropertyChanged("ActionLists");
                 }
             }
             catch (Exception e)
@@ -314,6 +319,7 @@ namespace Destinationboard.ViewModels
                 {
                     this.ActionLists.SelectedItem.DestinationItems.DeleteSelectedItem();
                     RefreshSortOrder(); // ソート順の更新
+                    NotifyPropertyChanged("ActionLists");
                 }
             }
             catch (Exception e)
