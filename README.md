@@ -55,7 +55,7 @@ DestinationServer\Config\DestinationServer.confを変更します。
 </ConfigManager>
 ```
 
-4. 起動順序
+### 起動順序
 
 以下の順でアプリケーションを起動します。
 - DestinationboardServer.exe
