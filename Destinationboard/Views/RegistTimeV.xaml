@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Destinationboard.Views"
         xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.RegistTimeV"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" 
-        Title="日時入力" Height="auto" Width="auto" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
+        Title="日時入力" Height="600" Width="auto" hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico">
 
     <Window.DataContext>
         <ViewModels:RegistTimeVM/>
@@ -43,10 +43,8 @@
                     <Border Height="50" Margin="5" BorderThickness="5" BorderBrush="Black">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="開始日時"/>
                     </Border>
-                    <Viewbox Grid.Row="1" Margin="20">
-                        <Calendar Language="ja-jp" SelectedDate="{Binding ActionPlan.FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <Calendar Margin="5" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Language="ja-jp" SelectedDate="{Binding ActionPlan.FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   FontSize="{DynamicResource FontSize10}"/>
-                    </Viewbox>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -111,9 +109,7 @@
                     <Border Height="50" Margin="5" BorderThickness="5" BorderBrush="Black">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="終了日時"/>
                     </Border>
-                    <Viewbox Grid.Row="1" Margin="20">
-                        <Calendar SelectedDate="{Binding ActionPlan.ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Language="ja-jp" FontSize="{DynamicResource FontSize10}"/>
-                    </Viewbox>
+                    <Calendar Margin="5" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" SelectedDate="{Binding ActionPlan.ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Language="ja-jp" FontSize="{DynamicResource FontSize10}"/>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
