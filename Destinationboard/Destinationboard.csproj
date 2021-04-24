@@ -12,6 +12,15 @@
     <ApplicationIcon>Common\Themes\icon\app-icon.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\\Debug\Destinationboard\</OutputPath>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\\Release\Destinationboard\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Common\Themes\icon\app-icon.ico" />
   </ItemGroup>
