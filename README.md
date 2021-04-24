@@ -61,29 +61,7 @@ DestinationServer\Config\DestinationServer.confを変更します。
 - DestinationboardServer.exe
 - Destinationboard.exe
 
-## 画面イメージ
-
-### メイン画面
-![](png/main-window1.png)
-
-### 設定画面 - 従業員設定画面
-![](png/main-window2.png)
-
-### 出勤・退勤入力画面
-![](png/main-window3.png)
-
-### 設定画面 - 行先設定画面
-![](png/main-window4.png)
-
-### 行動入力画面
-![](png/main-window5.png)
-
-### 日時入力画面
-![](png/main-window6.png)
-![](png/main-window7.png)
-![](png/main-window8.png)
-
-### 備考入力画面
-![](png/main-window9.png)
+### 動作イメージ
+![](png/DestinationBoard-Animation.gif)
 
 
