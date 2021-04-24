@@ -30,359 +30,70 @@
 
         <StackPanel Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="0" FontSize="40" Cursor="Hand">
+                <Button Margin="5" Width="75" Height="75" Content="0" FontSize="40" Cursor="Hand">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="1" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="1" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="2" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="2" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="3" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="3" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="4" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="4" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="5" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="5" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="6" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="6" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="7" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="7" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="8" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="8" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="9" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="10" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="11" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="12" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="13" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="14" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="15" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="16" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="17" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="18" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="19" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="20" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="21" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="22" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="23" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="24" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="25" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="26" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="27" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="28" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="29" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="30" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="31" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="32" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="33" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="34" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="35" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="36" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="37" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="38" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="39" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="40" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="41" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="42" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="43" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="44" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="45" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="46" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="47" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="48" FontSize="40">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="Click">
-                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Button>
-                <Button Margin="5" Width="80" Height="80" Content="49" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="9" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
@@ -392,70 +103,359 @@
 
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="80" Height="80" Content="50" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="10" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="51" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="11" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="52" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="12" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="53" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="13" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="54" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="14" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="55" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="15" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="56" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="16" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="57" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="17" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="58" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="18" FontSize="40">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Button>
-                <Button Margin="5" Width="80" Height="80" Content="59" FontSize="40">
+                <Button Margin="5" Width="75" Height="75" Content="19" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="75" Height="75" Content="20" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="21" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="22" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="23" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="24" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="25" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="26" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="27" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="28" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="29" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="75" Height="75" Content="30" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="31" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="32" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="33" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="34" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="35" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="36" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="37" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="38" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="39" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="75" Height="75" Content="40" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="41" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="42" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="43" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="44" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="45" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="46" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="47" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="48" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="49" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="75" Height="75" Content="50" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="51" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="52" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="53" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="54" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="55" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="56" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="57" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="58" FontSize="40">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button Margin="5" Width="75" Height="75" Content="59" FontSize="40" Cursor="Hand">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction TargetObject="{Binding}" MethodName="SetMinute"/>
