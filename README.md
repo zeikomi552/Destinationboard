@@ -64,4 +64,14 @@ DestinationServer\Config\DestinationServer.confを変更します。
 ### 動作イメージ
 ![](png/DestinationBoard-Animation.gif)
 
+### 今後の予定（実際にやるかどうかは未定）
+- SuicaなどのFelica系で出勤・退勤の入力
+- ハンティスキャナとQRコードで出勤・退勤の入力
+- マップ表示
+- 出退勤のログ保存機能
+- 出勤・退勤・テレワークの個人用のアプリを作成
+- Androidアプリの作成
+- iOSアプリの作成
+
+
 
