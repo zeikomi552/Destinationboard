@@ -100,9 +100,9 @@ namespace Destinationboard.Models
             this.ActionID = reply.ActionID;
             this.ActionName = reply.ActionName;
             this.SortOrder = reply.SortOrder;
-            this.CreateDate = DateTime.ParseExact(reply.CreateDate, "yyyy/MM/dd", null);
+            this.CreateDate = DateTime.ParseExact(reply.CreateDate, "yyyy/MM/dd HH:mm:ss", null);
             this.CreateUser = reply.CreateUser;
-            this.UpdateDate = DateTime.ParseExact(reply.UpdateDate, "yyyy/MM/dd", null);
+            this.UpdateDate = DateTime.ParseExact(reply.UpdateDate, "yyyy/MM/dd HH:mm:ss", null);
             this.UpdateUser = reply.UpdateUser;
 
             DestinationInfoCollectionM dist = new DestinationInfoCollectionM();

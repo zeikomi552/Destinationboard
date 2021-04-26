@@ -36,7 +36,7 @@ namespace Destinationboard.Models
             this.StaffID = reply.StaffID;
             this.StaffName = reply.StaffName;
             this.SortOrder = reply.SortOrder;
-            this.CreateDate = DateTime.ParseExact( reply.CreateDate, "yyyy/MM/dd", null);
+            this.CreateDate = DateTime.ParseExact( reply.CreateDate, "yyyy/MM/dd HH:mm:ss", null);
             this.CreateUser = reply.CreateUser;
             this.Display = reply.Display;
         }
