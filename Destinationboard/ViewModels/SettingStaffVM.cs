@@ -127,7 +127,7 @@ namespace Destinationboard.ViewModels
                     staff_item.StaffName = tmp.StaffName;
                     staff_item.Display = tmp.Display;
                     staff_item.CreateUser = Environment.UserName;
-                    staff_item.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
+                    staff_item.CreateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     request.StaffInfoList.Add(staff_item);
                 }
 

@@ -147,9 +147,9 @@ namespace Destinationboard.ViewModels
                     ActionMasterRequest action_master = new ActionMasterRequest();
                     action_master.ActionID = tmp.ActionID;
                     action_master.ActionName = tmp.ActionName;
-                    action_master.CreateDate = tmp.CreateDate.ToString("yyyy/MM/dd");
+                    action_master.CreateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");   // サーバー側で時刻を作り直される
                     action_master.CreateUser = tmp.CreateUser;
-                    action_master.UpdateDate = tmp.UpdateDate.ToString("yyyy/MM/dd");
+                    action_master.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");   // サーバー側で時刻を作り直される
                     action_master.UpdateUser = tmp.UpdateUser;
                     action_master.SortOrder = tmp.SortOrder;
 
@@ -166,9 +166,9 @@ namespace Destinationboard.ViewModels
                 {
                     DestinationMasterRequest destination_master = new DestinationMasterRequest();
                     destination_master.ActionID = tmp.ActionID;
-                    destination_master.CreateDate = tmp.CreateDate.ToString("yyyy/MM/dd");
+                    destination_master.CreateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");   // サーバー側で時刻を作り直される
                     destination_master.CreateUser = tmp.CreateUser;
-                    destination_master.UpdateDate = tmp.UpdateDate.ToString("yyyy/MM/dd");
+                    destination_master.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");   // サーバー側で時刻を作り直される
                     destination_master.UpdateUser = tmp.UpdateUser;
                     destination_master.SortOrder = tmp.SortOrder;
                     destination_master.DestinationID = tmp.DestinationID;
