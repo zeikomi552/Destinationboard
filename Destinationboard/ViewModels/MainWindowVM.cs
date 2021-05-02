@@ -287,9 +287,7 @@ namespace Destinationboard.ViewModels
             if( CommonValues.GetInstance().EnableHandyScanner)
             {
                 int port = CommonValues.GetInstance().HandyScannerComPort;  // シリアルポート指定
-                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-                Encoding enc = Encoding.GetEncoding("Shift-JIS");
-                CommonValues.GetInstance().Scanner = new QRCodeScannerLib.ScannerManager(port, enc);
+                CommonValues.GetInstance().Scanner = new QRCodeScannerLib.ScannerManager(port);
                 CommonValues.GetInstance().Scanner.Connect();   // 接続
 
                 CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;

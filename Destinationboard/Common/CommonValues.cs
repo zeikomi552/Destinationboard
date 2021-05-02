@@ -152,11 +152,8 @@ namespace Destinationboard.Common
 			// スキャナを使用する場合
 			if(EnableHandyScanner)
             {
-				// 文字コード設定
-				System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
 				// スキャナのオブジェクト作成
-				this._Scanner = new ScannerManager(CommonValues.GetInstance().HandyScannerComPort, Encoding.GetEncoding("Shift_JIS"));
+				this._Scanner = new ScannerManager(CommonValues.GetInstance().HandyScannerComPort);
 			}
 		}
         #endregion
