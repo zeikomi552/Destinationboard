@@ -29,6 +29,7 @@
     <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="PCSC.Iso7816" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,6 +2,9 @@
 using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
 using Grpc.Core;
+using PCSC;
+using PCSC.Iso7816;
+using PCSC.Monitoring;
 using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
@@ -92,6 +95,67 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        ISCardMonitor _Monitor;
+
+        private void DisplayEvent(string readername, CardStatusEventArgs unknown)
+        {
+            using (var context = ContextFactory.Instance.Establish(SCardScope.System))
+            {
+                using (var rfidReader = context.ConnectReader(readername, SCardShareMode.Shared, SCardProtocol.Any))
+                {
+                    var apdu = new CommandApdu(IsoCase.Case2Short, rfidReader.Protocol)
+                    {
+                        CLA = 0xFF,
+                        Instruction = InstructionCode.GetData,
+                        P1 = 0x00,
+                        P2 = 0x00,
+                        Le = 0 // We don't know the ID tag size
+                    };
+
+                    using (rfidReader.Transaction(SCardReaderDisposition.Leave))
+                    {
+                        Console.WriteLine("Retrieving the UID .... ");
+
+                        var sendPci = SCardPCI.GetPci(rfidReader.Protocol);
+                        var receivePci = new SCardPCI(); // IO returned protocol control information.
+
+                        var receiveBuffer = new byte[256];
+                        var command = apdu.ToArray();
+
+                        var bytesReceived = rfidReader.Transmit(
+                            sendPci, // Protocol Control Information (T0, T1 or Raw)
+                            command, // command APDU
+                            command.Length,
+                            receivePci, // returning Protocol Control Information
+                            receiveBuffer,
+                            receiveBuffer.Length); // data buffer
+
+                        var responseApdu =
+                            new ResponseApdu(receiveBuffer, bytesReceived, IsoCase.Case2Short, rfidReader.Protocol);
+
+
+                        if (this.StaffItems.SelectedItem != null)
+                        {
+                            this.StaffItems.SelectedItem.FelicaID = responseApdu.HasData ? BitConverter.ToString(responseApdu.GetData()) : "No uid received";
+                        }
+                    }
+                }
+            }
+        }
+
+        private static string[] GetReaderNames()
+        {
+            using (var context = ContextFactory.Instance.Establish(SCardScope.System))
+            {
+                return context.GetReaders();
+            }
+        }
+
+        private static bool IsEmpty(ICollection<string> readerNames) => readerNames == null || readerNames.Count < 1;
+
+
+
+
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -100,6 +164,16 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // Retrieve the names of all installed readers.
+                var readerNames = GetReaderNames();
+
+                if (!IsEmpty(readerNames))
+                {
+                    _Monitor = MonitorFactory.Instance.Create(SCardScope.System);
+                    _Monitor.CardInserted += (sender, args) => DisplayEvent(readerNames.First(), args);
+                    _Monitor.Start(readerNames.First());
+                }
+
                 // チャネルの作成
                 var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName,
                     CommonValues.GetInstance().Port, ChannelCredentials.Insecure);

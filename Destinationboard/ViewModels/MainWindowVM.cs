@@ -3,6 +3,7 @@ using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
 using Destinationboard.Views;
 using Grpc.Core;
+using PCSC;
 using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
