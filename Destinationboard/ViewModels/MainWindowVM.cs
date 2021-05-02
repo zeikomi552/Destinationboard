@@ -3,11 +3,13 @@ using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
 using Destinationboard.Views;
 using Grpc.Core;
+using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
@@ -240,22 +242,15 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 従業員ステータスの登録画面へ遷移する
-        /// <summary>
-        /// 従業員ステータスの登録画面へ遷移する
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Staff_ClickRegistBeginFinish(object sender, EventArgs e)
+
+        public void MoveRegistBeginFinish(ActionPlanM action_plan)
         {
             try
             {
-
                 var wnd = new RegistBeginFinishV();
                 wnd.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;  // 中央に表示する
                 var vm = wnd.DataContext as RegistBeginFinishVM;
 
-                var action_plan = sender as ActionPlanM;
                 vm.ActionPlan.Copy(action_plan);
 
                 // 画面遷移
@@ -272,8 +267,58 @@ namespace Destinationboard.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
+        #region 従業員ステータスの登録画面へ遷移する
+        /// <summary>
+        /// 従業員ステータスの登録画面へ遷移する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Staff_ClickRegistBeginFinish(object sender, EventArgs e)
+        {
+            var action_plan = sender as ActionPlanM;
+            MoveRegistBeginFinish(action_plan);
+        }
         #endregion
         #endregion
+
+        public void HandyScannerInit()
+        {
+            // スキャナを使用するかどうかの判定
+            if( CommonValues.GetInstance().EnableHandyScanner)
+            {
+                int port = CommonValues.GetInstance().HandyScannerComPort;  // シリアルポート指定
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                Encoding enc = Encoding.GetEncoding("Shift-JIS");
+                CommonValues.GetInstance().Scanner = new QRCodeScannerLib.ScannerManager(port, enc);
+                CommonValues.GetInstance().Scanner.Connect();   // 接続
+
+                CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+                CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
+            }
+        }
+
+        /// <summary>
+        /// イベント処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _SerialPort_DataReceived(object sender, EventArgs e)
+        {
+            var ev = e as ScannerDataRecieveEventArgs;
+            string Message = ev.Message;
+
+            Application.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                var tmp = (from x in this.ActionPlans.Items
+                           where x.QRCode.Equals(Message)
+                           select x).FirstOrDefault();
+
+                if (tmp != null)
+                {
+                    MoveRegistBeginFinish(tmp);
+                }
+            }));
+        }
 
         #region 初期化処理
         /// <summary>
@@ -292,6 +337,9 @@ namespace Destinationboard.ViewModels
                 _timer2.Start();
 
                 GetPlans();
+
+                // ハンディスキャナの初期化
+                HandyScannerInit();
             }
             catch (Exception ex)
             {
@@ -349,8 +397,12 @@ namespace Destinationboard.ViewModels
                     if (staff_action != null)
                     {
                         staff_action.StaffName = staff.StaffName;   // 名前は従業員マスターのものを使用する
+                        var action_plan = new ActionPlanM(staff_action);
+                        action_plan.QRCode = staff.QRCode;      // 従業員識別用QRコード
+                        action_plan.FelicaID = staff.FelicaID;  // 従業員識別用FelicaID
+
                         // その行動情報を登録する
-                        action_list.Add(new ActionPlanM(staff_action));
+                        action_list.Add(action_plan);
                     }
                     else
                     {
@@ -358,6 +410,9 @@ namespace Destinationboard.ViewModels
                         var emply_action_plan = new ActionPlanM();
                         emply_action_plan.StaffID = staff.StaffID;
                         emply_action_plan.StaffName = staff.StaffName;
+                        emply_action_plan.QRCode = staff.QRCode;
+                        emply_action_plan.FelicaID = staff.FelicaID;
+
                         action_list.Add(emply_action_plan);
                     }
                 }
@@ -496,6 +551,13 @@ namespace Destinationboard.ViewModels
             {
                 _timer.Stop();  // タイマー破棄
                 _timer2.Stop(); // タイマー破棄
+
+                // スキャナを使用するかどうかの判定
+                if (CommonValues.GetInstance().EnableHandyScanner)
+                {
+                    CommonValues.GetInstance().Scanner.Disconnect();
+                    CommonValues.GetInstance().Scanner.Dispose();
+                }
 
                 Environment.Exit(0);
             }

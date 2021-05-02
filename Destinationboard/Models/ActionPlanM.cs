@@ -143,6 +143,57 @@ namespace Destinationboard.Models
         }
         #endregion
 
+        #region 従業員識別FelicaID[FelicaID]プロパティ
+        /// <summary>
+        /// 従業員識別FelicaID[FelicaID]プロパティ用変数
+        /// </summary>
+        String _FelicaID = string.Empty;
+        /// <summary>
+        /// 従業員識別FelicaID[FelicaID]プロパティ
+        /// </summary>
+        public String FelicaID
+        {
+            get
+            {
+                return _FelicaID;
+            }
+            set
+            {
+                if (_FelicaID == null || !_FelicaID.Equals(value))
+                {
+                    _FelicaID = value;
+                    NotifyPropertyChanged("FelicaID");
+                }
+            }
+        }
+        #endregion
+
+        #region 従業員識別QRコード[QRCode]プロパティ
+        /// <summary>
+        /// 従業員識別QRコード[QRCode]プロパティ用変数
+        /// </summary>
+        String _QRCode = string.Empty;
+        /// <summary>
+        /// 従業員識別QRコード[QRCode]プロパティ
+        /// </summary>
+        public String QRCode
+        {
+            get
+            {
+                return _QRCode;
+            }
+            set
+            {
+                if (_QRCode == null || !_QRCode.Equals(value))
+                {
+                    _QRCode = value;
+                    NotifyPropertyChanged("QRCode");
+                }
+            }
+        }
+        #endregion
+
+
         #region スタッフの登録処理
         /// <summary>
         /// スタッフの登録処理

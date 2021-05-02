@@ -26,8 +26,6 @@ namespace Destinationboard.Common
 		/// </summary>
 		private CommonValues()
 		{
-			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-			this._Scanner = new ScannerManager(3, Encoding.GetEncoding("Shift_JIS"));
 		}
 		#endregion
 
@@ -145,6 +143,71 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		#region スキャナの初期化処理
+		/// <summary>
+		/// スキャナの初期化処理
+		/// </summary>
+		public void ScannerInitialize()
+        {
+			// スキャナを使用する場合
+			if(EnableHandyScanner)
+            {
+				// 文字コード設定
+				System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+				// スキャナのオブジェクト作成
+				this._Scanner = new ScannerManager(CommonValues.GetInstance().HandyScannerComPort, Encoding.GetEncoding("Shift_JIS"));
+			}
+		}
+        #endregion
+
+        #region ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ
+        /// <summary>
+        /// ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ用変数
+        /// </summary>
+        bool _EnableHandyScanner = false;
+		/// <summary>
+		/// ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ
+		/// </summary>
+		public bool EnableHandyScanner
+		{
+			get
+			{
+				return _EnableHandyScanner;
+			}
+			set
+			{
+				if (!_EnableHandyScanner.Equals(value))
+				{
+					_EnableHandyScanner = value;
+				}
+			}
+		}
+		#endregion
+
+		#region ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
+		/// <summary>
+		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ用変数
+		/// </summary>
+		int _HandyScannerComPort = 3;
+		/// <summary>
+		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
+		/// </summary>
+		public int HandyScannerComPort
+		{
+			get
+			{
+				return _HandyScannerComPort;
+			}
+			set
+			{
+				if (!_HandyScannerComPort.Equals(value))
+				{
+					_HandyScannerComPort = value;
+				}
+			}
+		}
+		#endregion
 
 		/// <summary>
 		/// Configデータのセット
@@ -155,6 +218,10 @@ namespace Destinationboard.Common
 			conf.LoadConfig();
 			ServerName = conf.ServerName;
 			Port = conf.Port;
+
+			// ハンディスキャナ設定
+			HandyScannerComPort = conf.HandyScannerComPort;
+			EnableHandyScanner = conf.EnableHandyScanner;
 		}
 
 		public DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient GetClient()

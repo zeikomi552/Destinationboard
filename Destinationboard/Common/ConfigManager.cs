@@ -86,6 +86,54 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		#region ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ
+		/// <summary>
+		/// ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ用変数
+		/// </summary>
+		bool _EnableHandyScanner = false;
+		/// <summary>
+		/// ハンディスキャナを使用するかどうか(true:使用する false:使用しない)[EnableHandyScanner]プロパティ
+		/// </summary>
+		public bool EnableHandyScanner
+		{
+			get
+			{
+				return _EnableHandyScanner;
+			}
+			set
+			{
+				if (!_EnableHandyScanner.Equals(value))
+				{
+					_EnableHandyScanner = value;
+				}
+			}
+		}
+		#endregion
+
+		#region ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
+		/// <summary>
+		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ用変数
+		/// </summary>
+		int _HandyScannerComPort = 3;
+		/// <summary>
+		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
+		/// </summary>
+		public int HandyScannerComPort
+		{
+			get
+			{
+				return _HandyScannerComPort;
+			}
+			set
+			{
+				if (!_HandyScannerComPort.Equals(value))
+				{
+					_HandyScannerComPort = value;
+				}
+			}
+		}
+		#endregion
+
 		#region コンフィグファイルの保存処理
 		/// <summary>
 		/// コンフィグファイルの保存処理
@@ -138,14 +186,16 @@ namespace Destinationboard.Common
 		{
 			this.ServerName = conf.ServerName;  // サーバー名
 			this.Port = conf.Port;          // ポート番号
+			this.EnableHandyScanner = conf.EnableHandyScanner;		// スキャナ使用可/不可
+			this.HandyScannerComPort = conf.HandyScannerComPort;    // スキャナポート番号
 		}
-        #endregion
+		#endregion
 
-        #region コンフィグファイルのロード処理
-        /// <summary>
-        /// コンフィグファイルのロード処理
-        /// </summary>
-        public void LoadConfig()
+		#region コンフィグファイルのロード処理
+		/// <summary>
+		/// コンフィグファイルのロード処理
+		/// </summary>
+		public void LoadConfig()
 		{
 			try
 			{
