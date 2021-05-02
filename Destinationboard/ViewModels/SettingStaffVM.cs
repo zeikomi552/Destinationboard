@@ -54,31 +54,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 受信データ[Message]プロパティ
-        /// <summary>
-        /// 受信データ[Message]プロパティ用変数
-        /// </summary>
-        string _Message = string.Empty;
-        /// <summary>
-        /// 受信データ[Message]プロパティ
-        /// </summary>
-        public string Message
-        {
-            get
-            {
-                return _Message;
-            }
-            set
-            {
-                if (!_Message.Equals(value))
-                {
-                    _Message = value;
-                    NotifyPropertyChanged("Message");
-                }
-            }
-        }
-        #endregion
-
         #region スキャナの初期化処理
         /// <summary>
         /// スキャナの初期化処理
@@ -109,11 +84,10 @@ namespace Destinationboard.ViewModels
         private void _SerialPort_DataReceived(object sender, EventArgs e)
         {
             var ev = e as ScannerDataRecieveEventArgs;
-            this.Message = ev.Message;
 
             if (this.StaffItems.SelectedItem != null)
             {
-                this.StaffItems.SelectedItem.QRCode = this.Message;
+                this.StaffItems.SelectedItem.QRCode = ev.Message;
             }
         }
         #endregion

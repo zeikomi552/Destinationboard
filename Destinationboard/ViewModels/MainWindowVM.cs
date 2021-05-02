@@ -483,7 +483,6 @@ namespace Destinationboard.ViewModels
 
                 if (CommonValues.GetInstance().EnableHandyScanner)
                 {
-                    CommonValues.GetInstance().Scanner.Disconnect();
                     CommonValues.GetInstance().Scanner.Connect();
                     CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
                 }
