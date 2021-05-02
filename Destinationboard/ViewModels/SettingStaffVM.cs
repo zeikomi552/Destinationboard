@@ -79,16 +79,28 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region スキャナの初期化処理
         /// <summary>
         /// スキャナの初期化処理
         /// </summary>
         public void ScannerInitialize()
         {
-            CommonValues.GetInstance().Scanner.Connect();
+            // スキャナを使用する場合
+            if (CommonValues.GetInstance().EnableHandyScanner)
+            {
+                // 接続処理
+                CommonValues.GetInstance().Scanner.Connect();
 
-            CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
-            CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
+                // イベントを一旦クリア
+                CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+
+                // イベント登録
+                CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
+            }
         }
+        #endregion
+
+        #region イベント処理
         /// <summary>
         /// イベント処理
         /// </summary>
@@ -104,10 +116,12 @@ namespace Destinationboard.ViewModels
                 this.StaffItems.SelectedItem.QRCode = this.Message;
             }
         }
+        #endregion
+
         #region 初期化処理
-            /// <summary>
-            /// 初期化処理
-            /// </summary>
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
         public override void Init()
         {
             try
@@ -190,7 +204,11 @@ namespace Destinationboard.ViewModels
                 // 送信
                 var reply = client.RegistStaff(request);
 
+
                 ShowMessage.ShowNoticeOK("登録しました", "通知");
+
+                // ハンディスキャナのコネクションの終了処理
+                CloseConnection();
 
                 // 閉じる処理
                 this.DialogResult = true;
@@ -200,6 +218,26 @@ namespace Destinationboard.ViewModels
             {
                 _logger.Error("Fatal Error", e);
                 ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region コネクションの終了処理
+        /// <summary>
+        /// コネクションの終了処理
+        /// </summary>
+        public void CloseConnection()
+        {
+            // イベント登録されている場合
+            if (CommonValues.GetInstance().Scanner.DataReceived != null)
+            {
+                CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+            }
+
+            // 接続中の場合
+            if (CommonValues.GetInstance().Scanner.IsConnect)
+            {
+                CommonValues.GetInstance().Scanner.Disconnect();
             }
         }
         #endregion
@@ -214,10 +252,8 @@ namespace Destinationboard.ViewModels
             {
                 if (ShowMessage.ShowQuestionYesNo("変更内容は登録されません。よろしいですか？", "確認") == System.Windows.MessageBoxResult.Yes)
                 {
-                    if(CommonValues.GetInstance().Scanner.DataReceived != null)
-                    {
-                        CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
-                    }
+                    // ハンディスキャナのコネクションの終了処理
+                    CloseConnection();
 
                     this.DialogResult = false;
                 }

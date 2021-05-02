@@ -469,10 +469,23 @@ namespace Destinationboard.ViewModels
                 SettingStaffV wnd = new SettingStaffV();
                 SettingStaffVM vm = wnd.DataContext as SettingStaffVM;
 
+                if (CommonValues.GetInstance().EnableHandyScanner)
+                {
+                    CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+                    CommonValues.GetInstance().Scanner.Disconnect();
+                }
+
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
                     GetPlans();
+                }
+
+                if (CommonValues.GetInstance().EnableHandyScanner)
+                {
+                    CommonValues.GetInstance().Scanner.Disconnect();
+                    CommonValues.GetInstance().Scanner.Connect();
+                    CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
                 }
             }
             catch (Exception e)
