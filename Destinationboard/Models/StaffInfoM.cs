@@ -36,6 +36,8 @@ namespace Destinationboard.Models
             this.StaffID = reply.StaffID;
             this.StaffName = reply.StaffName;
             this.SortOrder = reply.SortOrder;
+            this.QRCode = reply.QRCode;
+            this.FelicaID = reply.FelicaID;
             this.CreateDate = DateTime.ParseExact( reply.CreateDate, "yyyy/MM/dd HH:mm:ss", null);
             this.CreateUser = reply.CreateUser;
             this.Display = reply.Display;

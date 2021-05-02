@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary.csproj" />
+    <ProjectReference Include="..\..\QRCodeScannerLib\QRCodeScannerLib\QRCodeScannerLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

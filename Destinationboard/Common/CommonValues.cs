@@ -1,5 +1,6 @@
 ﻿using Destinationboard.Common.Utilities;
 using Grpc.Core;
+using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace Destinationboard.Common
 		/// </summary>
 		private CommonValues()
 		{
-
+			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+			this._Scanner = new ScannerManager(3, Encoding.GetEncoding("Shift_JIS"));
 		}
 		#endregion
 
@@ -117,6 +119,32 @@ namespace Destinationboard.Common
 			}
 		}
 		#endregion
+
+		#region スキャナー[Scanner]プロパティ
+		/// <summary>
+		/// スキャナー[Scanner]プロパティ用変数
+		/// </summary>
+		ScannerManager _Scanner;
+		/// <summary>
+		/// スキャナー[Scanner]プロパティ
+		/// </summary>
+		public ScannerManager Scanner
+		{
+			get
+			{
+				return _Scanner;
+			}
+			set
+			{
+				if (_Scanner == null || !_Scanner.Equals(value))
+				{
+					_Scanner = value;
+					NotifyPropertyChanged("Scanner");
+				}
+			}
+		}
+		#endregion
+
 
 		/// <summary>
 		/// Configデータのセット

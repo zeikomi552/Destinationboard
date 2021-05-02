@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destinationboard", "Destina
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DestinationboardCommunicationLibrary", "..\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary\DestinationboardCommunicationLibrary.csproj", "{19919E26-1045-445E-B131-597727DFF992}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeScannerLib", "..\QRCodeScannerLib\QRCodeScannerLib\QRCodeScannerLib.csproj", "{08A3319F-01C7-49A7-9459-F009C1DBBDCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{19919E26-1045-445E-B131-597727DFF992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19919E26-1045-445E-B131-597727DFF992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19919E26-1045-445E-B131-597727DFF992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A3319F-01C7-49A7-9459-F009C1DBBDCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A3319F-01C7-49A7-9459-F009C1DBBDCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A3319F-01C7-49A7-9459-F009C1DBBDCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A3319F-01C7-49A7-9459-F009C1DBBDCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

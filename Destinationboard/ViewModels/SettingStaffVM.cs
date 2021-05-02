@@ -2,12 +2,14 @@
 using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
 using Grpc.Core;
+using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
 {
@@ -52,10 +54,60 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 初期化処理
+        #region 受信データ[Message]プロパティ
         /// <summary>
-        /// 初期化処理
+        /// 受信データ[Message]プロパティ用変数
         /// </summary>
+        string _Message = string.Empty;
+        /// <summary>
+        /// 受信データ[Message]プロパティ
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                return _Message;
+            }
+            set
+            {
+                if (!_Message.Equals(value))
+                {
+                    _Message = value;
+                    NotifyPropertyChanged("Message");
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// スキャナの初期化処理
+        /// </summary>
+        public void ScannerInitialize()
+        {
+            CommonValues.GetInstance().Scanner.Connect();
+
+            CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+            CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
+        }
+        /// <summary>
+        /// イベント処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _SerialPort_DataReceived(object sender, EventArgs e)
+        {
+            var ev = e as ScannerDataRecieveEventArgs;
+            this.Message = ev.Message;
+
+            if (this.StaffItems.SelectedItem != null)
+            {
+                this.StaffItems.SelectedItem.QRCode = this.Message;
+            }
+        }
+        #region 初期化処理
+            /// <summary>
+            /// 初期化処理
+            /// </summary>
         public override void Init()
         {
             try
@@ -88,6 +140,8 @@ namespace Destinationboard.ViewModels
                 // 画面に表示
                 this.StaffItems = staff_list;
 
+                // スキャナ初期化処理
+                ScannerInitialize();
             }
             catch (Exception e)
             {
@@ -126,6 +180,8 @@ namespace Destinationboard.ViewModels
                     staff_item.SortOrder = tmp.SortOrder;
                     staff_item.StaffName = tmp.StaffName;
                     staff_item.Display = tmp.Display;
+                    staff_item.QRCode = tmp.QRCode;
+                    staff_item.FelicaID = tmp.FelicaID;
                     staff_item.CreateUser = Environment.UserName;
                     staff_item.CreateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     request.StaffInfoList.Add(staff_item);
@@ -158,6 +214,11 @@ namespace Destinationboard.ViewModels
             {
                 if (ShowMessage.ShowQuestionYesNo("変更内容は登録されません。よろしいですか？", "確認") == System.Windows.MessageBoxResult.Yes)
                 {
+                    if(CommonValues.GetInstance().Scanner.DataReceived != null)
+                    {
+                        CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+                    }
+
                     this.DialogResult = false;
                 }
             }
