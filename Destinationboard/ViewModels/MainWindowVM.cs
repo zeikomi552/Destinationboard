@@ -4,9 +4,12 @@ using Destinationboard.Models;
 using Destinationboard.Views;
 using Grpc.Core;
 using PCSC;
+using PCSC.Iso7816;
+using PCSC.Monitoring;
 using QRCodeScannerLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,58 @@ namespace Destinationboard.ViewModels
     {
         DispatcherTimer _timer = new DispatcherTimer();
         DispatcherTimer _timer2 = new DispatcherTimer();
+        PasoriUtil _Pasori = new PasoriUtil();
+
+        #region PaSoriで読み取ったイベントの受信
+        /// <summary>
+        /// PaSoriで読み取ったイベントの受信
+        /// </summary>
+        /// <param name="readername">リーダーの名称</param>
+        /// <param name="unknown">イベント</param>
+        private void PasoriReaded(string readername, CardStatusEventArgs unknown)
+        {
+            try
+            {
+                System.Media.SoundPlayer player = null;
+                string SoundFile = @"Common\Sound\FelicaReaded.wav";
+
+                // 再生ファイルの確認
+                if (File.Exists(SoundFile))
+                {
+                    player = new System.Media.SoundPlayer(SoundFile);
+                    player.Play();
+                }
+
+                string id = PasoriUtil.GetUID(readername);
+                // スレッドセーフな呼び出し
+                Application.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    var action_plan = (from x in this.ActionPlans.Items
+                                       where x.FelicaID.Equals(id)
+                                       select x).FirstOrDefault();
+
+                    if (action_plan != null)
+                    {
+                        MoveRegistBeginFinish(action_plan);
+                    }
+                }));
+
+                // 再生の停止
+                if (player != null)
+                {
+                    player.Stop();
+                    player.Dispose();
+                    player = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+        #endregion
+
         #region コンストラクタ
         /// <summary>
         /// コンストラクタ
@@ -75,11 +130,17 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 計画のリフレッシュタイマー
+        /// <summary>
+        /// 計画のリフレッシュタイマー
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Refresh_Tick(object sender, EventArgs e)
         {
             GetPlans();
         }
-
+        #endregion
 
         #region 行動予定一覧[ActionPlans]プロパティ
         /// <summary>
@@ -282,6 +343,10 @@ namespace Destinationboard.ViewModels
         #endregion
         #endregion
 
+        #region ハンディスキャナの初期化処理
+        /// <summary>
+        /// ハンディスキャナの初期化処理
+        /// </summary>
         public void HandyScannerInit()
         {
             // スキャナを使用するかどうかの判定
@@ -295,9 +360,11 @@ namespace Destinationboard.ViewModels
                 CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
             }
         }
+        #endregion
 
+        #region スキャナの読み取り受信処理
         /// <summary>
-        /// イベント処理
+        /// スキャナの読み取り受信処理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -318,6 +385,7 @@ namespace Destinationboard.ViewModels
                 }
             }));
         }
+        #endregion
 
         #region 初期化処理
         /// <summary>
@@ -339,6 +407,14 @@ namespace Destinationboard.ViewModels
 
                 // ハンディスキャナの初期化
                 HandyScannerInit();
+
+                // Pasoriの接続状態を確認
+                if (_Pasori.ReaderNames.Count > 0)
+                {
+                    _Pasori.Monitor.CardInserted += (sender, args) => PasoriReaded(_Pasori.ReaderNames.First(), args);
+                    _Pasori.MonitorStart();
+                }
+
             }
             catch (Exception ex)
             {
@@ -474,11 +550,17 @@ namespace Destinationboard.ViewModels
                     CommonValues.GetInstance().Scanner.Disconnect();
                 }
 
+                // Pasoriのモニタリングストップ
+                _Pasori.MonitorStop();
+
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
                 {
                     GetPlans();
                 }
+
+                // Pasoriのモニタリングスタート
+                _Pasori.MonitorStart();
 
                 if (CommonValues.GetInstance().EnableHandyScanner)
                 {

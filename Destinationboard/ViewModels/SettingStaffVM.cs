@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
@@ -88,73 +89,36 @@ namespace Destinationboard.ViewModels
         {
             var ev = e as ScannerDataRecieveEventArgs;
 
-            if (this.StaffItems.SelectedItem != null)
+            // スレッドセーフな呼び出し
+            Application.Current.Dispatcher.Invoke((Action)(() =>
             {
-                this.StaffItems.SelectedItem.QRCode = ev.Message;
-            }
+                if (this.StaffItems.SelectedItem != null)
+                {
+                    this.StaffItems.SelectedItem.QRCode = ev.Message;
+                }
+            }));
         }
         #endregion
 
         ISCardMonitor _Monitor;
 
+        /// <summary>
+        /// 表示イベント
+        /// </summary>
+        /// <param name="readername">リーダーの名称</param>
+        /// <param name="unknown">イベント</param>
         private void DisplayEvent(string readername, CardStatusEventArgs unknown)
         {
-            using (var context = ContextFactory.Instance.Establish(SCardScope.System))
+            string id = PasoriUtil.GetUID(readername);
+            // スレッドセーフな呼び出し
+            Application.Current.Dispatcher.Invoke((Action)(() =>
             {
-                using (var rfidReader = context.ConnectReader(readername, SCardShareMode.Shared, SCardProtocol.Any))
+                if (this.StaffItems.SelectedItem != null)
                 {
-                    var apdu = new CommandApdu(IsoCase.Case2Short, rfidReader.Protocol)
-                    {
-                        CLA = 0xFF,
-                        Instruction = InstructionCode.GetData,
-                        P1 = 0x00,
-                        P2 = 0x00,
-                        Le = 0 // We don't know the ID tag size
-                    };
-
-                    using (rfidReader.Transaction(SCardReaderDisposition.Leave))
-                    {
-                        Console.WriteLine("Retrieving the UID .... ");
-
-                        var sendPci = SCardPCI.GetPci(rfidReader.Protocol);
-                        var receivePci = new SCardPCI(); // IO returned protocol control information.
-
-                        var receiveBuffer = new byte[256];
-                        var command = apdu.ToArray();
-
-                        var bytesReceived = rfidReader.Transmit(
-                            sendPci, // Protocol Control Information (T0, T1 or Raw)
-                            command, // command APDU
-                            command.Length,
-                            receivePci, // returning Protocol Control Information
-                            receiveBuffer,
-                            receiveBuffer.Length); // data buffer
-
-                        var responseApdu =
-                            new ResponseApdu(receiveBuffer, bytesReceived, IsoCase.Case2Short, rfidReader.Protocol);
-
-
-                        if (this.StaffItems.SelectedItem != null)
-                        {
-                            this.StaffItems.SelectedItem.FelicaID = responseApdu.HasData ? BitConverter.ToString(responseApdu.GetData()) : "No uid received";
-                        }
-                    }
+                    this.StaffItems.SelectedItem.FelicaID = id;
                 }
-            }
+            }));
         }
-
-        private static string[] GetReaderNames()
-        {
-            using (var context = ContextFactory.Instance.Establish(SCardScope.System))
-            {
-                return context.GetReaders();
-            }
-        }
-
-        private static bool IsEmpty(ICollection<string> readerNames) => readerNames == null || readerNames.Count < 1;
-
-
-
 
         #region 初期化処理
         /// <summary>
@@ -165,9 +129,9 @@ namespace Destinationboard.ViewModels
             try
             {
                 // Retrieve the names of all installed readers.
-                var readerNames = GetReaderNames();
+                var readerNames = PasoriUtil.GetReaderNames();
 
-                if (!IsEmpty(readerNames))
+                if (!PasoriUtil.IsEmpty(readerNames))
                 {
                     _Monitor = MonitorFactory.Instance.Create(SCardScope.System);
                     _Monitor.CardInserted += (sender, args) => DisplayEvent(readerNames.First(), args);
@@ -290,6 +254,20 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+        public void ClosePasori()
+        {
+            try
+            {
+                _Monitor.Cancel();
+                _Monitor.CardInserted -= (sender, args) => { }; // イベントの初期化
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
         #region 閉じる処理
         /// <summary>
         /// 閉じる処理
