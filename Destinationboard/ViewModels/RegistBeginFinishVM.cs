@@ -130,6 +130,9 @@ namespace Destinationboard.ViewModels
                 {
                     // ステータスを戻す
                     this._ActionPlan.Status = this.StatusBak;
+                    _timer.Stop();  // タイマーのストップ
+                    // 画面を閉じる
+                    this.DialogResult = false;
                 }
                 else
                 {

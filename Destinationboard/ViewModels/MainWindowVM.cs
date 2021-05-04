@@ -304,7 +304,11 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
+        #region 出勤・退勤入力画面への遷移
+        /// <summary>
+        /// 出勤・退勤入力画面への遷移
+        /// </summary>
+        /// <param name="action_plan">行動予定</param>
         public void MoveRegistBeginFinish(ActionPlanM action_plan)
         {
             try
@@ -329,9 +333,11 @@ namespace Destinationboard.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
-        #region 従業員ステータスの登録画面へ遷移する
+        #endregion
+
+        #region 出勤・退勤入力画面への遷移
         /// <summary>
-        /// 従業員ステータスの登録画面へ遷移する
+        /// 出勤・退勤入力画面への遷移
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
