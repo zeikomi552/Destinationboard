@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{DynamicResource ButtonLargeFontSize}" Text="行動予定表" Grid.ColumnSpan="2"/>
-                <TextBlock Language="ja-jp" Margin="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16"
+                <TextBlock Language="ja-jp" Margin="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{DynamicResource FontSize05}"
                            Text="{Binding CurrentTime, Mode=OneWay, StringFormat=yyyy/MM/dd(ddd) H:mm}"/>
             </Grid>
         </Border>
