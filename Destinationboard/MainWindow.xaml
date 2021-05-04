@@ -65,7 +65,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Content="氏名">
+                    <Button FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Content="氏名" Cursor="Hand">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveSettingStaffV"/>
@@ -110,7 +110,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Height="50" Margin="5" >
+                                    <Button FontSize="{StaticResource ButtonMiddleFontSize}" Height="50" Margin="5" >
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}">
                                                 <Style.Triggers>
@@ -127,12 +127,14 @@
                                             </Style>
                                         </Button.Style>
                                         <Button.Content>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding StaffName}"/>
-                                                <TextBlock Text=" ("/>
-                                                <TextBlock Text="{Binding Status, Converter={StaticResource StaffStatusToStringConverter}}"/>
-                                                <TextBlock Text=")"/>
-                                            </StackPanel>
+                                            <Viewbox Margin="5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding StaffName}"/>
+                                                    <TextBlock Text=" ("/>
+                                                    <TextBlock Text="{Binding Status, Converter={StaticResource StaffStatusToStringConverter}}"/>
+                                                    <TextBlock Text=")"/>
+                                                </StackPanel>
+                                            </Viewbox>
                                         </Button.Content>
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
@@ -140,31 +142,43 @@
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
                                     </Button>
-                                    <Button Height="50" Margin="5" Grid.Column="1">
+                                    <Button FontSize="{StaticResource ButtonMiddleFontSize}" Height="50" Margin="5" Grid.Column="1">
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
                                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistAction"/>
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding ActionName}"/>
-                                            <TextBlock Text=":"/>
-                                            <TextBlock Text="{Binding DestinationName}"/>
-                                        </StackPanel>
+                                        <Viewbox Margin="5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding ActionName}"/>
+                                                <TextBlock Text=":"/>
+                                                <TextBlock Text="{Binding DestinationName}"/>
+                                            </StackPanel>
+                                        </Viewbox>
                                     </Button>
                                     <Grid Grid.Column="2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Height="50" Margin="5" Content="{Binding FromTime, Converter={StaticResource DateTextConverter}}">
+                                        <Button FontSize="{StaticResource ButtonMiddleFontSize}" Height="50" Margin="5">
+                                            <Button.Content>
+                                                <Viewbox>
+                                                    <TextBlock Text="{Binding FromTime, Converter={StaticResource DateTextConverter}}"/>
+                                                </Viewbox>
+                                            </Button.Content>
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
                                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistStartTime"/>
                                                 </b:EventTrigger>
                                             </b:Interaction.Triggers>
                                         </Button>
-                                        <Button Height="50" Margin="5" Grid.Column="1" Content="{Binding ToTime, Converter={StaticResource DateTextConverter}}">
+                                        <Button FontSize="{StaticResource ButtonMiddleFontSize}" Height="50" Margin="5" Grid.Column="1">
+                                            <Button.Content>
+                                                <Viewbox>
+                                                    <TextBlock Text="{Binding ToTime, Converter={StaticResource DateTextConverter}}"/>
+                                                </Viewbox>
+                                            </Button.Content>
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="Click">
                                                     <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistEndTime"/>
@@ -172,12 +186,17 @@
                                             </b:Interaction.Triggers>
                                         </Button>
                                     </Grid>
-                                    <Button Height="50" Margin="5" Grid.Column="3" Content="{Binding Memo}">
+                                    <Button FontSize="{StaticResource ButtonMiddleFontSize}" Height="50" Margin="5" Grid.Column="3">
                                         <b:Interaction.Triggers>
                                             <b:EventTrigger EventName="Click">
                                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="RegistMemo"/>
                                             </b:EventTrigger>
                                         </b:Interaction.Triggers>
+                                        <Button.Content>
+                                            <Viewbox>
+                                                <TextBlock Text="{Binding Memo}"/>
+                                            </Viewbox>
+                                        </Button.Content>
                                     </Button>
                                 </Grid>
                             </DataTemplate>
