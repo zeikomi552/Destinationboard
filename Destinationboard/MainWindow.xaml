@@ -79,8 +79,12 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
-                    <Button IsEnabled="False" FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="2" Content="時間"/>
-                    <Button IsEnabled="False" FontSize="{DynamicResource ButtonLargeFontSize}" Height="50" Margin="5" Grid.Column="3" Content="備考" />
+                    <Border Height="50" Background="{DynamicResource PrimaryHueLightBrush}" Margin="5" Grid.Column="2" Style="{DynamicResource MaterialDesignToolBarMainPanelBorderStyle}">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{DynamicResource ButtonLargeFontSize}" Text="時間" Foreground="#DDFFFFFF" Style="{DynamicResource MaterialDesignButtonTextBlock}"/>
+                    </Border>
+                    <Border Height="50" Background="{DynamicResource PrimaryHueLightBrush}" Margin="5" Grid.Column="3" Style="{DynamicResource MaterialDesignToolBarMainPanelBorderStyle}">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{DynamicResource ButtonLargeFontSize}" Text="備考" Foreground="#DDFFFFFF" Style="{DynamicResource MaterialDesignButtonTextBlock}"/>
+                    </Border>
                 </Grid>
                 <Grid Grid.Row="1" >
                     <ItemsControl Margin="5" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items}">
