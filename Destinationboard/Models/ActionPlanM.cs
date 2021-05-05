@@ -108,6 +108,42 @@ namespace Destinationboard.Models
         }
         #endregion
 
+        #region マップ情報に変換
+        /// <summary>
+        /// マップ情報に変換
+        /// </summary>
+        /// <returns>マップ情報</returns>
+        public MapLayoutM ToMapLayout()
+        {
+            MapLayoutM map = new MapLayoutM();
+            map.StaffID = this.StaffID;
+            map.MapPos = new System.Windows.Point(this.MapPos.X, this.MapPos.Y);
+            return map;
+        }
+        #endregion
+
+        #region マップ情報のセット
+        /// <summary>
+        /// マップ情報のセット
+        /// </summary>
+        /// <param name="maplist">マップリスト</param>
+        public void SetMapLayout(List<MapLayoutM> maplist)
+        {
+            var map = (from x in maplist
+                       where x.StaffID.Equals(this.StaffID)
+                       select x).FirstOrDefault();
+
+            if (map != null)
+            {
+                this.MapPos = new Point(map.MapPos.X, map.MapPos.Y);
+            }
+            else
+            {
+                this.MapPos = new Point(0, 0);
+            }
+        }
+        #endregion
+
         #region Copy処理
         /// <summary>
         /// Copy処理
@@ -205,33 +241,6 @@ namespace Destinationboard.Models
             }
         }
         #endregion
-
-
-        #region [X]プロパティ
-        /// <summary>
-        /// [X]プロパティ用変数
-        /// </summary>
-        double _X = 0.0;
-        /// <summary>
-        /// [X]プロパティ
-        /// </summary>
-        public double X
-        {
-            get
-            {
-                return _X;
-            }
-            set
-            {
-                if (!_X.Equals(value))
-                {
-                    _X = value;
-                    NotifyPropertyChanged("X");
-                }
-            }
-        }
-        #endregion
-
 
         #region マップでの位置情報[MapPos]プロパティ
         /// <summary>
