@@ -21,7 +21,7 @@
         <ItemsControl Margin="5" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="{x:Type ItemsControl}">
-                    <Border>
+                    <Border>    
                         <ScrollViewer>
                             <ItemsPresenter Margin="10" />
                         </ScrollViewer>

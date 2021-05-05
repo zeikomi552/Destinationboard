@@ -55,6 +55,12 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+        public void SetActionPlans(ActionPlanCollectionM action_plans)
+        {
+            this.ActionPlans = action_plans;
+        }
+
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
         /// マップのイメージ[MapImage]プロパティ用変数
@@ -103,8 +109,6 @@ namespace Destinationboard.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
-
-        
 
         public void Thumb_DragStarted(object sender, DragStartedEventArgs e)
         {
