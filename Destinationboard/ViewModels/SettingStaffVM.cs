@@ -257,7 +257,10 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
+        #region パソリの終了処理
+        /// <summary>
+        /// パソリの終了処理
+        /// </summary>
         public void ClosePasori()
         {
             try
@@ -271,6 +274,8 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
+
         #region 閉じる処理
         /// <summary>
         /// 閉じる処理
