@@ -240,16 +240,19 @@ namespace Destinationboard.ViewModels
         /// </summary>
         public void CloseConnection()
         {
-            // イベント登録されている場合
-            if (CommonValues.GetInstance().Scanner.DataReceived != null)
+            if (CommonValues.GetInstance().EnableHandyScanner)
             {
-                CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
-            }
+                // イベント登録されている場合
+                if (CommonValues.GetInstance().Scanner.DataReceived != null)
+                {
+                    CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
+                }
 
-            // 接続中の場合
-            if (CommonValues.GetInstance().Scanner.IsConnect)
-            {
-                CommonValues.GetInstance().Scanner.Disconnect();
+                // 接続中の場合
+                if (CommonValues.GetInstance().Scanner.IsConnect)
+                {
+                    CommonValues.GetInstance().Scanner.Disconnect();
+                }
             }
         }
         #endregion
