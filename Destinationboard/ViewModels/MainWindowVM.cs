@@ -450,7 +450,7 @@ namespace Destinationboard.ViewModels
                 HandyScannerInit();
 
                 // Pasoriの接続状態を確認
-                if (_Pasori.ReaderNames.Count > 0)
+                if (_Pasori != null && _Pasori.ReaderNames != null && _Pasori.ReaderNames.Count > 0)
                 {
                     _Pasori.Monitor.CardInserted += (sender, args) => PasoriReaded(_Pasori.ReaderNames.First(), args);
                     _Pasori.MonitorStart();
