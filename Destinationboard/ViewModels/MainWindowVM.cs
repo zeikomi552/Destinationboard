@@ -161,6 +161,11 @@ namespace Destinationboard.ViewModels
                 if (_ActionPlans == null || !_ActionPlans.Equals(value))
                 {
                     _ActionPlans = value;
+
+                    if (_MapVM != null)
+                    {
+                        _MapVM.SetActionPlans(_ActionPlans);
+                    }
                     NotifyPropertyChanged("ActionPlans");
                 }
             }
@@ -191,6 +196,35 @@ namespace Destinationboard.ViewModels
                 staff.ClickEndTime += Staff_ClickEndTime;
             }
         }
+
+
+        private MapVM _MapVM;
+
+        #region マップの初期化処理
+        /// <summary>
+        /// マップの初期化処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void InitMap(object sender, EventArgs e)
+        {
+            try
+            {
+                var v = sender as MainWindow;
+
+                if (v != null)
+                {
+                    this._MapVM = v.Map.DataContext as MapVM;
+                    this._MapVM.SetActionPlans(this.ActionPlans);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+        #endregion
 
         #region 終了時刻のボタン押下処理
         /// <summary>
