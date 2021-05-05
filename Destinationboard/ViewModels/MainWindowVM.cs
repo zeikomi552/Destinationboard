@@ -192,6 +192,26 @@ namespace Destinationboard.ViewModels
             }
         }
 
+        public void InitMap(object sender, EventArgs e)
+        {
+            try
+            {
+                var v = sender as MainWindow;
+
+                if (v != null)
+                {
+                    var vm = v.Map.DataContext as MapVM;
+                    vm.ActionPlans = this.ActionPlans;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         #region 終了時刻のボタン押下処理
         /// <summary>
         /// 終了時刻のボタン押下処理
