@@ -12,7 +12,7 @@
     <UserControl.DataContext>
         <Binding Source="{StaticResource vm}"/>
     </UserControl.DataContext>
-    
+
     <Grid>
         <Border Background="AliceBlue" Margin="5">
             <Image Source="{Binding MapImage}"/>

@@ -164,7 +164,7 @@ namespace Destinationboard.ViewModels
 
                     if (_MapVM != null)
                     {
-                        _MapVM.SetActionPlans(_ActionPlans);
+                        _MapVM.ActionPlans = value;
                     }
                     NotifyPropertyChanged("ActionPlans");
                 }
@@ -215,7 +215,8 @@ namespace Destinationboard.ViewModels
                 if (v != null)
                 {
                     this._MapVM = v.Map.DataContext as MapVM;
-                    this._MapVM.SetActionPlans(this.ActionPlans);
+                    this._MapVM.Init();
+                    this._MapVM.ActionPlans = this.ActionPlans;
                 }
             }
             catch (Exception ex)
@@ -449,7 +450,7 @@ namespace Destinationboard.ViewModels
                 HandyScannerInit();
 
                 // Pasoriの接続状態を確認
-                if (_Pasori.ReaderNames.Count > 0)
+                if (_Pasori != null && _Pasori.ReaderNames != null && _Pasori.ReaderNames.Count > 0)
                 {
                     _Pasori.Monitor.CardInserted += (sender, args) => PasoriReaded(_Pasori.ReaderNames.First(), args);
                     _Pasori.MonitorStart();
@@ -691,6 +692,7 @@ namespace Destinationboard.ViewModels
                     CommonValues.GetInstance().Scanner.Disconnect();
                     CommonValues.GetInstance().Scanner.Dispose();
                 }
+                this._MapVM.Close();
 
                 Environment.Exit(0);
             }
@@ -701,5 +703,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
     }
 }

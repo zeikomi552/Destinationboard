@@ -2,6 +2,7 @@
 using Destinationboard.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Text;
@@ -36,6 +37,13 @@ namespace Destinationboard.ViewModels
                 if (_ActionPlans == null || !_ActionPlans.Equals(value))
                 {
                     _ActionPlans = value;
+
+                    // 行動計画にマップ情報をセット
+                    _ActionPlans.SetMapLayout(this.MapBackup);
+
+                    // マップ情報のバックアップ
+                    this.MapBackup = _ActionPlans.ToMapLayoutList();
+
                     NotifyPropertyChanged("ActionPlans");
                 }
             }
@@ -55,48 +63,13 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 行動予定保存用変数
+        #region マップ情報のバックアップ
         /// <summary>
-        /// 行動予定保存用
+        /// マップ情報のバックアップ
         /// </summary>
-        ActionPlanCollectionM _Backup = new ActionPlanCollectionM();
+        List<MapLayoutM> MapBackup = new ();
         #endregion
 
-        #region ActionPlanのセット処理
-        /// <summary>
-        /// ActionPlanのセット処理
-        /// </summary>
-        /// <param name="action_plans">行動予定リスト</param>
-        public void SetActionPlans(ActionPlanCollectionM action_plans)
-        {
-            // バックアップとの比較
-            foreach (var ap in action_plans.Items)
-            {
-                var bk = (from x in this._Backup.Items
-                 where x.StaffID.Equals(ap.StaffID)
-                 select x).FirstOrDefault();
-
-                if (bk != null)
-                {
-                    // 位置情報を反映
-                    ap.MapPos = new Point(bk.MapPos.X, bk.MapPos.Y);
-                }
-            }
-
-            this.ActionPlans = action_plans;
-
-            ActionPlanCollectionM tmp = new ActionPlanCollectionM();
-            foreach (var ap in this.ActionPlans.Items)
-            {
-                ActionPlanM cp = new ActionPlanM();
-                cp.Copy(ap);    // 値をコピー
-                tmp.Add(cp);    // 要素の追加
-            }
-
-            // バックアップ
-            _Backup = tmp;
-        }
-        #endregion
 
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
@@ -130,7 +103,8 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-
+                // マップのロード処理
+                LoadMapPosition();
             }
             catch (Exception ex)
             {
@@ -148,7 +122,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-
+                this.SaveMapPostion();
             }
             catch (Exception ex)
             {
@@ -225,20 +199,78 @@ namespace Destinationboard.ViewModels
                 // nullチェック
                 if (vm != null)
                 {
-                    var bk = (from elem in this._Backup.Items
-                              where elem.StaffID.Equals(vm.StaffID)
-                              select elem).FirstOrDefault();
-
-                    // 位置情報のセット
-                    bk.MapPos = new Point(x, y);
-
                     var ap = (from elem in this.ActionPlans.Items
                               where elem.StaffID.Equals(vm.StaffID)
                               select elem).FirstOrDefault();
 
                     ap.MapPos = new Point(x, y);
-                    ap.X = x;
+
+                    var bk = (from m in this.MapBackup
+                              where m.StaffID.Equals(ap.StaffID)
+                              select m).FirstOrDefault();
+
+                    if (bk != null)
+                    {
+                        bk.MapPos = new Point(x, y);
+                    }
+                    else
+                    {
+                        this.MapBackup.Add(new MapLayoutM() { StaffID = ap.StaffID, MapPos = new Point(x, y) });
+                    }
                 }
+            }
+        }
+        #endregion
+
+        #region マップ情報のロード処理
+        /// <summary>
+        /// マップ情報のロード処理
+        /// </summary>
+        private void LoadMapPosition()
+        {
+            try
+            {
+                string map_bk_path = @"temporary\_actionplans";
+
+                if (File.Exists(map_bk_path))
+                {
+                    this.MapBackup = XMLUtil.Deserialize<List<MapLayoutM>>(@"temporary\_actionplans");
+                }
+                else
+                {
+                    if (!Directory.Exists(@"temporary"))
+                    {
+                        Directory.CreateDirectory(@"temporary");
+                    }
+                    else
+                    {
+                        SaveMapPostion();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region マップの配置情報の保存
+        /// <summary>
+        /// マップの配置情報の保存
+        /// </summary>
+        private void SaveMapPostion()
+        {
+            try
+            {
+                var bk = this.ActionPlans.ToMapLayoutList();
+                XMLUtil.Seialize<List<MapLayoutM>>(@"temporary\_actionplans", bk);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
         #endregion
