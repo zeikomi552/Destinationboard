@@ -102,6 +102,7 @@ namespace Destinationboard.ViewModels
 
         ISCardMonitor _Monitor;
 
+        #region 表示イベント
         /// <summary>
         /// 表示イベント
         /// </summary>
@@ -119,6 +120,7 @@ namespace Destinationboard.ViewModels
                 }
             }));
         }
+        #endregion
 
         #region 初期化処理
         /// <summary>
