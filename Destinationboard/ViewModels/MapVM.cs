@@ -55,11 +55,48 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 行動予定保存用変数
+        /// <summary>
+        /// 行動予定保存用
+        /// </summary>
+        ActionPlanCollectionM _Backup = new ActionPlanCollectionM();
+        #endregion
 
+        #region ActionPlanのセット処理
+        /// <summary>
+        /// ActionPlanのセット処理
+        /// </summary>
+        /// <param name="action_plans">行動予定リスト</param>
         public void SetActionPlans(ActionPlanCollectionM action_plans)
         {
+            // バックアップとの比較
+            foreach (var ap in action_plans.Items)
+            {
+                var bk = (from x in this._Backup.Items
+                 where x.StaffID.Equals(ap.StaffID)
+                 select x).FirstOrDefault();
+
+                if (bk != null)
+                {
+                    // 位置情報を反映
+                    ap.MapPos = new Point(bk.MapPos.X, bk.MapPos.Y);
+                }
+            }
+
             this.ActionPlans = action_plans;
+
+            ActionPlanCollectionM tmp = new ActionPlanCollectionM();
+            foreach (var ap in this.ActionPlans.Items)
+            {
+                ActionPlanM cp = new ActionPlanM();
+                cp.Copy(ap);    // 値をコピー
+                tmp.Add(cp);    // 要素の追加
+            }
+
+            // バックアップ
+            _Backup = tmp;
         }
+        #endregion
 
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
@@ -85,6 +122,10 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
         public override void Init()
         {
             try
@@ -97,6 +138,12 @@ namespace Destinationboard.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
+        #endregion
+
+        #region Close処理
+        /// <summary>
+        /// Close処理
+        /// </summary>
         public override void Close()
         {
             try
@@ -109,7 +156,14 @@ namespace Destinationboard.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
+        #endregion
 
+        #region ドラッグスタート
+        /// <summary>
+        /// ドラッグスタート
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Thumb_DragStarted(object sender, DragStartedEventArgs e)
         {
             var thumb = sender as Thumb;
@@ -122,7 +176,14 @@ namespace Destinationboard.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region ドラッグ完了
+        /// <summary>
+        /// ドラッグ完了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Thumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             var thumb = sender as Thumb;
@@ -135,7 +196,14 @@ namespace Destinationboard.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region ドラッグ中
+        /// <summary>
+        /// ドラッグ中
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
@@ -153,9 +221,26 @@ namespace Destinationboard.ViewModels
                     y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
                 }
 
-                Canvas.SetLeft(thumb, x);
-                Canvas.SetTop(thumb, y);
+                var vm = thumb.DataContext as ActionPlanM;
+                // nullチェック
+                if (vm != null)
+                {
+                    var bk = (from elem in this._Backup.Items
+                              where elem.StaffID.Equals(vm.StaffID)
+                              select elem).FirstOrDefault();
+
+                    // 位置情報のセット
+                    bk.MapPos = new Point(x, y);
+
+                    var ap = (from elem in this.ActionPlans.Items
+                              where elem.StaffID.Equals(vm.StaffID)
+                              select elem).FirstOrDefault();
+
+                    ap.MapPos = new Point(x, y);
+                    ap.X = x;
+                }
             }
         }
+        #endregion
     }
 }

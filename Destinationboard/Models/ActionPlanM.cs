@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Destinationboard.Models
@@ -107,6 +108,18 @@ namespace Destinationboard.Models
         }
         #endregion
 
+        #region Copy処理
+        /// <summary>
+        /// Copy処理
+        /// </summary>
+        /// <param name="source">コピー元</param>
+        public void Copy(ActionPlanM source)
+        {
+            ((ActionPlanTableBase)this).Copy(source);
+            this.MapPos = new Point(source.MapPos.X, source.MapPos.Y);
+        }
+        #endregion
+
         #region Copy処理(ActionPlanTableReplyを変換する)
         /// <summary>
         /// Copy処理(ActionPlanTableReplyを変換する)
@@ -188,6 +201,58 @@ namespace Destinationboard.Models
                 {
                     _QRCode = value;
                     NotifyPropertyChanged("QRCode");
+                }
+            }
+        }
+        #endregion
+
+
+        #region [X]プロパティ
+        /// <summary>
+        /// [X]プロパティ用変数
+        /// </summary>
+        double _X = 0.0;
+        /// <summary>
+        /// [X]プロパティ
+        /// </summary>
+        public double X
+        {
+            get
+            {
+                return _X;
+            }
+            set
+            {
+                if (!_X.Equals(value))
+                {
+                    _X = value;
+                    NotifyPropertyChanged("X");
+                }
+            }
+        }
+        #endregion
+
+
+        #region マップでの位置情報[MapPos]プロパティ
+        /// <summary>
+        /// マップでの位置情報[MapPos]プロパティ用変数
+        /// </summary>
+        Point _MapPos = new Point(0,0);
+        /// <summary>
+        /// マップでの位置情報[MapPos]プロパティ
+        /// </summary>
+        public Point MapPos
+        {
+            get
+            {
+                return _MapPos;
+            }
+            set
+            {
+                if (!_MapPos.Equals(value))
+                {
+                    _MapPos = value;
+                    NotifyPropertyChanged("MapPos");
                 }
             }
         }
