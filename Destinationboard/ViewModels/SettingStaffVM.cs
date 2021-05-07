@@ -179,6 +179,52 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 主キーのチェック
+        /// <summary>
+        /// 主キーのチェック
+        /// </summary>
+        /// <returns>true:重複している false:重複していない</returns>
+        public bool CheckPrimaryKey()
+        {
+            var empty_key_count = (from x in this.StaffItems.Items
+                                  where string.IsNullOrWhiteSpace(x.StaffID)
+                                  select x).Count();
+
+            if (empty_key_count > 0)
+            {
+                StringBuilder msg = new StringBuilder();
+                msg.AppendLine("入力されていない従業員IDがあります。");
+                msg.AppendLine("従業員IDは入力必須です。");
+                ShowMessage.ShowNoticeOK(msg.ToString(), "通知");
+                return false;
+
+            }
+
+            var staffid_count = this.StaffItems.Items
+                                    .GroupBy(c => c.StaffID)
+                                    .Select(c => new { StaffID = c.Key, Count = c.Count() })
+                                    .OrderBy(c => c.StaffID);
+
+            var multi_keys = staffid_count.Where(c => c.Count > 1);
+            if (multi_keys.Count() > 0)
+            {
+                StringBuilder msg = new StringBuilder();
+                msg.AppendLine("以下の従業員IDが重複しています");
+                msg.AppendLine("重複従業員ID:");
+
+                foreach (var tmp in multi_keys)
+                {
+                    msg.AppendLine(tmp.StaffID);
+                }
+
+                ShowMessage.ShowNoticeOK(msg.ToString(), "通知");
+
+                return false;
+            }
+            return true;
+        }
+        #endregion
+
         #region スタッフの登録処理
         /// <summary>
         /// スタッフの登録処理
@@ -187,6 +233,10 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                if (!CheckPrimaryKey())
+                    return;
+
+
                 // チャネルの取得
                 var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName, CommonValues.GetInstance().Port,
                     ChannelCredentials.Insecure);
