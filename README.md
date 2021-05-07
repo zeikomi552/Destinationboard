@@ -14,6 +14,7 @@
 - [Destinationboard](https://github.com/zeikomi552/Destinationboard)
 - [DestinationboardServer](https://github.com/zeikomi552/DestinationboardServer)
 - [DestinationboardCommunicationLibrary](https://github.com/zeikomi552/DestinationboardCommunicationLibrary)
+- [QRCodeScannerLib](https://github.com/zeikomi552/QRCodeScannerLib)
 
 すべて同階層に配置してください。
 
@@ -65,10 +66,6 @@ DestinationServer\Config\DestinationServer.confを変更します。
 ![](png/DestinationBoard-Animation.gif)
 
 ### 今後の予定（実際にやるかどうかは未定）
-- SuicaなどのFelica系で出勤・退勤の入力
-- ハンティスキャナとQRコードで出勤・退勤の入力
-- マップ表示
-- 出退勤のログ保存機能
 - 出勤・退勤・テレワークの個人用のアプリを作成
 - Androidアプリの作成
 - iOSアプリの作成
