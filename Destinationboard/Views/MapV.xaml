@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Destinationboard.Views"
-             xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.MapV"
+             xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Class="Destinationboard.Views.MapV"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <Converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
         <ViewModels:MapVM x:Key="vm"/>
     </UserControl.Resources>
     <UserControl.DataContext>
@@ -15,13 +16,13 @@
 
     <Grid>
         <Border Background="AliceBlue" Margin="5">
-            <Image Source="{Binding MapImage}"/>
+            <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
         </Border>
 
         <ItemsControl Margin="5" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="{x:Type ItemsControl}">
-                    <Border>    
+                    <Border>
                         <ScrollViewer>
                             <ItemsPresenter Margin="10" />
                         </ScrollViewer>
@@ -79,5 +80,12 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="マップ変更" Cursor="Hand">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="Click">
+                    <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="MapChange"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </Button>
     </Grid>
 </UserControl>

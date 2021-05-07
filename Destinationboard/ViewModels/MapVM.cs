@@ -1,5 +1,6 @@
 ﻿using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,9 @@ namespace Destinationboard.ViewModels
 {
     public class MapVM : ViewModelBase
     {
+        public MapVM()
+        {
+        }
         #region 行動予定一覧[ActionPlans]プロパティ
         /// <summary>
         /// 行動予定一覧[ActionPlans]プロパティ用変数
@@ -58,7 +62,7 @@ namespace Destinationboard.ViewModels
         {
             get
             {
-                return @"Common\Themes\map\map-layout.png";
+                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\map-layout.png";
             }
         }
         #endregion
@@ -69,7 +73,6 @@ namespace Destinationboard.ViewModels
         /// </summary>
         List<MapLayoutM> MapBackup = new ();
         #endregion
-
 
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
@@ -83,17 +86,19 @@ namespace Destinationboard.ViewModels
         {
             get
             {
-                var bmpImg = new BitmapImage();
-                bmpImg.BeginInit();
-                bmpImg.CacheOption = BitmapCacheOption.OnLoad;
-                bmpImg.CreateOptions = BitmapCreateOptions.None;
-                bmpImg.UriSource = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + ImagePath);
-                bmpImg.EndInit();
-                bmpImg.Freeze();
-                return bmpImg;
+                return _MapImage;
+            }
+            set
+            {
+                if (_MapImage == null || !_MapImage.Equals(value))
+                {
+                    _MapImage = value;
+                    NotifyPropertyChanged("MapImage");
+                }
             }
         }
         #endregion
+
 
         #region 初期化処理
         /// <summary>
@@ -274,5 +279,30 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+        public void MapChange()
+        {
+            try
+            {
+                // ダイアログのインスタンスを生成
+                var dialog = new OpenFileDialog();
+
+                // ファイルの種類を設定
+                dialog.Filter = "画像ファイル (*.png)|*.png|(*.jpg)|(*.jpg)";
+
+                // ダイアログを表示する
+                if (dialog.ShowDialog() == true)
+                {
+                    string file_name = this.ImagePath;
+                    File.Copy(dialog.FileName, file_name, true);
+                    NotifyPropertyChanged("ImagePath");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
     }
 }
