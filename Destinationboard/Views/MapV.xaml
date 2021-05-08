@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Destinationboard.Views"
-             xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Class="Destinationboard.Views.MapV"
+             xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Name="userControl" x:Class="Destinationboard.Views.MapV"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
@@ -18,10 +18,10 @@
         <Viewbox>
             <Grid>
                 <Border Background="AliceBlue">
-                    <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
+                    <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}" />
                 </Border>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl x:Name="itemsControl" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.Template>
                         <ControlTemplate TargetType="{x:Type ItemsControl}">
                             <Border>
@@ -39,7 +39,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas Width="{Binding ActualWidth, ElementName=MapImage, Mode=OneWay}">
-                                <Thumb Background="{x:Null}" Width="30" Height="30" Canvas.Left="{Binding MapPos.X}" Canvas.Top="{Binding MapPos.Y}">
+                                <Thumb Background="{x:Null}" Canvas.Left="{Binding MapPos.X}" Canvas.Top="{Binding MapPos.Y}">
                                     <b:Interaction.Triggers>
                                         <b:EventTrigger EventName="DragStarted">
                                             <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragStarted"/>
@@ -53,7 +53,10 @@
                                     </b:Interaction.Triggers>
                                     <Thumb.Template>
                                         <ControlTemplate>
-                                            <Border x:Name="Thumb_Border" CornerRadius="50" BorderBrush="Red">
+                                            <Border x:Name="Thumb_Border" BorderBrush="Red"
+                                                    Width="{Binding Value, ElementName=slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="{Binding Value, ElementName=slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    CornerRadius="200">
                                                 <Border.Style>
                                                     <Style TargetType="{x:Type Border}">
                                                         <Style.Triggers>
@@ -82,12 +85,15 @@
                 </ItemsControl>
             </Grid>
         </Viewbox>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="マップ変更" Cursor="Hand">
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="Click">
-                    <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="MapChange"/>
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
-        </Button>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="マップ変更" Cursor="Hand">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="MapChange"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Button>
+            <Slider Margin="5" x:Name="slider" VerticalAlignment="Center" Width="100" Minimum="1" Maximum="200" Value="{Binding MapInfo.PositionControlSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

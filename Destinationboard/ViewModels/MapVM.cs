@@ -22,6 +22,32 @@ namespace Destinationboard.ViewModels
         public MapVM()
         {
         }
+        #region マップ情報（バックアップ用)[MapInfo]プロパティ
+        /// <summary>
+        /// マップ情報（バックアップ用)[MapInfo]プロパティ用変数
+        /// </summary>
+        MapInfoM _MapInfo = new MapInfoM();
+        /// <summary>
+        /// マップ情報（バックアップ用)[MapInfo]プロパティ
+        /// </summary>
+        public MapInfoM MapInfo
+        {
+            get
+            {
+                return _MapInfo;
+            }
+            set
+            {
+                if (_MapInfo == null || !_MapInfo.Equals(value))
+                {
+                    _MapInfo = value;
+                    NotifyPropertyChanged("MapInfo");
+                }
+            }
+        }
+        #endregion
+
+
         #region 行動予定一覧[ActionPlans]プロパティ
         /// <summary>
         /// 行動予定一覧[ActionPlans]プロパティ用変数
@@ -43,10 +69,10 @@ namespace Destinationboard.ViewModels
                     _ActionPlans = value;
 
                     // 行動計画にマップ情報をセット
-                    _ActionPlans.SetMapLayout(this.MapBackup);
+                    _ActionPlans.SetMapLayout(this.MapInfo.MapPosition);
 
                     // マップ情報のバックアップ
-                    this.MapBackup = _ActionPlans.ToMapLayoutList();
+                    this.MapInfo.MapPosition.Items = new System.Collections.ObjectModel.ObservableCollection<MapLayoutM>(_ActionPlans.ToMapLayoutList());
 
                     NotifyPropertyChanged("ActionPlans");
                 }
@@ -67,12 +93,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region マップ情報のバックアップ
-        /// <summary>
-        /// マップ情報のバックアップ
-        /// </summary>
-        List<MapLayoutM> MapBackup = new ();
-        #endregion
 
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
@@ -98,6 +118,10 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+
+
+
 
         #region 初期化処理
         /// <summary>
@@ -209,7 +233,7 @@ namespace Destinationboard.ViewModels
 
                     ap.MapPos = new Point(x, y);
 
-                    var bk = (from m in this.MapBackup
+                    var bk = (from m in this.MapInfo.MapPosition.Items
                               where m.StaffID.Equals(ap.StaffID)
                               select m).FirstOrDefault();
 
@@ -219,7 +243,7 @@ namespace Destinationboard.ViewModels
                     }
                     else
                     {
-                        this.MapBackup.Add(new MapLayoutM() { StaffID = ap.StaffID, MapPos = new Point(x, y) });
+                        this.MapInfo.MapPosition.Add(new MapLayoutM() { StaffID = ap.StaffID, MapPos = new Point(x, y) });
                     }
                 }
             }
@@ -234,11 +258,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                string map_bk_path = @"temporary\_actionplans";
+                string map_bk_path = @"temporary\_mapinfo_tmporary";
 
                 if (File.Exists(map_bk_path))
                 {
-                    this.MapBackup = XMLUtil.Deserialize<List<MapLayoutM>>(@"temporary\_actionplans");
+                    this.MapInfo = XMLUtil.Deserialize<MapInfoM>(map_bk_path);
                 }
                 else
                 {
@@ -268,8 +292,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                var bk = this.ActionPlans.ToMapLayoutList();
-                XMLUtil.Seialize<List<MapLayoutM>>(@"temporary\_actionplans", bk);
+                XMLUtil.Seialize<MapInfoM>(@"temporary\_mapinfo_tmporary", this.MapInfo);
             }
             catch (Exception e)
             {
@@ -320,7 +343,7 @@ namespace Destinationboard.ViewModels
         {
             this.ActionPlans.ClearMapPosition();
 
-            foreach (var tmp in this.MapBackup)
+            foreach (var tmp in this.MapInfo.MapPosition.Items)
             {
                 tmp.MapPos = new Point(0, 0);
             }

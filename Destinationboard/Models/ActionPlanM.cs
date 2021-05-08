@@ -127,9 +127,9 @@ namespace Destinationboard.Models
         /// マップ情報のセット
         /// </summary>
         /// <param name="maplist">マップリスト</param>
-        public void SetMapLayout(List<MapLayoutM> maplist)
+        public void SetMapLayout(ModelList<MapLayoutM> maplist)
         {
-            var map = (from x in maplist
+            var map = (from x in maplist.Items
                        where x.StaffID.Equals(this.StaffID)
                        select x).FirstOrDefault();
 

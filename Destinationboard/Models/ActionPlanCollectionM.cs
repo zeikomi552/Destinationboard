@@ -30,7 +30,7 @@ namespace Destinationboard.Models
         /// マップ情報のセット
         /// </summary>
         /// <param name="maplist">マップリスト</param>
-        public void SetMapLayout(List<MapLayoutM> maplist)
+        public void SetMapLayout(ModelList<MapLayoutM> maplist)
         {
             foreach (var tmp in this.Items)
             {
