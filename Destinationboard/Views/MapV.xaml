@@ -15,71 +15,73 @@
     </UserControl.DataContext>
 
     <Grid>
-        <Border Background="AliceBlue" Margin="5">
-            <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
-        </Border>
+        <Viewbox>
+            <Grid>
+                <Border Background="AliceBlue">
+                    <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
+                </Border>
 
-        <ItemsControl Margin="5" Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ItemsControl.Template>
-                <ControlTemplate TargetType="{x:Type ItemsControl}">
-                    <Border>
-                        <ScrollViewer>
-                            <ItemsPresenter Margin="10" />
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </ItemsControl.Template>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding ActionPlans.Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                            <Border>
+                                <ItemsPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
 
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Canvas>
-                        <Thumb Background="{x:Null}" Width="50" Height="50" Canvas.Left="{Binding MapPos.X}" Canvas.Top="{Binding MapPos.Y}">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="DragStarted">
-                                    <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragStarted"/>
-                                </b:EventTrigger>
-                                <b:EventTrigger EventName="DragCompleted">
-                                    <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragCompleted"/>
-                                </b:EventTrigger>
-                                <b:EventTrigger EventName="DragDelta">
-                                    <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragDelta"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                            <Thumb.Template>
-                                <ControlTemplate>
-                                    <Border x:Name="Thumb_Border" CornerRadius="50" BorderBrush="Red">
-                                        <Border.Style>
-                                            <Style TargetType="{x:Type Border}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Status}" Value="0">
-                                                        <Setter Property="Background" Value="LightGray"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="1">
-                                                        <Setter Property="Background" Value="Yellow"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="2">
-                                                        <Setter Property="Background" Value="LightYellow"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <Viewbox>
-                                            <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding StaffName}"/>
-                                        </Viewbox>
-                                    </Border>
-                                </ControlTemplate>
-                            </Thumb.Template>
-                        </Thumb>
-                    </Canvas>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas Width="{Binding ActualWidth, ElementName=MapImage, Mode=OneWay}">
+                                <Thumb Background="{x:Null}" Width="30" Height="30" Canvas.Left="{Binding MapPos.X}" Canvas.Top="{Binding MapPos.Y}">
+                                    <b:Interaction.Triggers>
+                                        <b:EventTrigger EventName="DragStarted">
+                                            <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragStarted"/>
+                                        </b:EventTrigger>
+                                        <b:EventTrigger EventName="DragCompleted">
+                                            <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragCompleted"/>
+                                        </b:EventTrigger>
+                                        <b:EventTrigger EventName="DragDelta">
+                                            <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="Thumb_DragDelta"/>
+                                        </b:EventTrigger>
+                                    </b:Interaction.Triggers>
+                                    <Thumb.Template>
+                                        <ControlTemplate>
+                                            <Border x:Name="Thumb_Border" CornerRadius="50" BorderBrush="Red">
+                                                <Border.Style>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                                                <Setter Property="Background" Value="LightGray"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="1">
+                                                                <Setter Property="Background" Value="Yellow"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="2">
+                                                                <Setter Property="Background" Value="LightYellow"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Viewbox>
+                                                    <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding StaffName}"/>
+                                                </Viewbox>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Viewbox>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="マップ変更" Cursor="Hand">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="Click">

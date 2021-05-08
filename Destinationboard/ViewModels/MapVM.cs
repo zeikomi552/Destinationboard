@@ -62,7 +62,7 @@ namespace Destinationboard.ViewModels
         {
             get
             {
-                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\map-layout.png";
+                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\map-layout";
             }
         }
         #endregion
@@ -98,7 +98,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
 
         #region 初期化処理
         /// <summary>
@@ -280,6 +279,10 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region マップ変更処理
+        /// <summary>
+        /// マップ変更処理
+        /// </summary>
         public void MapChange()
         {
             try
@@ -288,13 +291,16 @@ namespace Destinationboard.ViewModels
                 var dialog = new OpenFileDialog();
 
                 // ファイルの種類を設定
-                dialog.Filter = "画像ファイル (*.png)|*.png|(*.jpg)|(*.jpg)";
+                dialog.Filter = "画像ファイル (*.png;*.jpg;*.gif;*.bmp)|*.png;*.jpg;*.gif;*.bmp";
 
                 // ダイアログを表示する
                 if (dialog.ShowDialog() == true)
                 {
                     string file_name = this.ImagePath;
                     File.Copy(dialog.FileName, file_name, true);
+
+                    ClearMapPosition(); // 位置情報の初期化
+
                     NotifyPropertyChanged("ImagePath");
                 }
             }
@@ -304,5 +310,22 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
+
+        #region 位置情報の初期化処理
+        /// <summary>
+        /// 位置情報の初期化処理
+        /// </summary>
+        public void ClearMapPosition()
+        {
+            this.ActionPlans.ClearMapPosition();
+
+            foreach (var tmp in this.MapBackup)
+            {
+                tmp.MapPos = new Point(0, 0);
+            }
+
+        }
+        #endregion
     }
 }

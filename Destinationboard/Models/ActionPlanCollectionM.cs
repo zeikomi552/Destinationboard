@@ -38,5 +38,18 @@ namespace Destinationboard.Models
             }
         }
         #endregion
+
+        #region 位置情報の初期化
+        /// <summary>
+        /// 位置情報の初期化
+        /// </summary>
+        public void ClearMapPosition()
+        {
+            foreach (var tmp in this.Items)
+            {
+                tmp.MapPos = new System.Windows.Point(0, 0);
+            }
+        }
+        #endregion
     }
 }
