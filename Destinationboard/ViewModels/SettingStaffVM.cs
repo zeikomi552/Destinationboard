@@ -411,5 +411,31 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+        public void Save()
+        {
+            try
+            {
+                ExcelManagerForStaffListM.Save(this.StaffItems);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+
+        public void Load()
+        {
+            try
+            {
+                this.StaffItems = ExcelManagerForStaffListM.Load();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
     }
 }
