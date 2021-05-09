@@ -45,7 +45,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="auto" Header="従業員名" Binding="{Binding StaffName}"/>
                         <DataGridTextColumn Width="auto" Header="従業員番号" Binding="{Binding StaffID}"/>
-                        <DataGridTextColumn IsReadOnly="True" Width="auto" Header="QRコード" Binding="{Binding QRCode}"/>
+                        <DataGridTextColumn Width="auto" Header="QRコード" Binding="{Binding QRCode}"/>
                         <DataGridTextColumn IsReadOnly="True" Width="*" Header="Felica" Binding="{Binding FelicaID, Converter={StaticResource FelicaIDToHusejiConverter}}"/>
                         <DataGridTemplateColumn IsReadOnly="True" Header="表示">
                             <DataGridTemplateColumn.CellTemplate>
