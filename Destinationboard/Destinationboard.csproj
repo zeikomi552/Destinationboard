@@ -32,6 +32,7 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="PCSC.Iso7816" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DotNetBarcode">
+      <HintPath>Common\dll\DotNetBarcode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Ink">
       <HintPath>Common\dll\Microsoft.Ink.dll</HintPath>
       <Private>true</Private>

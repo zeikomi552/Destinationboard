@@ -8,8 +8,23 @@ using System.Windows.Media;
 
 namespace Destinationboard.Common.Utilities
 {
+    public static class IntExtensions
+    {
+        /// <summary>
+        /// 数値をExcelのカラム文字へ変換します
+        /// </summary>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        public static string ToColumnName(this int source)
+        {
+            if (source < 1) return string.Empty;
+            return ToColumnName((source - 1) / 26) + (char)('A' + ((source - 1) % 26));
+        }
+    }
+
     public class Utilities
     {
+
 
         #region 最上位のWindowの取得処理
         /// <summary>

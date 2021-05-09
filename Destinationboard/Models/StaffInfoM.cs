@@ -38,9 +38,39 @@ namespace Destinationboard.Models
             this.SortOrder = reply.SortOrder;
             this.QRCode = reply.QRCode;
             this.FelicaID = reply.FelicaID;
-            this.CreateDate = DateTime.ParseExact( reply.CreateDate, "yyyy/MM/dd HH:mm:ss", null);
+            this.CreateDate = DateTime.ParseExact(reply.CreateDate, "yyyy/MM/dd HH:mm:ss", null);
             this.CreateUser = reply.CreateUser;
             this.Display = reply.Display;
         }
+
+        /// <summary>
+        /// サンプルのQRコード
+        /// </summary>
+        public string SampleQRCode
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.QRCode))
+                {
+                    char rs = (char)0x1E;
+                    char gs = (char)0x1D;
+                    char eot = (char)0x04D;
+                    StringBuilder qrcode = new StringBuilder();
+                    qrcode.Append("[)>20");
+                    qrcode.Append(rs);
+                    qrcode.Append("1HS" + this.StaffID);
+                    qrcode.Append(gs);
+                    qrcode.Append("1HN" + this.StaffName);
+                    qrcode.Append(rs);
+                    qrcode.Append(eot);
+                    return qrcode.ToString();
+                }
+                else
+                {
+                    return this.QRCode;
+                }
+            }
+        }
+    
     }
 }
