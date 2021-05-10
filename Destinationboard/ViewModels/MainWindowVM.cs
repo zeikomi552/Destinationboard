@@ -22,7 +22,7 @@ namespace Destinationboard.ViewModels
     {
         DispatcherTimer _timer = new DispatcherTimer();
         DispatcherTimer _timer2 = new DispatcherTimer();
-        PasoriUtil _Pasori = new PasoriUtil();
+        PasoriUtil _Pasori = null;
 
         #region PaSoriで読み取ったイベントの受信
         /// <summary>
@@ -403,6 +403,19 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region PaSoRiの初期化処理
+        /// <summary>
+        /// PaSoRiの初期化処理
+        /// </summary>
+        public void PaSoRiInit()
+        {
+            if (CommonValues.GetInstance().EnablePaSoRi)
+            {
+                this._Pasori = new PasoriUtil();
+            }
+        }
+        #endregion
+
         #region スキャナの読み取り受信処理
         /// <summary>
         /// スキャナの読み取り受信処理
@@ -448,6 +461,9 @@ namespace Destinationboard.ViewModels
 
                 // ハンディスキャナの初期化
                 HandyScannerInit();
+
+                // PaSoRiの初期化
+                PaSoRiInit();
 
                 // Pasoriの接続状態を確認
                 if (_Pasori != null && _Pasori.ReaderNames != null && _Pasori.ReaderNames.Count > 0)
@@ -591,8 +607,12 @@ namespace Destinationboard.ViewModels
                     CommonValues.GetInstance().Scanner.Disconnect();
                 }
 
-                // Pasoriのモニタリングストップ
-                _Pasori.MonitorStop();
+                // PaSoRiが有効の場合
+                if (CommonValues.GetInstance().EnablePaSoRi)
+                {
+                    // Pasoriのモニタリングストップ
+                    _Pasori.MonitorStop();
+                }
 
                 // 画面を開く
                 if (wnd.ShowDialog() == true)
@@ -600,8 +620,12 @@ namespace Destinationboard.ViewModels
                     GetPlans();
                 }
 
-                // Pasoriのモニタリングスタート
-                _Pasori.MonitorStart();
+                // PaSoRiが有効の場合
+                if (CommonValues.GetInstance().EnablePaSoRi)
+                {
+                    // Pasoriのモニタリングスタート
+                    _Pasori.MonitorStart();
+                }
 
                 if (CommonValues.GetInstance().EnableHandyScanner)
                 {

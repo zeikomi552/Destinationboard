@@ -110,6 +110,31 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		#region PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ
+		/// <summary>
+		/// PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ用変数
+		/// </summary>
+		bool _EnablePaSoRi = false;
+		/// <summary>
+		/// PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ
+		/// </summary>
+		public bool EnablePaSoRi
+		{
+			get
+			{
+				return _EnablePaSoRi;
+			}
+			set
+			{
+				if (!_EnablePaSoRi.Equals(value))
+				{
+					_EnablePaSoRi = value;
+				}
+			}
+		}
+		#endregion
+
+
 		#region ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
 		/// <summary>
 		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ用変数
@@ -188,6 +213,8 @@ namespace Destinationboard.Common
 			this.Port = conf.Port;          // ポート番号
 			this.EnableHandyScanner = conf.EnableHandyScanner;		// スキャナ使用可/不可
 			this.HandyScannerComPort = conf.HandyScannerComPort;    // スキャナポート番号
+			this.EnablePaSoRi = conf.EnablePaSoRi;	// PaSoRiの使用可/不可
+			
 		}
 		#endregion
 

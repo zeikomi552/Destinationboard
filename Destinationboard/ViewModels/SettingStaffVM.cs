@@ -79,6 +79,27 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region PaSoRiの初期化処理
+        /// <summary>
+        /// PaSoRiの初期化処理
+        /// </summary>
+        public void PaSoRiInitialize()
+        {
+            if (CommonValues.GetInstance().EnablePaSoRi)
+            {
+                // Retrieve the names of all installed readers.
+                var readerNames = PasoriUtil.GetReaderNames();
+
+                if (!PasoriUtil.IsEmpty(readerNames))
+                {
+                    _Monitor = MonitorFactory.Instance.Create(SCardScope.System);
+                    _Monitor.CardInserted += (sender, args) => DisplayEvent(readerNames.First(), args);
+                    _Monitor.Start(readerNames.First());
+                }
+            }
+        }
+        #endregion
+
         #region イベント処理
         /// <summary>
         /// イベント処理
@@ -130,15 +151,8 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                // Retrieve the names of all installed readers.
-                var readerNames = PasoriUtil.GetReaderNames();
-
-                if (!PasoriUtil.IsEmpty(readerNames))
-                {
-                    _Monitor = MonitorFactory.Instance.Create(SCardScope.System);
-                    _Monitor.CardInserted += (sender, args) => DisplayEvent(readerNames.First(), args);
-                    _Monitor.Start(readerNames.First());
-                }
+                // PaSoRiの初期化処理
+                PaSoRiInitialize();
 
                 // チャネルの作成
                 var channel = new Grpc.Core.Channel(CommonValues.GetInstance().ServerName,
@@ -412,6 +426,10 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 保存処理
+        /// <summary>
+        /// 保存処理
+        /// </summary>
         public void Save()
         {
             try
@@ -424,7 +442,12 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
 
+        #region ロード処理
+        /// <summary>
+        /// ロード処理
+        /// </summary>
         public void Load()
         {
             try
@@ -437,5 +460,6 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
     }
 }

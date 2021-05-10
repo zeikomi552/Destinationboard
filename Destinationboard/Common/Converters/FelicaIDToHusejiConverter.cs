@@ -44,7 +44,8 @@ namespace Destinationboard.Common.Converters
 		// TwoWayの場合に使用する
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
+			return value;
 		}
 
 		#endregion

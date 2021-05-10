@@ -206,6 +206,30 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
+		#region PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ
+		/// <summary>
+		/// PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ用変数
+		/// </summary>
+		bool _EnablePaSoRi = false;
+		/// <summary>
+		/// PaSoRi(Felica用)の有効かどうか(true:使用する false:使用しない)を示すフラグ[EnablePaSoRi]プロパティ
+		/// </summary>
+		public bool EnablePaSoRi
+		{
+			get
+			{
+				return _EnablePaSoRi;
+			}
+			set
+			{
+				if (!_EnablePaSoRi.Equals(value))
+				{
+					_EnablePaSoRi = value;
+				}
+			}
+		}
+		#endregion
+
 		/// <summary>
 		/// Configデータのセット
 		/// </summary>
@@ -219,6 +243,9 @@ namespace Destinationboard.Common
 			// ハンディスキャナ設定
 			HandyScannerComPort = conf.HandyScannerComPort;
 			EnableHandyScanner = conf.EnableHandyScanner;
+
+			// PaSoRiの設定
+			EnablePaSoRi = conf.EnablePaSoRi;
 		}
 
 		public DestinationbardCommunicationAPI.DestinationbardCommunicationAPIClient GetClient()
