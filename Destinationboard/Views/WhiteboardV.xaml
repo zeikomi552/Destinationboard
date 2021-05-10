@@ -68,19 +68,17 @@
                     </Button>
                 </StackPanel>
 
-                <Viewbox Grid.Column="1">
-                    <Grid x:Name="Drawgrid">
-                        <Grid Background="AliceBlue">
-                            <Image Margin="100,0,100,0" x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
-                        </Grid>
+                <Grid Grid.Column="1" x:Name="Drawgrid">
+                    <Grid Background="AliceBlue">
+                        <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
+                    </Grid>
 
-                        <InkCanvas Background="{x:Null}" x:Name="theInkCanvas" EditingMode="{Binding EditingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <InkCanvas Background="{x:Null}" x:Name="theInkCanvas" EditingMode="{Binding EditingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:inkCanvasSizeHelper.Size="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasElaseShapeHelper.ElaseShape="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasColorHelper.Color="{Binding MarkerColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}"/>
-                    </Grid>
-                </Viewbox>
+                </Grid>
                 <StackPanel VerticalAlignment="Center" Grid.Column="2">
                     <Button Content="黒" Height="50" Margin="5" Cursor="Hand">
                         <b:Interaction.Triggers>
