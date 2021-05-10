@@ -215,6 +215,9 @@
                     <TabItem Header="マップ">
                         <Views:MapV x:Name="Map"/>
                     </TabItem>
+                    <TabItem Header="ホワイトボード">
+                        <Views:WhiteboardV/>
+                    </TabItem>
                 </TabControl>
             </Grid>
         </GroupBox>

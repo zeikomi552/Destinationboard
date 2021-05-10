@@ -10,6 +10,9 @@
     <Compile Update="Views\MapV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WhiteboardV.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Common\Themes\DestinationboardBaseThemes.xaml">
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MapV.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WhiteboardV.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
