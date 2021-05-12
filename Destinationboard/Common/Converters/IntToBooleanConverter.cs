@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Destinationboard.Common.Converters
 {
 	[System.Windows.Data.ValueConversion(typeof(int), typeof(bool))]
 	public class IntToBooleanConverter : System.Windows.Data.IValueConverter
 	{
+		public int Default { get; set; } = -1;
+
+
 		#region IValueConverter メンバ
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			string param = parameter.ToString();
-			int input_param = -1;
+			int input_param = this.Default;
 			int target = (int)value;
 
 			// 入力文字列を数値に変換
@@ -37,7 +41,7 @@ namespace Destinationboard.Common.Converters
 			bool value_tmp = (bool)value;
 
 			string param = parameter.ToString();
-			int input_param = -1;
+			int input_param = this.Default;
 
 			// 入力文字列を数値に変換
 			if (int.TryParse(param, out input_param) == true)
@@ -48,7 +52,7 @@ namespace Destinationboard.Common.Converters
 				}
 			}
 
-			return -1;
+			return input_param;
 		}
 
 		#endregion

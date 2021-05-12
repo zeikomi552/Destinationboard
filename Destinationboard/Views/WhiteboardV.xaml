@@ -13,7 +13,8 @@
         <ViewModels:WhiteboardVM/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <Converters:IntToBooleanConverter x:Key="IntToBooleanConverter"/>
+        <Converters:ColorToBooleanConverter x:Key="ColorToBooleanConverter"/>
+        <Converters:IntToBooleanConverter x:Key="IntToBooleanConverter" Default="5"/>
         <Converters:InkCanvasEditingModeToBoolConverter x:Key="InkCanvasEditingModeToBoolConverter"/>
         <Converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
     </UserControl.Resources>
@@ -32,10 +33,10 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel VerticalAlignment="Center">
-                    
-                    
-                    
-                    
+
+
+
+
                     <Button Content="1つ戻る" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -76,22 +77,25 @@
                                    hlp:inkCanvasSizeHelper.Size="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasElaseShapeHelper.ElaseShape="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasColorHelper.Color="{Binding MarkerColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   hlp:inkCanvasHighlighterHelper.Highlighter="{Binding IsChecked, ElementName=toggleButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}"/>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ペン" Margin="5" Cursor="Hand" 
+                        <ToggleButton x:Name="toggleButton" Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="蛍光" Margin="5" Cursor="Hand"/>
+
+                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ペン" Margin="5" Cursor="Hand" 
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム" Margin="5" Cursor="Hand"
+                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        
-                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム2" Margin="5" Cursor="Hand"
+
+                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム2" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="選択" Margin="5" Cursor="Hand"
+                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="選択" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
+                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     </StackPanel>
@@ -113,48 +117,37 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel VerticalAlignment="Center" Grid.Column="2">
-                    <Button Content="黒" Height="50" Margin="5" Cursor="Hand">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeColorBlack"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-                    <Button Content="赤" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeColorRed"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-                    <Button Content="青" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeColorBlue"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-                    <ToggleButton Content="大" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeBig"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </ToggleButton>
-                    <ToggleButton Content="中" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeMiddle"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </ToggleButton>
-                    <ToggleButton Content="小" Height="50" Margin="5" IsChecked="{Binding Size, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeSmall"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </ToggleButton>
+                    <StackPanel Margin="0,20">
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="黒" Height="50" Width="50" Margin="5" 
+                                  IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
+                                    ConverterParameter=Black, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="赤" Height="50" Width="50" Margin="5"
+                                  IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
+                                    ConverterParameter=Red, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="青" Height="50" Width="50" Margin="5"
+                                  IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
+                                    ConverterParameter=Blue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="黄" Height="50" Width="50" Margin="5"
+                                  IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
+                                    ConverterParameter=Yellow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    </StackPanel>
+                    <StackPanel Margin="0,20">
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                      Content="大" Height="50" Width="50" Margin="5" IsChecked="{Binding Size, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=20}"/>
+
+
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                      Content="中" Height="50" Width="50" Margin="5" IsChecked="{Binding Size, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=10}"/>
+
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                      Content="小" Height="50" Width="50" Margin="5" IsChecked="{Binding Size, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}"/>
+
+
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </GroupBox>

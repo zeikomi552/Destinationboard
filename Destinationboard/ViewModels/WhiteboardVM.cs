@@ -21,7 +21,7 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// ホワイトボード用マーカーカラー[MarkerColor]プロパティ用変数
         /// </summary>
-        Color _MarkerColor = Colors.Red;
+        Color _MarkerColor = Colors.Black;
         /// <summary>
         /// ホワイトボード用マーカーカラー[MarkerColor]プロパティ
         /// </summary>
@@ -110,6 +110,10 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region 背景画像の消去
+        /// <summary>
+        /// 背景画像の消去
+        /// </summary>
         public void BackgroundClear()
         {
             try
@@ -123,6 +127,7 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
 
         System.Windows.Ink.StrokeCollection _added;
         System.Windows.Ink.StrokeCollection _removed;
@@ -161,7 +166,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                ChangeColorBlack();
             }
             catch (Exception ex)
             {
@@ -216,117 +220,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 色を黒に変更
-        /// <summary>
-        /// 色を黒に変更
-        /// </summary>
-        public void ChangeColorBlack()
-        {
-            try
-            {
-                this.MarkerColor = Colors.Black;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 色を赤に変更
-        /// <summary>
-        /// 色を赤に変更
-        /// </summary>
-        public void ChangeColorRed()
-        {
-            try
-            {
-                this.MarkerColor = Colors.Red;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 色を青に変更
-        /// <summary>
-        /// 色を青に変更
-        /// </summary>
-        public void ChangeColorBlue()
-        {
-            try
-            {
-                this.MarkerColor = Colors.Blue;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-
-        #region サイズを大に変更
-        /// <summary>
-        /// サイズを大に変更
-        /// </summary>
-        public void ChangeBig()
-        {
-            try
-            {
-                this.Size = 20;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region サイズを中に変更
-        /// <summary>
-        /// サイズを中に変更
-        /// </summary>
-        public void ChangeMiddle()
-        {
-            try
-            {
-                this.Size = 10;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region サイズを小に変更
-        /// <summary>
-        /// サイズを小に変更
-        /// </summary>
-        public void ChangeSmall()
-        {
-            try
-            {
-                this.Size = 5;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
 
         #region クリア処理
         /// <summary>
