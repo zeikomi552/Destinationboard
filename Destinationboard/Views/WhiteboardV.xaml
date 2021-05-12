@@ -13,6 +13,8 @@
         <ViewModels:WhiteboardVM/>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <Converters:IntToBooleanConverter x:Key="IntToBooleanConverter"/>
+        <Converters:InkCanvasEditingModeToBoolConverter x:Key="InkCanvasEditingModeToBoolConverter"/>
         <Converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
     </UserControl.Resources>
     <Grid>
@@ -30,14 +32,10 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel VerticalAlignment="Center">
-                    <Button Content="背景選択" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-
+                    
+                    
+                    
+                    
                     <Button Content="1つ戻る" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -66,6 +64,7 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
+
                 </StackPanel>
 
                 <Grid Grid.Column="1" x:Name="Drawgrid">
@@ -78,6 +77,40 @@
                                    hlp:InkCanvasElaseShapeHelper.ElaseShape="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasColorHelper.Color="{Binding MarkerColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}"/>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ペン" Margin="5" Cursor="Hand" 
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム2" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="選択" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ToggleButton Width="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Content="背景選択" Height="30" Margin="5">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                        <Button Content="背景削除" Height="30" Margin="5" Cursor="Hand">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundClear"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                    </StackPanel>
                 </Grid>
                 <StackPanel VerticalAlignment="Center" Grid.Column="2">
                     <Button Content="黒" Height="50" Margin="5" Cursor="Hand">
@@ -101,34 +134,27 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
-                    <Button Content="大" Height="50" Margin="5">
+                    <ToggleButton Content="大" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeBig"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-                    </Button>
-                    <Button Content="中" Height="50" Margin="5">
+                    </ToggleButton>
+                    <ToggleButton Content="中" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeMiddle"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-                    </Button>
-                    <Button Content="小" Height="50" Margin="5">
+                    </ToggleButton>
+                    <ToggleButton Content="小" Height="50" Margin="5" IsChecked="{Binding Size, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="ChangeSmall"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-                    </Button>
-                    <Button Content="消しゴム" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Elase"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
+                    </ToggleButton>
                 </StackPanel>
             </Grid>
         </GroupBox>

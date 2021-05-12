@@ -109,6 +109,21 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+        public void BackgroundClear()
+        {
+            try
+            {
+                File.Delete(this.ImagePath);
+                NotifyPropertyChanged("ImagePath");
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+
         System.Windows.Ink.StrokeCollection _added;
         System.Windows.Ink.StrokeCollection _removed;
         private bool handle = true;
@@ -117,7 +132,7 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// 書き込みモード[EditingMode]プロパティ用変数
         /// </summary>
-        InkCanvasEditingMode _EditingMode = new InkCanvasEditingMode();
+        InkCanvasEditingMode _EditingMode = InkCanvasEditingMode.Ink;
         /// <summary>
         /// 書き込みモード[EditingMode]プロパティ
         /// </summary>
@@ -182,6 +197,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
         #region Close処理
         /// <summary>
         /// Close処理
@@ -208,7 +224,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.EditingMode = InkCanvasEditingMode.Ink;
                 this.MarkerColor = Colors.Black;
             }
             catch (Exception ex)
@@ -227,7 +242,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.EditingMode = InkCanvasEditingMode.Ink;
                 this.MarkerColor = Colors.Red;
             }
             catch (Exception ex)
@@ -246,7 +260,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.EditingMode = InkCanvasEditingMode.Ink;
                 this.MarkerColor = Colors.Blue;
             }
             catch (Exception ex)
@@ -257,23 +270,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 消しゴムに変更
-        /// <summary>
-        /// 消しゴムに変更
-        /// </summary>
-        public void Elase()
-        {
-            try
-            {
-                this.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
 
         #region サイズを大に変更
         /// <summary>

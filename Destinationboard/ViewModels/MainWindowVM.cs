@@ -227,6 +227,8 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+
         #region 終了時刻のボタン押下処理
         /// <summary>
         /// 終了時刻のボタン押下処理

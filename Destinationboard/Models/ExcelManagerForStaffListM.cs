@@ -90,10 +90,14 @@ namespace Destinationboard.Models
                 {
                     worksheet.Row(row).Height = 70;
                     worksheet.Cell(row, ColumnNames.IndexOf(Column1) + 1).Value = row - 1;
-                    worksheet.Cell(row, ColumnNames.IndexOf(Column2) + 1).Value = item.StaffName;
-                    worksheet.Cell(row, ColumnNames.IndexOf(Column3) + 1).Value = item.StaffID;
-                    worksheet.Cell(row, ColumnNames.IndexOf(Column4) + 1).Value = item.QRCode;
-                    worksheet.Cell(row, ColumnNames.IndexOf(Column5) + 1).Value = item.FelicaID;
+                    worksheet.Cell(row, ColumnNames.IndexOf(Column2) + 1).SetValue(item.StaffName)
+                        .Style.NumberFormat.Format = "@";
+                    worksheet.Cell(row, ColumnNames.IndexOf(Column3) + 1).SetValue(item.StaffID)
+                        .Style.NumberFormat.Format = "@";
+                    worksheet.Cell(row, ColumnNames.IndexOf(Column4) + 1).SetValue(item.QRCode)
+                        .Style.NumberFormat.Format = "@";
+                    worksheet.Cell(row, ColumnNames.IndexOf(Column5) + 1).SetValue(item.FelicaID)
+                        .Style.NumberFormat.Format = "@";
                     worksheet.Cell(row, ColumnNames.IndexOf(Column6) + 1).Value = item.Display;
 
                     DotNetBarcode makeQR = new DotNetBarcode();
