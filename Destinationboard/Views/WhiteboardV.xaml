@@ -83,14 +83,33 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <ToggleButton x:Name="toggleButton" Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="蛍光" Margin="5" Cursor="Hand"/>
 
-                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ペン" Margin="5" Cursor="Hand" 
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/pencil.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
-                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/eraser1.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
-                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム2" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/eraser2.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+
+                        </ToggleButton>
 
                         <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="選択" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -118,21 +137,45 @@
                 </Grid>
                 <StackPanel VerticalAlignment="Center" Grid.Column="2">
                     <StackPanel Margin="0,20">
-                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="黒" Height="50" Width="50" Margin="5" 
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Height="50" Width="50" Margin="5" 
                                   IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
-                                    ConverterParameter=Black, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    ConverterParameter=Black, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/black-color.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
-                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="赤" Height="50" Width="50" Margin="5"
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Height="50" Width="50" Margin="5"
                                   IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
-                                    ConverterParameter=Red, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    ConverterParameter=Red, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/red-color.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
-                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="青" Height="50" Width="50" Margin="5"
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Height="50" Width="50" Margin="5"
                                   IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
-                                    ConverterParameter=Blue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    ConverterParameter=Blue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/blue-color.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
-                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="黄" Height="50" Width="50" Margin="5"
+                        <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Height="50" Width="50" Margin="5"
                                   IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
-                                    ConverterParameter=Yellow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    ConverterParameter=Yellow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/yellow-color.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
                     </StackPanel>
                     <StackPanel Margin="0,20">

@@ -39,11 +39,24 @@
             <GroupBox Margin="5" Grid.Row="1" Header="手書き入力">
                 <Grid>
                     <InkCanvas Margin="5" EditingMode="{Binding EditingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="theInkCanvas"/>
-                    <StackPanel Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ペン" Margin="5" Cursor="Hand" 
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Content="消しゴム" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/pencil.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                            
+                        </ToggleButton>
+                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ToggleButton.Content>
+                                <StackPanel>
+                                    <Image Source="/Common/Themes/icon/eraser2.png" />
+                                </StackPanel>
+                            </ToggleButton.Content>
+                        </ToggleButton>
 
                     </StackPanel>
                 </Grid>
