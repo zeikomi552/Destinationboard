@@ -216,7 +216,13 @@
                         <Views:MapV x:Name="Map"/>
                     </TabItem>
                     <TabItem Header="ホワイトボード">
-                        <Views:WhiteboardV/>
+                        <Views:WhiteboardV x:Name="whiteboard1"/>
+                    </TabItem>
+                    <TabItem Header="ホワイトボード2">
+                        <Views:WhiteboardV x:Name="whiteboard2"/>
+                    </TabItem>
+                    <TabItem Header="ホワイトボード3">
+                        <Views:WhiteboardV x:Name="whiteboard3"/>
                     </TabItem>
                 </TabControl>
             </Grid>

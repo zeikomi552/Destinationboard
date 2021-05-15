@@ -66,18 +66,32 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 背景イメージのパス[ImagePath]プロパティ
+        #region 背景イメージパス[ImagePath]プロパティ
         /// <summary>
-        /// 背景イメージのパス[ImagePath]プロパティ
+        /// 背景イメージパス[ImagePath]プロパティ用変数
+        /// </summary>
+        string _ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-layout";
+        /// <summary>
+        /// 背景イメージパス[ImagePath]プロパティ
         /// </summary>
         public string ImagePath
         {
             get
             {
-                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-layout";
+                return _ImagePath;
+            }
+            set
+            {
+                if (!_ImagePath.Equals(value))
+                {
+                    _ImagePath = value;
+                    NotifyPropertyChanged("ImagePath");
+                }
             }
         }
         #endregion
+
+
         #region 背景変更処理
         /// <summary>
         /// 背景変更処理
@@ -189,7 +203,9 @@ namespace Destinationboard.ViewModels
 
                 if (wnd != null)
                 {
+                    wnd.theInkCanvas.Strokes.StrokesChanged -= Strokes_StrokesChanged;
                     wnd.theInkCanvas.Strokes.StrokesChanged += Strokes_StrokesChanged;
+                    this.ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map\{0}-layout", wnd.Name);
                 }
             }
             catch (Exception ex)
