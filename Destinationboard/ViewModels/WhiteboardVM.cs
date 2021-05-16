@@ -1,10 +1,12 @@
 ﻿using Destinationboard.Common.Utilities;
+using Destinationboard.Models;
 using Destinationboard.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -91,6 +93,8 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        private string _StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-stroke";
+
 
         #region 背景変更処理
         /// <summary>
@@ -143,8 +147,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        System.Windows.Ink.StrokeCollection _added;
-        System.Windows.Ink.StrokeCollection _removed;
         private bool handle = true;
 
         #region 書き込みモード[EditingMode]プロパティ
@@ -189,6 +191,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        InkCanvas _InkCanvas;
         #region InkCanvasの初期化処理
         /// <summary>
         /// InkCanvasの初期化処理
@@ -203,9 +206,21 @@ namespace Destinationboard.ViewModels
 
                 if (wnd != null)
                 {
+                    _InkCanvas = wnd.theInkCanvas;
+                    this.ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map\{0}-layout", wnd.Name);
+                    this._StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map{0}-stroke", wnd.Name);
+
+                    if (File.Exists(this._StorkePath))
+                    {
+                        using (System.IO.FileStream fs =
+                            new System.IO.FileStream(this._StorkePath, System.IO.FileMode.Open))
+                        {
+                            this._InkCanvas.Strokes = new System.Windows.Ink.StrokeCollection(fs);
+                        }
+                    }
                     wnd.theInkCanvas.Strokes.StrokesChanged -= Strokes_StrokesChanged;
                     wnd.theInkCanvas.Strokes.StrokesChanged += Strokes_StrokesChanged;
-                    this.ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map\{0}-layout", wnd.Name);
+
                 }
             }
             catch (Exception ex)
@@ -236,7 +251,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region クリア処理
         /// <summary>
         /// クリア処理
@@ -262,6 +276,9 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+        List<StrokePairM> _StrokeUndo = new List<StrokePairM>();
+        List<StrokePairM> _StrokeRedo = new List<StrokePairM>();
         #region ストロークが変化した場合の処理
         /// <summary>
         /// ストロークが変化した場合の処理
@@ -274,8 +291,13 @@ namespace Destinationboard.ViewModels
             {
                 if (handle)
                 {
-                    _added = e.Added;
-                    _removed = e.Removed;
+                    this._StrokeUndo.Add(new StrokePairM(e.Added, e.Removed));
+
+                    using (System.IO.FileStream fs =
+                        new System.IO.FileStream(this._StorkePath, System.IO.FileMode.Create))
+                    {
+                        this._InkCanvas.Strokes.Save(fs);
+                    }
                 }
             }
             catch (Exception ex)
@@ -301,8 +323,26 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     handle = false;
-                    wnd.theInkCanvas.Strokes.Remove(_added);
-                    wnd.theInkCanvas.Strokes.Add(_removed);
+
+                    // 最後の変更を取り出す
+                    var tmp = this._StrokeUndo.LastOrDefault();
+
+                    // nullチェック
+                    if (tmp != null)
+                    {
+                        // Redo用に保存する
+                        _StrokeRedo.Add(new StrokePairM(tmp.AddedStroke, tmp.RemovedStroke));
+
+                        // 最後に追加された分は取り除く
+                        wnd.theInkCanvas.Strokes.Remove(tmp.AddedStroke);
+
+                        // 最後に取り除かれた分は追加する
+                        wnd.theInkCanvas.Strokes.Add(tmp.RemovedStroke);
+
+                        // Undoのリストから削除する
+                        this._StrokeUndo.Remove(tmp);
+                    }
+
                     handle = true;
                 }
             }
@@ -329,8 +369,25 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     handle = false;
-                    wnd.theInkCanvas.Strokes.Add(_added);
-                    wnd.theInkCanvas.Strokes.Remove(_removed);
+
+                    // 最後の変更を取り出す
+                    var tmp = this._StrokeRedo.LastOrDefault();
+
+                    if (tmp != null)
+                    {
+                        // Undoで消されたストロークを追加
+                        wnd.theInkCanvas.Strokes.Add(tmp.AddedStroke);
+
+                        // Undoで戻されたストロークを削除
+                        wnd.theInkCanvas.Strokes.Remove(tmp.RemovedStroke);
+
+                        // Undo用のストロークを保存
+                        this._StrokeUndo.Add(new StrokePairM(tmp.AddedStroke, tmp.RemovedStroke));
+
+                        // Redo用のストロークを削除
+                        this._StrokeRedo.Remove(tmp);
+                    }
+
                     handle = true;
                 }
             }
@@ -342,7 +399,13 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        // [保存]ボタンクリック時の処理
+
+        #region 保存ボタン処理(.png)
+        /// <summary>
+        /// 保存ボタン処理(.png)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Save(object sender, RoutedEventArgs e)
         {
             var wnd = Utilities.GetWindow<UserControl>(sender) as WhiteboardV;
@@ -374,6 +437,7 @@ namespace Destinationboard.ViewModels
                 }
             }
         }
+        #endregion
     }
 
 }

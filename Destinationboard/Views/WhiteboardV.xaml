@@ -32,8 +32,26 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel VerticalAlignment="Center">
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <Button Content="背景選択" Height="50" Margin="5">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                    <Button Content="背景削除" Height="50" Margin="5" Cursor="Hand">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundClear"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
                     <Button Content="1つ戻る" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -65,11 +83,57 @@
 
                 </StackPanel>
 
-                <Grid Grid.Column="1" x:Name="Drawgrid">
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <ToggleButton x:Name="toggleButton" Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="蛍光" Margin="5" Cursor="Hand"/>
+
+                    <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/pencil.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                    <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/eraser1.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                    <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/eraser2.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+
+                    </ToggleButton>
+
+                    <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/nagenawa.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+
+                    </ToggleButton>
+
+                    <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                </StackPanel>
+                
+                
+                <Grid Grid.Row="1" Grid.Column="1" x:Name="Drawgrid">
                     <Grid Background="AliceBlue">
                         <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
                     </Grid>
-
                     <InkCanvas Background="{x:Null}" x:Name="theInkCanvas" EditingMode="{Binding EditingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:inkCanvasSizeHelper.Size="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasElaseShapeHelper.ElaseShape="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -77,69 +141,10 @@
                                    hlp:inkCanvasHighlighterHelper.Highlighter="{Binding IsChecked, ElementName=toggleButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}"/>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <ToggleButton x:Name="toggleButton" Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="蛍光" Margin="5" Cursor="Hand"/>
 
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ToggleButton.Content>
-                                <StackPanel>
-                                    <Image Source="/Common/Themes/icon/pencil.png" />
-                                </StackPanel>
-                            </ToggleButton.Content>
-                        </ToggleButton>
-
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ToggleButton.Content>
-                                <StackPanel>
-                                    <Image Source="/Common/Themes/icon/eraser1.png" />
-                                </StackPanel>
-                            </ToggleButton.Content>
-                        </ToggleButton>
-
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ToggleButton.Content>
-                                <StackPanel>
-                                    <Image Source="/Common/Themes/icon/eraser2.png" />
-                                </StackPanel>
-                            </ToggleButton.Content>
-
-                        </ToggleButton>
-
-                        <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ToggleButton.Content>
-                                <StackPanel>
-                                    <Image Source="/Common/Themes/icon/nagenawa.png" />
-                                </StackPanel>
-                            </ToggleButton.Content>
-
-                        </ToggleButton>
-
-                        <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <Button Content="背景選択" Height="30" Margin="5">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Button>
-                        <Button Content="背景削除" Height="30" Margin="5" Cursor="Hand">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundClear"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Button>
-                    </StackPanel>
                 </Grid>
-                <StackPanel VerticalAlignment="Center" Grid.Column="2">
+                
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.Column="2">
                     <StackPanel Margin="0,20">
                         <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Height="50" Width="50" Margin="5" 
                                   IsChecked="{Binding MarkerColor, Converter={StaticResource ColorToBooleanConverter},
