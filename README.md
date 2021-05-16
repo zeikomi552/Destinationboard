@@ -63,7 +63,8 @@ DestinationServer\Config\DestinationServer.confを変更します。
 - Destinationboard.exe
 
 ### 動作イメージ
-![](png/DestinationBoard-Animation.gif)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7NZvU27SmCw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### 今後の予定（実際にやるかどうかは未定）
 - 出勤・退勤・テレワークの個人用のアプリを作成
