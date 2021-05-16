@@ -28,12 +28,14 @@
     <None Remove="Common\Themes\icon\blue-color.png" />
     <None Remove="Common\Themes\icon\eraser1.png" />
     <None Remove="Common\Themes\icon\eraser2.png" />
+    <None Remove="Common\Themes\icon\gesture.png" />
     <None Remove="Common\Themes\icon\media_pause.png" />
     <None Remove="Common\Themes\icon\media_play.png" />
     <None Remove="Common\Themes\icon\media_stop.png" />
     <None Remove="Common\Themes\icon\nagenawa.png" />
     <None Remove="Common\Themes\icon\nagewa.png" />
     <None Remove="Common\Themes\icon\pencil.png" />
+    <None Remove="Common\Themes\icon\pencil2.png" />
     <None Remove="Common\Themes\icon\red-color.png" />
     <None Remove="Common\Themes\icon\yellow-color.png" />
     <None Remove="Common\Themes\pencil.svg" />
@@ -77,6 +79,9 @@
     <Resource Include="Common\Themes\icon\eraser2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Themes\icon\gesture.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Themes\icon\media_pause.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -90,6 +95,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\pencil.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\pencil2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\red-color.png">

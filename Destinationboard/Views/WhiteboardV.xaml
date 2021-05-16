@@ -83,8 +83,14 @@
 
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <ToggleButton x:Name="toggleButton" Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="蛍光" Margin="5" Cursor="Hand"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Cursor="Hand">
+                    <ToggleButton x:Name="toggleButton" Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Margin="5" Cursor="Hand">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/pencil2.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
 
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -124,8 +130,14 @@
 
                     </ToggleButton>
 
-                    <ToggleButton Width="80" Height="80" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Content="ジェスチャ" Margin="5" Cursor="Hand"
-                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
+                                      IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/Common/Themes/icon/gesture.png" />
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
 
                 </StackPanel>
                 
