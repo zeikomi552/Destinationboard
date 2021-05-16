@@ -32,6 +32,7 @@
     <None Remove="Common\Themes\icon\media_pause.png" />
     <None Remove="Common\Themes\icon\media_play.png" />
     <None Remove="Common\Themes\icon\media_stop.png" />
+    <None Remove="Common\Themes\icon\movie_select.png" />
     <None Remove="Common\Themes\icon\nagenawa.png" />
     <None Remove="Common\Themes\icon\nagewa.png" />
     <None Remove="Common\Themes\icon\pencil.png" />
@@ -89,6 +90,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\media_stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\movie_select.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\nagenawa.png">
