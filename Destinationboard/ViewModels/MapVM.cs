@@ -22,6 +22,7 @@ namespace Destinationboard.ViewModels
         public MapVM()
         {
         }
+
         #region マップ情報（バックアップ用)[MapInfo]プロパティ
         /// <summary>
         /// マップ情報（バックアップ用)[MapInfo]プロパティ用変数
@@ -46,7 +47,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
 
         #region 行動予定一覧[ActionPlans]プロパティ
         /// <summary>
@@ -93,7 +93,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region マップのイメージ[MapImage]プロパティ
         /// <summary>
         /// マップのイメージ[MapImage]プロパティ用変数
@@ -118,10 +117,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
-
-
-
 
         #region 初期化処理
         /// <summary>
@@ -160,6 +155,8 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+
         #region ドラッグスタート
         /// <summary>
         /// ドラッグスタート
@@ -168,14 +165,23 @@ namespace Destinationboard.ViewModels
         /// <param name="e"></param>
         public void Thumb_DragStarted(object sender, DragStartedEventArgs e)
         {
-            var thumb = sender as Thumb;
-            if (null != thumb)
+            try
             {
-                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
-                if (null != border)
+
+                var thumb = sender as Thumb;
+                if (null != thumb)
                 {
-                    border.BorderThickness = new Thickness(1);
+                    var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                    if (null != border)
+                    {
+                        border.BorderThickness = new Thickness(1);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
             }
         }
         #endregion
@@ -188,14 +194,23 @@ namespace Destinationboard.ViewModels
         /// <param name="e"></param>
         public void Thumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            var thumb = sender as Thumb;
-            if (null != thumb)
+            try
             {
-                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
-                if (null != border)
+
+                var thumb = sender as Thumb;
+                if (null != thumb)
                 {
-                    border.BorderThickness = new Thickness(0);
+                    var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                    if (null != border)
+                    {
+                        border.BorderThickness = new Thickness(0);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
             }
         }
         #endregion
@@ -208,44 +223,52 @@ namespace Destinationboard.ViewModels
         /// <param name="e"></param>
         public void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            var thumb = sender as Thumb;
-            if (null != thumb)
+            try
             {
-                var x = Canvas.GetLeft(thumb) + e.HorizontalChange;
-                var y = Canvas.GetTop(thumb) + e.VerticalChange;
-
-                var canvas = thumb.Parent as Canvas;
-                if (null != canvas)
+                var thumb = sender as Thumb;
+                if (null != thumb)
                 {
-                    x = Math.Max(x, 0);
-                    y = Math.Max(y, 0);
-                    x = Math.Min(x, canvas.ActualWidth - thumb.ActualWidth);
-                    y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
-                }
+                    var x = Canvas.GetLeft(thumb) + e.HorizontalChange;
+                    var y = Canvas.GetTop(thumb) + e.VerticalChange;
 
-                var vm = thumb.DataContext as ActionPlanM;
-                // nullチェック
-                if (vm != null)
-                {
-                    var ap = (from elem in this.ActionPlans.Items
-                              where elem.StaffID.Equals(vm.StaffID)
-                              select elem).FirstOrDefault();
-
-                    ap.MapPos = new Point(x, y);
-
-                    var bk = (from m in this.MapInfo.MapPosition.Items
-                              where m.StaffID.Equals(ap.StaffID)
-                              select m).FirstOrDefault();
-
-                    if (bk != null)
+                    var canvas = thumb.Parent as Canvas;
+                    if (null != canvas)
                     {
-                        bk.MapPos = new Point(x, y);
+                        x = Math.Max(x, 0);
+                        y = Math.Max(y, 0);
+                        x = Math.Min(x, canvas.ActualWidth - thumb.ActualWidth);
+                        y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
                     }
-                    else
+
+                    var vm = thumb.DataContext as ActionPlanM;
+                    // nullチェック
+                    if (vm != null)
                     {
-                        this.MapInfo.MapPosition.Add(new MapLayoutM() { StaffID = ap.StaffID, MapPos = new Point(x, y) });
+                        var ap = (from elem in this.ActionPlans.Items
+                                  where elem.StaffID.Equals(vm.StaffID)
+                                  select elem).FirstOrDefault();
+
+                        ap.MapPos = new Point(x, y);
+
+                        var bk = (from m in this.MapInfo.MapPosition.Items
+                                  where m.StaffID.Equals(ap.StaffID)
+                                  select m).FirstOrDefault();
+
+                        if (bk != null)
+                        {
+                            bk.MapPos = new Point(x, y);
+                        }
+                        else
+                        {
+                            this.MapInfo.MapPosition.Add(new MapLayoutM() { StaffID = ap.StaffID, MapPos = new Point(x, y) });
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
             }
         }
         #endregion

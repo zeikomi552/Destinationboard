@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>1.0.3.1</AssemblyVersion>
-    <FileVersion>1.0.3.1</FileVersion>
+    <AssemblyVersion>1.0.3.2</AssemblyVersion>
+    <FileVersion>1.0.3.2</FileVersion>
     <Version>1.0.0</Version>
     <PackageIcon>Icon1.ico</PackageIcon>
     <Authors />
@@ -24,6 +24,22 @@
 
   <ItemGroup>
     <None Remove="Common\Themes\icon\app-icon.ico" />
+    <None Remove="Common\Themes\icon\black-color.png" />
+    <None Remove="Common\Themes\icon\blue-color.png" />
+    <None Remove="Common\Themes\icon\eraser1.png" />
+    <None Remove="Common\Themes\icon\eraser2.png" />
+    <None Remove="Common\Themes\icon\gesture.png" />
+    <None Remove="Common\Themes\icon\media_pause.png" />
+    <None Remove="Common\Themes\icon\media_play.png" />
+    <None Remove="Common\Themes\icon\media_stop.png" />
+    <None Remove="Common\Themes\icon\movie_select.png" />
+    <None Remove="Common\Themes\icon\nagenawa.png" />
+    <None Remove="Common\Themes\icon\nagewa.png" />
+    <None Remove="Common\Themes\icon\pencil.png" />
+    <None Remove="Common\Themes\icon\pencil2.png" />
+    <None Remove="Common\Themes\icon\red-color.png" />
+    <None Remove="Common\Themes\icon\yellow-color.png" />
+    <None Remove="Common\Themes\pencil.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +68,49 @@
 
   <ItemGroup>
     <Resource Include="Common\Themes\icon\app-icon.ico" />
+    <Resource Include="Common\Themes\icon\black-color.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\blue-color.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\eraser1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\eraser2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\gesture.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\media_pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\media_play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\media_stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\movie_select.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\nagenawa.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\pencil.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\pencil2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\red-color.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\yellow-color.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\pencil.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,9 +127,16 @@
     <None Update="Common\Themes\map\map-layout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Common\Themes\media\media1.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Themes\media\" />
   </ItemGroup>
 
 </Project>

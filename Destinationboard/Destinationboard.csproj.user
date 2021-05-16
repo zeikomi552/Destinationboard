@@ -10,6 +10,9 @@
     <Compile Update="Views\MapV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MediaV.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\WhiteboardV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MapV.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MediaV.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\WhiteboardV.xaml">

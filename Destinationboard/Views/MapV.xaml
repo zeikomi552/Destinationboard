@@ -86,7 +86,7 @@
             </Grid>
         </Viewbox>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Content="マップ変更" Cursor="Hand">
+            <Button Margin="5" Content="マップ変更" Cursor="Hand">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction TargetObject="{Binding Source={StaticResource vm}}" MethodName="MapChange"/>

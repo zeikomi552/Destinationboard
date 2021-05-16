@@ -1,10 +1,12 @@
 ﻿using Destinationboard.Common.Utilities;
+using Destinationboard.Models;
 using Destinationboard.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +23,7 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// ホワイトボード用マーカーカラー[MarkerColor]プロパティ用変数
         /// </summary>
-        Color _MarkerColor = Colors.Red;
+        Color _MarkerColor = Colors.Black;
         /// <summary>
         /// ホワイトボード用マーカーカラー[MarkerColor]プロパティ
         /// </summary>
@@ -66,18 +68,34 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region 背景イメージのパス[ImagePath]プロパティ
+        #region 背景イメージパス[ImagePath]プロパティ
         /// <summary>
-        /// 背景イメージのパス[ImagePath]プロパティ
+        /// 背景イメージパス[ImagePath]プロパティ用変数
+        /// </summary>
+        string _ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-layout";
+        /// <summary>
+        /// 背景イメージパス[ImagePath]プロパティ
         /// </summary>
         public string ImagePath
         {
             get
             {
-                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-layout";
+                return _ImagePath;
+            }
+            set
+            {
+                if (!_ImagePath.Equals(value))
+                {
+                    _ImagePath = value;
+                    NotifyPropertyChanged("ImagePath");
+                }
             }
         }
         #endregion
+
+        private string _StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-stroke";
+
+
         #region 背景変更処理
         /// <summary>
         /// 背景変更処理
@@ -109,15 +127,33 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-        System.Windows.Ink.StrokeCollection _added;
-        System.Windows.Ink.StrokeCollection _removed;
+
+        #region 背景画像の消去
+        /// <summary>
+        /// 背景画像の消去
+        /// </summary>
+        public void BackgroundClear()
+        {
+            try
+            {
+                File.Delete(this.ImagePath);
+                NotifyPropertyChanged("ImagePath");
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
         private bool handle = true;
 
         #region 書き込みモード[EditingMode]プロパティ
         /// <summary>
         /// 書き込みモード[EditingMode]プロパティ用変数
         /// </summary>
-        InkCanvasEditingMode _EditingMode = new InkCanvasEditingMode();
+        InkCanvasEditingMode _EditingMode = InkCanvasEditingMode.Ink;
         /// <summary>
         /// 書き込みモード[EditingMode]プロパティ
         /// </summary>
@@ -146,7 +182,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                ChangeColorBlack();
             }
             catch (Exception ex)
             {
@@ -156,6 +191,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        InkCanvas _InkCanvas;
         #region InkCanvasの初期化処理
         /// <summary>
         /// InkCanvasの初期化処理
@@ -170,7 +206,21 @@ namespace Destinationboard.ViewModels
 
                 if (wnd != null)
                 {
+                    _InkCanvas = wnd.theInkCanvas;
+                    this.ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map\{0}-layout", wnd.Name);
+                    this._StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map{0}-stroke", wnd.Name);
+
+                    if (File.Exists(this._StorkePath))
+                    {
+                        using (System.IO.FileStream fs =
+                            new System.IO.FileStream(this._StorkePath, System.IO.FileMode.Open))
+                        {
+                            this._InkCanvas.Strokes = new System.Windows.Ink.StrokeCollection(fs);
+                        }
+                    }
+                    wnd.theInkCanvas.Strokes.StrokesChanged -= Strokes_StrokesChanged;
                     wnd.theInkCanvas.Strokes.StrokesChanged += Strokes_StrokesChanged;
+
                 }
             }
             catch (Exception ex)
@@ -182,6 +232,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
         #region Close処理
         /// <summary>
         /// Close処理
@@ -190,138 +241,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 色を黒に変更
-        /// <summary>
-        /// 色を黒に変更
-        /// </summary>
-        public void ChangeColorBlack()
-        {
-            try
-            {
-                this.EditingMode = InkCanvasEditingMode.Ink;
-                this.MarkerColor = Colors.Black;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 色を赤に変更
-        /// <summary>
-        /// 色を赤に変更
-        /// </summary>
-        public void ChangeColorRed()
-        {
-            try
-            {
-                this.EditingMode = InkCanvasEditingMode.Ink;
-                this.MarkerColor = Colors.Red;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 色を青に変更
-        /// <summary>
-        /// 色を青に変更
-        /// </summary>
-        public void ChangeColorBlue()
-        {
-            try
-            {
-                this.EditingMode = InkCanvasEditingMode.Ink;
-                this.MarkerColor = Colors.Blue;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region 消しゴムに変更
-        /// <summary>
-        /// 消しゴムに変更
-        /// </summary>
-        public void Elase()
-        {
-            try
-            {
-                this.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region サイズを大に変更
-        /// <summary>
-        /// サイズを大に変更
-        /// </summary>
-        public void ChangeBig()
-        {
-            try
-            {
-                this.Size = 20;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region サイズを中に変更
-        /// <summary>
-        /// サイズを中に変更
-        /// </summary>
-        public void ChangeMiddle()
-        {
-            try
-            {
-                this.Size = 10;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-            }
-        }
-        #endregion
-
-        #region サイズを小に変更
-        /// <summary>
-        /// サイズを小に変更
-        /// </summary>
-        public void ChangeSmall()
-        {
-            try
-            {
-                this.Size = 5;
 
             }
             catch (Exception ex)
@@ -357,6 +276,9 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+
+        List<StrokePairM> _StrokeUndo = new List<StrokePairM>();
+        List<StrokePairM> _StrokeRedo = new List<StrokePairM>();
         #region ストロークが変化した場合の処理
         /// <summary>
         /// ストロークが変化した場合の処理
@@ -369,8 +291,13 @@ namespace Destinationboard.ViewModels
             {
                 if (handle)
                 {
-                    _added = e.Added;
-                    _removed = e.Removed;
+                    this._StrokeUndo.Add(new StrokePairM(e.Added, e.Removed));
+
+                    using (System.IO.FileStream fs =
+                        new System.IO.FileStream(this._StorkePath, System.IO.FileMode.Create))
+                    {
+                        this._InkCanvas.Strokes.Save(fs);
+                    }
                 }
             }
             catch (Exception ex)
@@ -396,8 +323,26 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     handle = false;
-                    wnd.theInkCanvas.Strokes.Remove(_added);
-                    wnd.theInkCanvas.Strokes.Add(_removed);
+
+                    // 最後の変更を取り出す
+                    var tmp = this._StrokeUndo.LastOrDefault();
+
+                    // nullチェック
+                    if (tmp != null)
+                    {
+                        // Redo用に保存する
+                        _StrokeRedo.Add(new StrokePairM(tmp.AddedStroke, tmp.RemovedStroke));
+
+                        // 最後に追加された分は取り除く
+                        wnd.theInkCanvas.Strokes.Remove(tmp.AddedStroke);
+
+                        // 最後に取り除かれた分は追加する
+                        wnd.theInkCanvas.Strokes.Add(tmp.RemovedStroke);
+
+                        // Undoのリストから削除する
+                        this._StrokeUndo.Remove(tmp);
+                    }
+
                     handle = true;
                 }
             }
@@ -424,8 +369,25 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     handle = false;
-                    wnd.theInkCanvas.Strokes.Add(_added);
-                    wnd.theInkCanvas.Strokes.Remove(_removed);
+
+                    // 最後の変更を取り出す
+                    var tmp = this._StrokeRedo.LastOrDefault();
+
+                    if (tmp != null)
+                    {
+                        // Undoで消されたストロークを追加
+                        wnd.theInkCanvas.Strokes.Add(tmp.AddedStroke);
+
+                        // Undoで戻されたストロークを削除
+                        wnd.theInkCanvas.Strokes.Remove(tmp.RemovedStroke);
+
+                        // Undo用のストロークを保存
+                        this._StrokeUndo.Add(new StrokePairM(tmp.AddedStroke, tmp.RemovedStroke));
+
+                        // Redo用のストロークを削除
+                        this._StrokeRedo.Remove(tmp);
+                    }
+
                     handle = true;
                 }
             }
@@ -437,7 +399,13 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        // [保存]ボタンクリック時の処理
+
+        #region 保存ボタン処理(.png)
+        /// <summary>
+        /// 保存ボタン処理(.png)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Save(object sender, RoutedEventArgs e)
         {
             var wnd = Utilities.GetWindow<UserControl>(sender) as WhiteboardV;
@@ -469,6 +437,7 @@ namespace Destinationboard.ViewModels
                 }
             }
         }
+        #endregion
     }
 
 }
