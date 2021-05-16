@@ -113,7 +113,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" >
-            <ToggleButton Margin="5" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+            <ToggleButton Width="50" Height="50" Margin="5" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
                           IsChecked="{Binding MediaState, Converter={StaticResource MediaStateToBooleanConverter}, ConverterParameter=Play, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ToggleButton.Content>
                     <Viewbox>
@@ -125,7 +125,7 @@
                 </ToggleButton.Content>
             </ToggleButton>
 
-            <ToggleButton Margin="5" Cursor="Hand" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+            <ToggleButton Width="50" Height="50" Margin="5" Cursor="Hand" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
                           IsChecked="{Binding MediaState, Converter={StaticResource MediaStateToBooleanConverter}, ConverterParameter=Pause, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ToggleButton.Content>
                     <Viewbox>
@@ -138,7 +138,7 @@
 
             </ToggleButton>
 
-            <ToggleButton Margin="5" Cursor="Hand" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+            <ToggleButton Width="50" Height="50" Margin="5" Cursor="Hand" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
                           IsChecked="{Binding MediaState, Converter={StaticResource MediaStateToBooleanConverter}, ConverterParameter=Stop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ToggleButton.Content>
                     <Viewbox>
@@ -155,19 +155,17 @@
                           IsChecked="{Binding MediaState, Converter={StaticResource MediaStateToBooleanConverter}, ConverterParameter=Manual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
 
-            <Button Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Margin="5" Cursor="Hand">
+            <Button Margin="5" Cursor="Hand">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="MediaChange"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
                 <Button.Content>
-                    <Viewbox>
-                        <StackPanel>
-                            <Image Width="50" Height="50" Source="/Common/Themes/icon/movie_select.png" />
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="動画選択"/>
-                        </StackPanel>
-                    </Viewbox>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Common/Themes/icon/movie_select.png" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="動画選択"/>
+                    </StackPanel>
                 </Button.Content>
 
             </Button>
