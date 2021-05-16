@@ -224,6 +224,9 @@
                     <TabItem Header="ホワイトボード3">
                         <Views:WhiteboardV x:Name="whiteboard3"/>
                     </TabItem>
+                    <TabItem Header="動画">
+                        <Views:MediaV x:Name="media1"/>
+                    </TabItem>
                 </TabControl>
             </Grid>
         </GroupBox>
