@@ -86,36 +86,48 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Cursor="Hand">
                     <ToggleButton x:Name="toggleButton" Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"  Margin="5" Cursor="Hand">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/pencil2.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/pencil2.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="蛍光"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
                     </ToggleButton>
 
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand" 
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Ink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/pencil.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/pencil.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="ペン"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
                     </ToggleButton>
 
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/eraser1.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/eraser1.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="消しゴム"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
                     </ToggleButton>
 
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=EraseByStroke, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/eraser2.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/eraser2.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="消しゴム"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
 
                     </ToggleButton>
@@ -123,9 +135,12 @@
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=Select, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/nagenawa.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/nagenawa.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="選択"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
 
                     </ToggleButton>
@@ -133,9 +148,12 @@
                     <ToggleButton Width="50" Height="50" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5" Cursor="Hand"
                                       IsChecked="{Binding EditingMode, Converter={StaticResource InkCanvasEditingModeToBoolConverter}, ConverterParameter=GestureOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ToggleButton.Content>
-                            <StackPanel>
-                                <Image Source="/Common/Themes/icon/gesture.png" />
-                            </StackPanel>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/gesture.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="ジェスチャ"/>
+                                </StackPanel>
+                            </Viewbox>
                         </ToggleButton.Content>
                     </ToggleButton>
 
