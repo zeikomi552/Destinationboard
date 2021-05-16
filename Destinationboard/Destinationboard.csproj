@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>1.0.3.2</AssemblyVersion>
-    <FileVersion>1.0.3.2</FileVersion>
+    <AssemblyVersion>1.0.3.3</AssemblyVersion>
+    <FileVersion>1.0.3.3</FileVersion>
     <Version>1.0.0</Version>
     <PackageIcon>Icon1.ico</PackageIcon>
     <Authors />
@@ -125,6 +125,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Common\Themes\map\map-layout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Themes\media\media1.mkv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Common\Themes\media\media1.mp4">

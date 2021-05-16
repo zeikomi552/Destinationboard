@@ -113,7 +113,7 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// メディアのファイルパス[MediaPath]プロパティ用変数
         /// </summary>
-        string _MediaPath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\media\media1.mp4";
+        string _MediaPath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\media\media1.mkv";
         /// <summary>
         /// メディアのファイルパス[MediaPath]プロパティ
         /// </summary>
@@ -171,7 +171,7 @@ namespace Destinationboard.ViewModels
                 var dialog = new OpenFileDialog();
 
                 // ファイルの種類を設定
-                dialog.Filter = "動画ファイル (*.mp4)|*.mp4";
+                dialog.Filter = "動画ファイル (*.mp4;*.mkv)|*.mp4;*.mkv";
 
                 // ダイアログを表示する
                 if (dialog.ShowDialog() == true)
