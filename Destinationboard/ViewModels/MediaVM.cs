@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
 {
@@ -88,6 +89,8 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+        
         #region 初期化処理
         /// <summary>
         /// 初期化処理
@@ -203,6 +206,7 @@ namespace Destinationboard.ViewModels
                     {
                         // 動画ファイルをロードします。
                         this._Media.Source = new Uri(this.MediaPath, UriKind.Relative);
+
                     }
                 }
             }
