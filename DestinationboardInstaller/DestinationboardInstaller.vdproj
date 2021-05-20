@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -191,7 +199,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Destinationboard"
         "ProductCode" = "8:{3B93C432-BD3E-46B4-8F82-4D101F768175}"
-        "PackageCode" = "8:{43448F5D-6771-4B5D-B35D-1C607EE40B3A}"
+        "PackageCode" = "8:{0522D6C9-208A-4E41-B8B5-C25DBFE51440}"
         "UpgradeCode" = "8:{DE3EB8D4-2AD6-4A37-8FD2-017EAE77F559}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -311,7 +319,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_296BB1AAD63F4C83A49165C733D8589E"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_15424B45DABA4CE2B16D6EB152CA9F8B"
             {
             "Name" = "8:行先ボードへのショートカット"
             "Arguments" = "8:"
@@ -319,13 +327,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_FB0E5194D62941A4B24D1FE05E66578B"
-            "Folder" = "8:_FB0E5194D62941A4B24D1FE05E66578B"
-            "WorkingFolder" = "8:_FB0E5194D62941A4B24D1FE05E66578B"
+            "Target" = "8:_B2C0C9CA57FD4409931FF25FB006D05B"
+            "Folder" = "8:_71CC7BB9DBAF4DB1937BB294B2869A6A"
+            "WorkingFolder" = "8:_039F821A90494CAF9671E62B7E4E425D"
             "Icon" = "8:_B9630C8575DF4BEAADDB9F6DC5C6AB36"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7110AB8FA9EF469B8ACFF874FF05CBB5"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3E68558F59254FE7B56D3586F6590C87"
             {
             "Name" = "8:行先ボードへのショートカット"
             "Arguments" = "8:"
@@ -333,10 +341,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_B9630C8575DF4BEAADDB9F6DC5C6AB36"
-            "Folder" = "8:_71CC7BB9DBAF4DB1937BB294B2869A6A"
+            "Target" = "8:_B2C0C9CA57FD4409931FF25FB006D05B"
+            "Folder" = "8:_FB0E5194D62941A4B24D1FE05E66578B"
             "WorkingFolder" = "8:_039F821A90494CAF9671E62B7E4E425D"
-            "Icon" = "8:"
+            "Icon" = "8:_B9630C8575DF4BEAADDB9F6DC5C6AB36"
             "Feature" = "8:"
             }
         }
