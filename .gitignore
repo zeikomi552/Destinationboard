@@ -8,3 +8,5 @@
 /.vs/Destinationboard/DesignTimeBuild
 /Destinationboard/bin/Release/net5.0-windows/runtimes
 /Destinationboard/bin/Release/net5.0-windows
+/DestinationboardInstaller/Debug
+/DestinationboardInstaller/Release
