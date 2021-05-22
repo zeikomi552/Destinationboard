@@ -67,9 +67,6 @@ namespace Destinationboard.ViewModels
             // スキャナを使用する場合
             if (CommonValues.GetInstance().EnableHandyScanner)
             {
-                // 接続処理
-                CommonValues.GetInstance().Scanner.Connect();
-
                 // イベントを一旦クリア
                 CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
 
@@ -312,12 +309,6 @@ namespace Destinationboard.ViewModels
                 if (CommonValues.GetInstance().Scanner.DataReceived != null)
                 {
                     CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
-                }
-
-                // 接続中の場合
-                if (CommonValues.GetInstance().Scanner.IsConnect)
-                {
-                    CommonValues.GetInstance().Scanner.Disconnect();
                 }
             }
         }

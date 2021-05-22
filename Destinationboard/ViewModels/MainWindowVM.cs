@@ -604,7 +604,7 @@ namespace Destinationboard.ViewModels
                 if (CommonValues.GetInstance().EnableHandyScanner)
                 {
                     CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
-                    CommonValues.GetInstance().Scanner.Disconnect();
+                    //CommonValues.GetInstance().Scanner.Disconnect();
                 }
 
                 // PaSoRiが有効の場合
@@ -629,7 +629,7 @@ namespace Destinationboard.ViewModels
 
                 if (CommonValues.GetInstance().EnableHandyScanner)
                 {
-                    CommonValues.GetInstance().Scanner.Connect();
+                    CommonValues.GetInstance().Scanner.DataReceived -= _SerialPort_DataReceived;
                     CommonValues.GetInstance().Scanner.DataReceived += _SerialPort_DataReceived;
                 }
             }
