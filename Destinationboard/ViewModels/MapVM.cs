@@ -155,8 +155,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
-
         #region ドラッグスタート
         /// <summary>
         /// ドラッグスタート
@@ -273,6 +271,9 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        private string _Map_Dir = "temporary";
+        private string _Map_FileName = "_mapinfo_tmporary";
+
         #region マップ情報のロード処理
         /// <summary>
         /// マップ情報のロード処理
@@ -281,7 +282,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                string map_bk_path = @"temporary\_mapinfo_tmporary";
+
+                // Configフォルダのパス取得
+                string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), _Map_Dir);
+                string map_bk_path = Path.Combine(conf_dir, _Map_FileName);
+
 
                 if (File.Exists(map_bk_path))
                 {
@@ -289,14 +294,11 @@ namespace Destinationboard.ViewModels
                 }
                 else
                 {
-                    if (!Directory.Exists(@"temporary"))
-                    {
-                        Directory.CreateDirectory(@"temporary");
-                    }
-                    else
-                    {
-                        SaveMapPostion();
-                    }
+                    // カレントディレクトリの作成
+                    Utilities.CreateCurrentDirectory(map_bk_path);
+
+                    // マップ情報の保存
+                    SaveMapPostion();
                 }
             }
             catch (Exception e)
@@ -315,7 +317,12 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                XMLUtil.Seialize<MapInfoM>(@"temporary\_mapinfo_tmporary", this.MapInfo);
+                // Configフォルダのパス取得
+                string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), _Map_Dir);
+                string map_bk_path = Path.Combine(conf_dir, _Map_FileName);
+
+
+                XMLUtil.Seialize<MapInfoM>(map_bk_path, this.MapInfo);
             }
             catch (Exception e)
             {
