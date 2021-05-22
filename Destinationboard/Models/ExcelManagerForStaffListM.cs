@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using ZXing;
+using ZXing.QrCode;
 
 namespace Destinationboard.Models
 {
@@ -100,30 +102,24 @@ namespace Destinationboard.Models
                         .Style.NumberFormat.Format = "@";
                     worksheet.Cell(row, ColumnNames.IndexOf(Column6) + 1).Value = item.Display;
 
-                    DotNetBarcode makeQR = new DotNetBarcode();
-                    makeQR.Type = DotNetBarcode.Types.QRCode;
 
-                    makeQR.QRSetECCRate = (DotNetBarcode.QRECCRates)DotNetBarcode.QRECCRates.Medium15Percent;
-                    makeQR.QRQuitZone = 2;
-                    makeQR.QRSetVersion = (DotNetBarcode.QRVersions)DotNetBarcode.QRVersions.Ver02;
-
-                    //描画先とするImageオブジェクトを作成する
-                    Bitmap canvas = new Bitmap(300, 300);
-                    //ImageオブジェクトのGraphicsオブジェクトを作成する
-                    using (var g = Graphics.FromImage(canvas))
+                    var barcodeWriter = new BarcodeWriter
                     {
-                        makeQR.WriteBar(item.SampleQRCode, 2, 2, 300, 300, g);
-
-                        MemoryStream memoryStream = new MemoryStream();
-                        canvas.Save(memoryStream, ImageFormat.Png);
-
-                        using (var ms = new MemoryStream())
+                        Format = BarcodeFormat.QR_CODE,
+                        Options = new QrCodeEncodingOptions
                         {
-
-                            canvas.Save(ms, ImageFormat.Bmp);
-                            var image = worksheet.AddPicture(ms);
-                            image.MoveTo(worksheet.Cell(row, ColumnNames.IndexOf(Column7) + 1)).Scale(0.3);
+                            CharacterSet = "UTF-8",
+                            Height = 300,
+                            Width = 300,
                         }
+                    };
+
+                    using (var bmp = barcodeWriter.Write(item.SampleQRCode))
+                    using (var ms = new MemoryStream())
+                    {
+                        bmp.Save(ms, ImageFormat.Bmp);
+                        var image = worksheet.AddPicture(ms);
+                        image.MoveTo(worksheet.Cell(row, ColumnNames.IndexOf(Column7) + 1)).Scale(0.3);
                     }
 
                     row++;

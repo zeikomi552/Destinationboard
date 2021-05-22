@@ -477,6 +477,7 @@ namespace Destinationboard.ViewModels
             {
                 _logger.Error(ex.Message);
                 Console.WriteLine(ex.Message);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
             }
         }
         #endregion
