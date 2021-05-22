@@ -10,15 +10,26 @@ namespace Destinationboard.Common
 {
 	public class ConfigManager
 	{
+		#region コンストラクタ
 		/// <summary>
-		/// コンフィグフォルダ
+		/// コンストラクタ
 		/// </summary>
-		const string _ConfigFolder = "Config";
+		public ConfigManager()
+		{
+		}
+        #endregion
+
+        #region コンフィグ
+        /// <summary>
+        /// コンフィグフォルダ
+        /// </summary>
+        string _ConfigFolder = "Config";
 		/// <summary>
 		/// コンフィグファイル名
 		/// </summary>
-		const string _ConfigFileName = "Destination.conf";
+		string _ConfigFileName = "Destination.conf";
 
+		#region コンフィグファイルパス
 		/// <summary>
 		/// コンフィグファイルパス
 		/// </summary>
@@ -26,10 +37,22 @@ namespace Destinationboard.Common
 		{
 			get
 			{
-				return _ConfigFolder + @"\" + _ConfigFileName;
+				// Configフォルダのパス取得
+				string conf_dir = Path.Combine(Utilities.Utilities.GetApplicationFolder(), _ConfigFolder);
+
+				// 存在確認
+				if (!Directory.Exists(conf_dir))
+				{
+					// 存在しない場合は作成
+					Utilities.Utilities.CreateDirectory(conf_dir);
+				}
+
+				// パスの結合
+				return Path.Combine(Utilities.Utilities.GetApplicationFolder(), _ConfigFolder, _ConfigFileName);
 			}
 		}
-
+		#endregion
+		#endregion
 
 		#region ロガー
 		/// <summary>
@@ -134,7 +157,6 @@ namespace Destinationboard.Common
 		}
 		#endregion
 
-
 		#region ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ
 		/// <summary>
 		/// ハンディスキャナ用COMポート番号[HandyScannerComPort]プロパティ用変数
@@ -184,11 +206,6 @@ namespace Destinationboard.Common
 		/// </summary>
 		private void ConfigCheckCreate()
 		{
-			// Configフォルダパスの確認
-			if (!Directory.Exists(_ConfigFolder))
-			{
-				Directory.CreateDirectory(_ConfigFolder);
-			}
 
 			// Configファイルの存在確認
 			if (!File.Exists(ConfigPath))
@@ -197,7 +214,7 @@ namespace Destinationboard.Common
 				ConfigManager ini_conf = new ConfigManager();
 
 				// configファイルの作成
-				XMLUtil.Seialize<ConfigManager>(_ConfigFolder + @"\" + _ConfigFileName, ini_conf);
+				XMLUtil.Seialize<ConfigManager>(ConfigPath, ini_conf);
 			}
 		}
 		#endregion

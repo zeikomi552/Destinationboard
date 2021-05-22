@@ -7,10 +7,16 @@
     <AssemblyVersion>1.0.3.4</AssemblyVersion>
     <FileVersion>1.0.3.4</FileVersion>
     <Version>1.0.0</Version>
-    <PackageIcon>Icon1.ico</PackageIcon>
-    <Authors />
+    <PackageIcon>app-icon.ico</PackageIcon>
+    <Authors>Zeikomi552</Authors>
     <ApplicationIcon>Common\Themes\icon\app-icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Company>Zeikomi</Company>
+    <RepositoryUrl>https://github.com/zeikomi552/Destinationboard</RepositoryUrl>
+    <RepositoryType>Application</RepositoryType>
+    <PackageTags>DestinationBoard</PackageTags>
+    <Copyright></Copyright>
+    <Description>Destinationboard</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,6 +46,10 @@
     <None Remove="Common\Themes\icon\red-color.png" />
     <None Remove="Common\Themes\icon\yellow-color.png" />
     <None Remove="Common\Themes\pencil.svg" />
+    <None Include="..\..\DestinationboardServer\DestinationboardServer\Common\icon\app-icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
