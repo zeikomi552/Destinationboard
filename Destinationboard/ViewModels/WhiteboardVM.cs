@@ -72,7 +72,7 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// 背景イメージパス[ImagePath]プロパティ用変数
         /// </summary>
-        string _ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-layout";
+        string _ImagePath = string.Empty;
         /// <summary>
         /// 背景イメージパス[ImagePath]プロパティ
         /// </summary>
@@ -207,8 +207,14 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     _InkCanvas = wnd.theInkCanvas;
-                    this.ImagePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map\{0}-layout", wnd.Name);
-                    this._StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"Common\Themes\map{0}-stroke", wnd.Name);
+
+                    // Configフォルダのパス取得
+                    string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
+                    string image_file_path = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
+
+
+                    this.ImagePath = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
+                    this._StorkePath = Path.Combine(conf_dir, string.Format("{0}-stroke", wnd.Name)); 
 
                     if (File.Exists(this._StorkePath))
                     {
@@ -292,6 +298,7 @@ namespace Destinationboard.ViewModels
                 if (handle)
                 {
                     this._StrokeUndo.Add(new StrokePairM(e.Added, e.Removed));
+                    this._StrokeRedo.Clear();
 
                     using (System.IO.FileStream fs =
                         new System.IO.FileStream(this._StorkePath, System.IO.FileMode.Create))
