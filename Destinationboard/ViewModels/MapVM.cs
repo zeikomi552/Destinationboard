@@ -19,9 +19,15 @@ namespace Destinationboard.ViewModels
 {
     public class MapVM : ViewModelBase
     {
+        #region コンストラクタ
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MapVM()
         {
+
         }
+        #endregion
 
         #region マップ情報（バックアップ用)[MapInfo]プロパティ
         /// <summary>
@@ -80,6 +86,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        private string _ImageFileName = "map-layout";
         #region マップイメージのパス[ImagePath]プロパティ
         /// <summary>
         /// マップイメージのパス[ImagePath]プロパティ
@@ -88,7 +95,10 @@ namespace Destinationboard.ViewModels
         {
             get
             {
-                return System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\map-layout";
+                // Configフォルダのパス取得
+                string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), _Map_Dir);
+                string image_file_path = Path.Combine(conf_dir, _ImageFileName);
+                return image_file_path;
             }
         }
         #endregion
@@ -126,8 +136,18 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // イメージファイルパスを確認
+                if (!File.Exists(this.ImagePath))
+                {
+                    string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,"Common","Themes","map","map-layout");
+                    Utilities.CreateCurrentDirectory(this.ImagePath);
+                    File.Copy(path, this.ImagePath, true);
+                }
+
                 // マップのロード処理
                 LoadMapPosition();
+                NotifyPropertyChanged("ImagePath");
+
             }
             catch (Exception ex)
             {
