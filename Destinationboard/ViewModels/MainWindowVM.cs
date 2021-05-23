@@ -457,27 +457,77 @@ namespace Destinationboard.ViewModels
                 _timer2.Interval = new TimeSpan(0, 0, 30);
                 _timer2.Start();
 
-                GetPlans();
-
-                // ハンディスキャナの初期化
-                HandyScannerInit();
-
-                // PaSoRiの初期化
-                PaSoRiInit();
-
-                // Pasoriの接続状態を確認
-                if (_Pasori != null && _Pasori.ReaderNames != null && _Pasori.ReaderNames.Count > 0)
+                try
                 {
-                    _Pasori.Monitor.CardInserted += (sender, args) => PasoriReaded(_Pasori.ReaderNames.First(), args);
-                    _Pasori.MonitorStart();
+                    GetPlans();
+                }
+                catch(Exception ex)
+                {
+                    StringBuilder msg = new StringBuilder();
+                    msg.AppendLine("サーバーとの通信に失敗しました。");
+                    msg.AppendLine("以下の状態が考えられます。");
+                    msg.AppendLine("1:サーバーが起動していない。サーバー情報:" + CommonValues.GetInstance().ServerName);
+                    msg.AppendLine("2:ファイアーウォールの設定でポートが閉じている。またはポートが競合している。ポート番号:" + CommonValues.GetInstance().Port);
+                    msg.AppendLine();
+                    msg.AppendLine("------- 詳細情報 --------");
+
+                    _logger.Error(msg.ToString());
+                    Console.WriteLine(msg.ToString());
+                    ShowMessage.ShowErrorOK(msg.ToString()+ ex.Message, "Error");
+                    throw;
                 }
 
+                try
+                {
+                    // ハンディスキャナの初期化
+                    HandyScannerInit();
+                }
+                catch (Exception ex)
+                {
+                    StringBuilder msg = new StringBuilder();
+                    msg.AppendLine("ハンディスキャナの起動に失敗しました。");
+                    msg.AppendLine("以下の状態が考えられます。");
+                    msg.AppendLine("1:ハンディスキャナが使用できない（ドライバがインストールされていない、または対象外のハンディスキャナ）");
+                    msg.AppendLine("2:COMポートが一致していない: 設定しているCOMポート:" + CommonValues.GetInstance().HandyScannerComPort);
+                    msg.AppendLine();
+                    msg.AppendLine("------- 詳細情報 --------");
+
+                    _logger.Error(msg.ToString());
+                    Console.WriteLine(msg.ToString());
+                    ShowMessage.ShowErrorOK(msg.ToString() + ex.Message, "Error");
+                    throw;
+                }
+
+                try
+                {
+                    // PaSoRiの初期化
+                    PaSoRiInit();
+
+                    // Pasoriの接続状態を確認
+                    if (_Pasori != null && _Pasori.ReaderNames != null && _Pasori.ReaderNames.Count > 0)
+                    {
+                        _Pasori.Monitor.CardInserted += (sender, args) => PasoriReaded(_Pasori.ReaderNames.First(), args);
+                        _Pasori.MonitorStart();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    StringBuilder msg = new StringBuilder();
+                    msg.AppendLine("PaSoRiの起動に失敗しました。");
+                    msg.AppendLine("以下の状態が考えられます。");
+                    msg.AppendLine("1:PaSoRiが使用できない（ドライバがインストールされていない）");
+                    msg.AppendLine();
+                    msg.AppendLine("------- 詳細情報 --------");
+
+                    _logger.Error(msg.ToString());
+                    Console.WriteLine(msg.ToString());
+                    ShowMessage.ShowErrorOK(msg.ToString() + ex.Message, "Error");
+                    throw;
+                }
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.Error(ex.Message);
-                Console.WriteLine(ex.Message);
-                ShowMessage.ShowErrorOK(ex.Message, "Error");
+                Environment.Exit(0);
             }
         }
         #endregion
@@ -561,6 +611,7 @@ namespace Destinationboard.ViewModels
             {
                 _logger.Error(ex.Message);
                 Console.WriteLine(ex.Message);
+                throw;
             }
         }
         #endregion
@@ -696,6 +747,7 @@ namespace Destinationboard.ViewModels
             {
                 _logger.Error(ex.Message);
                 Console.WriteLine(ex.Message);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
             }
         }
         #endregion
