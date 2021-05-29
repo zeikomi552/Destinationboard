@@ -36,15 +36,24 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                    <Button Content="背景選択" Height="50" Margin="5">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="Click">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Button>
+                    <Button Content="マグネット" Height="50" Margin="5" Cursor="Hand">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="CreateMagnet"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+
+                    <Button Content="背景選択" Height="50" Margin="5" Cursor="Hand">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+                    
                     <Button Content="背景削除" Height="50" Margin="5" Cursor="Hand">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -52,6 +61,7 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
+
                     <Button Content="1つ戻る" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -59,6 +69,7 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
+
                     <Button Content="1つ進む" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -66,6 +77,7 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
+
                     <Button Content="全消し" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -73,6 +85,8 @@
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
+
+
                     <Button Content="保存" Height="50" Margin="5">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
@@ -169,7 +183,11 @@
                                    hlp:InkCanvasElaseShapeHelper.ElaseShape="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:InkCanvasColorHelper.Color="{Binding MarkerColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:inkCanvasHighlighterHelper.Highlighter="{Binding IsChecked, ElementName=toggleButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}"/>
+                                    Width="{Binding ActualWidth, ElementName=Drawgrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=Drawgrid, Mode=OneWay}">
+                        <Thumb>
+                            
+                        </Thumb>
+                    </InkCanvas>
 
 
                 </Grid>

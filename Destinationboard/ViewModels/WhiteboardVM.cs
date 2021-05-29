@@ -43,6 +43,7 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
         #region ペンサイズ[Size]プロパティ
         /// <summary>
         /// ペンサイズ[Size]プロパティ用変数
@@ -94,7 +95,12 @@ namespace Destinationboard.ViewModels
         #endregion
 
         private string _StorkePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\canvas1-stroke";
+        private bool handle = true;
+        InkCanvas _InkCanvas;
+        List<StrokePairM> _StrokeUndo = new List<StrokePairM>();
+        List<StrokePairM> _StrokeRedo = new List<StrokePairM>();
 
+        private string _MagnetFilePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\wndname-magnet";
 
         #region 背景変更処理
         /// <summary>
@@ -147,8 +153,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        private bool handle = true;
-
         #region 書き込みモード[EditingMode]プロパティ
         /// <summary>
         /// 書き込みモード[EditingMode]プロパティ用変数
@@ -191,7 +195,8 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        InkCanvas _InkCanvas;
+
+        private string _WndName = string.Empty;
         #region InkCanvasの初期化処理
         /// <summary>
         /// InkCanvasの初期化処理
@@ -207,6 +212,7 @@ namespace Destinationboard.ViewModels
                 if (wnd != null)
                 {
                     _InkCanvas = wnd.theInkCanvas;
+                    _WndName = wnd.Name;
 
                     // Configフォルダのパス取得
                     string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
@@ -237,7 +243,6 @@ namespace Destinationboard.ViewModels
 
         }
         #endregion
-
 
         #region Close処理
         /// <summary>
@@ -282,9 +287,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
-        List<StrokePairM> _StrokeUndo = new List<StrokePairM>();
-        List<StrokePairM> _StrokeRedo = new List<StrokePairM>();
         #region ストロークが変化した場合の処理
         /// <summary>
         /// ストロークが変化した場合の処理
@@ -406,7 +408,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 保存ボタン処理(.png)
         /// <summary>
         /// 保存ボタン処理(.png)
@@ -445,6 +446,61 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
+
+        #region マグネットリスト[Magnets]プロパティ
+        /// <summary>
+        /// マグネットリスト[Magnets]プロパティ用変数
+        /// </summary>
+        MagnetCollectionM _Magnets = new MagnetCollectionM();
+        /// <summary>
+        /// マグネットリスト[Magnets]プロパティ
+        /// </summary>
+        public MagnetCollectionM Magnets
+        {
+            get
+            {
+                return _Magnets;
+            }
+            set
+            {
+                if (_Magnets == null || !_Magnets.Equals(value))
+                {
+                    _Magnets = value;
+                    NotifyPropertyChanged("Magnets");
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// マグネットの作成
+        /// </summary>
+        public void CreateMagnet()
+        {
+            try
+            {
+                MagnetV wnd = new MagnetV();
+
+                if (wnd.ShowDialog() == true)
+                {
+                    var vm = wnd.DataContext as MagnetVM;
+                    this.Magnets = vm.Magnets.Clone();
+
+                    // Configフォルダのパス取得
+                    string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
+                    string magnet_path = Path.Combine(conf_dir, string.Format("{0}-magnet", wnd.Name));
+
+
+                    XMLUtil.Seialize<MagnetCollectionM>(magnet_path, this.Magnets);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+
     }
 
 }
