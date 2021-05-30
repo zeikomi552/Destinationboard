@@ -37,6 +37,7 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="文字色" Binding="{Binding Foreground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="背景色" Binding="{Binding Background, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="フォントサイズ" Binding="{Binding FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
 

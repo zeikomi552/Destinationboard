@@ -136,6 +136,32 @@ namespace Destinationboard.Models
 		}
 		#endregion
 
+		#region フォントサイズ[FontSize]プロパティ
+		/// <summary>
+		/// フォントサイズ[FontSize]プロパティ用変数
+		/// </summary>
+		int _FontSize = 20;
+		/// <summary>
+		/// フォントサイズ[FontSize]プロパティ
+		/// </summary>
+		public int FontSize
+		{
+			get
+			{
+				return _FontSize;
+			}
+			set
+			{
+				if (!_FontSize.Equals(value))
+				{
+					_FontSize = value;
+					NotifyPropertyChanged("FontSize");
+				}
+			}
+		}
+		#endregion
+
+
 		/// <summary>
 		/// シャローコピー
 		/// </summary>

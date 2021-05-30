@@ -235,11 +235,13 @@
                 </StackPanel>
 
 
-                <Viewbox Grid.Row="1" Grid.Column="1" >
-                    <Grid x:Name="Drawgrid">
-                        <Grid Background="AliceBlue">
-                            <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
-                        </Grid>
+                <Viewbox Grid.Row="1" Grid.Column="1">
+                    <Grid Margin="5" x:Name="Drawgrid">
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <Grid Background="AliceBlue">
+                                <Image x:Name="MapImage" Source="{Binding ImagePath, Converter={StaticResource StringToImageSourceConverter}}"/>
+                            </Grid>
+                        </Border>
 
                         <InkCanvas Background="{x:Null}" x:Name="theInkCanvas" EditingMode="{Binding EditingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    hlp:inkCanvasSizeHelper.Size="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -282,12 +284,10 @@
                                             </b:Interaction.Triggers>
                                             <Thumb.Template>
                                                 <ControlTemplate>
-                                                    <Border x:Name="Thumb_Border" BorderBrush="Red">
-                                                        <Viewbox>
-                                                            <Border Background="{Binding Background}">
-                                                                <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Text}" Foreground="{Binding Foreground}"/>
-                                                            </Border>
-                                                        </Viewbox>
+                                                    <Border x:Name="Thumb_Border">
+                                                        <Border BorderBrush="Black" Background="{Binding Background}" BorderThickness="1">
+                                                            <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Text}" Foreground="{Binding Foreground}" FontSize="{Binding FontSize}"/>
+                                                        </Border>
                                                     </Border>
                                                 </ControlTemplate>
                                             </Thumb.Template>
@@ -296,8 +296,6 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-
-
                     </Grid>
                 </Viewbox>
                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.Column="2">

@@ -133,16 +133,40 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        public void CreateNoneImage(double width, double height)
+        {
+            // Imageオブジェクトの作成
+            using (var image = new System.Drawing.Bitmap((int)width, (int)height))
+            {
+
+                // ImageオブジェクトのGraphicsオブジェクトを作成
+                using (var graphics = System.Drawing.Graphics.FromImage(image))
+                {
+                    // 背景をグレーで塗りつぶす
+                    graphics.FillRectangle(System.Drawing.Brushes.White, graphics.VisibleClipBounds);
+
+                    // 黒色で四角形を描画
+                    //graphics.DrawRectangle(System.Drawing.Pens.Black, 50, 50, 50, 50);
+                    image.Save(this.ImagePath);
+                }
+            }
+        }
+
         #region 背景画像の消去
         /// <summary>
         /// 背景画像の消去
         /// </summary>
-        public void BackgroundClear()
+        public void BackgroundClear(object sender, EventArgs ev)
         {
             try
             {
-                File.Delete(this.ImagePath);
-                NotifyPropertyChanged("ImagePath");
+                var wnd = Utilities.GetWindow<UserControl>(sender) as WhiteboardV;
+
+                if (wnd != null)
+                {
+                    CreateNoneImage(800, 600);
+                    NotifyPropertyChanged("ImagePath");
+                }
             }
             catch (Exception e)
             {
@@ -196,6 +220,7 @@ namespace Destinationboard.ViewModels
         #endregion
 
         string UserControlName { get; set; }
+
         #region InkCanvasの初期化処理
         /// <summary>
         /// InkCanvasの初期化処理
@@ -217,6 +242,11 @@ namespace Destinationboard.ViewModels
                     // Configフォルダのパス取得
                     string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
                     string image_file_path = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
+
+                    if (!File.Exists(image_file_path))
+                    {
+                        //wnd.Drawgrid.ActualWidth
+                    }
 
                     this.ImagePath = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
                     this._StorkePath = Path.Combine(conf_dir, string.Format("{0}-stroke", wnd.Name));
@@ -253,6 +283,20 @@ namespace Destinationboard.ViewModels
         #endregion
 
 
+        #region マグネットの保存処理
+        /// <summary>
+        /// マグネットの保存処理
+        /// </summary>
+        private void SaveMagnet()
+        {
+            // Configフォルダのパス取得
+            string magnet_path = Utilities.GetTemporaryPath(string.Format("{0}-magnet", this.UserControlName));
+
+            // ファイルの保存処理
+            XMLUtil.Seialize<ModelList<MagnetM>>(magnet_path, this.Magnets.Magnets);
+        }
+        #endregion
+
         #region Close処理
         /// <summary>
         /// Close処理
@@ -261,11 +305,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                // Configフォルダのパス取得
-                string magnet_path = Utilities.GetTemporaryPath(string.Format("{0}-magnet", this.UserControlName));
-
-                // ファイルの保存処理
-                XMLUtil.Seialize<ModelList<MagnetM>>(magnet_path, this.Magnets.Magnets);
+                SaveMagnet();
             }
             catch (Exception ex)
             {
@@ -539,7 +579,8 @@ namespace Destinationboard.ViewModels
                     var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
                     if (null != border)
                     {
-                        border.BorderThickness = new Thickness(1);
+                        border.BorderThickness = new Thickness(2);
+                        border.BorderBrush = Brushes.Red;
                     }
                 }
             }
@@ -570,6 +611,8 @@ namespace Destinationboard.ViewModels
                     {
                         border.BorderThickness = new Thickness(0);
                     }
+                    // マグネットの保存
+                    SaveMagnet();
                 }
             }
             catch (Exception ex)
