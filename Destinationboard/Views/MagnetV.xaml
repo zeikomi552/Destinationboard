@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
         xmlns:local="clr-namespace:Destinationboard.Views"
-        xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.MagnetV" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters" x:Class="Destinationboard.Views.MagnetV" WindowStartupLocation="CenterScreen" WindowStyle="None" 
         mc:Ignorable="d"  hlp:DialogResultHelper.DialogResult="{Binding DialogResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Icon="/Common/Themes/icon/app-icon.ico"
         Title="MagnetV" Height="450" Width="800">
+    <Window.Resources>
+        <Converters:HexToSolidColorBrushConverter x:Key="HexToSolidColorBrushConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <ViewModels:MagnetVM/>
     </Window.DataContext>
@@ -16,11 +19,24 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <b:Interaction.Triggers>
+            <b:EventTrigger>
+                <b:CallMethodAction TargetObject="{Binding}" MethodName="Init"/>
+            </b:EventTrigger>
+        </b:Interaction.Triggers>
 
-        <DataGrid ItemsSource="{Binding Magnets.Items}">
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Magnets.Magnets.Items}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="表示文字列" Binding="{Binding Text}"/>
-                <DataGridTextColumn Header="文字色" Binding="{Binding Foreground}"/>
+                <DataGridTextColumn Header="表示文字列" Binding="{Binding Text}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Foreground" Value="{Binding Foreground, Converter={StaticResource HexToSolidColorBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Setter Property="Background" Value="{Binding Background, Converter={StaticResource HexToSolidColorBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="文字色" Binding="{Binding Foreground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="背景色" Binding="{Binding Background, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -1,10 +1,13 @@
 ﻿using Destinationboard.Common.Utilities;
 using Destinationboard.Models;
+using Destinationboard.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Destinationboard.ViewModels
 {
@@ -33,12 +36,21 @@ namespace Destinationboard.ViewModels
 				}
 			}
 		}
-		#endregion
+        #endregion
 
+        public string WhiteBoardName { get; set; }
 
-		public override void Init()
+        public override void Init()
         {
-            
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Fatal Error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
         }
 
         public override void Close()

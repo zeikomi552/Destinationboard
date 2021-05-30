@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -100,8 +101,6 @@ namespace Destinationboard.ViewModels
         List<StrokePairM> _StrokeUndo = new List<StrokePairM>();
         List<StrokePairM> _StrokeRedo = new List<StrokePairM>();
 
-        private string _MagnetFilePath = System.AppDomain.CurrentDomain.BaseDirectory + @"Common\Themes\map\wndname-magnet";
-
         #region 背景変更処理
         /// <summary>
         /// 背景変更処理
@@ -186,6 +185,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+
             }
             catch (Exception ex)
             {
@@ -195,8 +195,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
-        private string _WndName = string.Empty;
+        string UserControlName { get; set; }
         #region InkCanvasの初期化処理
         /// <summary>
         /// InkCanvasの初期化処理
@@ -211,16 +210,25 @@ namespace Destinationboard.ViewModels
 
                 if (wnd != null)
                 {
+                    this.UserControlName = wnd.Name;    // ユーザーコントロール名を保持
+
                     _InkCanvas = wnd.theInkCanvas;
-                    _WndName = wnd.Name;
 
                     // Configフォルダのパス取得
                     string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
                     string image_file_path = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
 
-
                     this.ImagePath = Path.Combine(conf_dir, string.Format("{0}-layout", wnd.Name));
-                    this._StorkePath = Path.Combine(conf_dir, string.Format("{0}-stroke", wnd.Name)); 
+                    this._StorkePath = Path.Combine(conf_dir, string.Format("{0}-stroke", wnd.Name));
+
+                    // Configフォルダのパス取得
+                    string magnet_path = Utilities.GetTemporaryPath(string.Format("{0}-magnet", wnd.Name));
+
+                    if (File.Exists(magnet_path))
+                    {
+                        // マグネット情報の読み取り
+                        this.Magnets.Magnets = XMLUtil.Deserialize<ModelList<MagnetM>>(magnet_path);
+                    }
 
                     if (File.Exists(this._StorkePath))
                     {
@@ -244,6 +252,11 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        public void PutMagnet(WhiteboardV wnd)
+        {
+            
+        }
+
         #region Close処理
         /// <summary>
         /// Close処理
@@ -252,7 +265,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                // Configフォルダのパス取得
+                string magnet_path = Utilities.GetTemporaryPath(string.Format("{0}-magnet", this.UserControlName));
 
+                // ファイルの保存処理
+                XMLUtil.Seialize<ModelList<MagnetM>>(magnet_path, this.Magnets.Magnets);
             }
             catch (Exception ex)
             {
@@ -472,6 +489,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region マグネットの作成
         /// <summary>
         /// マグネットの作成
         /// </summary>
@@ -480,18 +498,24 @@ namespace Destinationboard.ViewModels
             try
             {
                 MagnetV wnd = new MagnetV();
+                var vm = wnd.DataContext as MagnetVM;
+
+                // ホワイトボード名のセット（ファイル名識別用）
+                vm.WhiteBoardName = this.UserControlName;
+
+                // 値のクローン
+                vm.Magnets = this.Magnets.Clone();
 
                 if (wnd.ShowDialog() == true)
                 {
-                    var vm = wnd.DataContext as MagnetVM;
+                    // 値のクローン
                     this.Magnets = vm.Magnets.Clone();
 
                     // Configフォルダのパス取得
-                    string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), "temporary");
-                    string magnet_path = Path.Combine(conf_dir, string.Format("{0}-magnet", wnd.Name));
+                    string magnet_path = Utilities.GetTemporaryPath(string.Format("{0}-magnet", this.UserControlName));
 
-
-                    XMLUtil.Seialize<MagnetCollectionM>(magnet_path, this.Magnets);
+                    // ファイルの保存処理
+                    XMLUtil.Seialize<ModelList<MagnetM>>(magnet_path, this.Magnets.Magnets);
                 }
             }
             catch (Exception e)
@@ -500,7 +524,110 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
 
+        #region ドラッグスタート
+        /// <summary>
+        /// ドラッグスタート
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Thumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            try
+            {
+
+                var thumb = sender as Thumb;
+                if (null != thumb)
+                {
+                    var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                    if (null != border)
+                    {
+                        border.BorderThickness = new Thickness(1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region ドラッグ完了
+        /// <summary>
+        /// ドラッグ完了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Thumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            try
+            {
+
+                var thumb = sender as Thumb;
+                if (null != thumb)
+                {
+                    var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                    if (null != border)
+                    {
+                        border.BorderThickness = new Thickness(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region ドラッグ中
+        /// <summary>
+        /// ドラッグ中
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            try
+            {
+                var thumb = sender as Thumb;
+                if (null != thumb)
+                {
+                    var x = Canvas.GetLeft(thumb) + e.HorizontalChange;
+                    var y = Canvas.GetTop(thumb) + e.VerticalChange;
+
+                    var canvas = thumb.Parent as Canvas;
+                    if (null != canvas)
+                    {
+                        x = Math.Max(x, 0);
+                        y = Math.Max(y, 0);
+                        x = Math.Min(x, canvas.ActualWidth - thumb.ActualWidth);
+                        y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
+                    }
+
+                    var vm = thumb.DataContext as MagnetM;
+                    // nullチェック
+                    if (vm != null)
+                    {
+                        var mg = (from elem in this.Magnets.Magnets.Items
+                                  where elem.ID.Equals(vm.ID)
+                                  select elem).FirstOrDefault();
+
+                        mg.MapPos = new Point(x, y);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("fatal error", ex);
+                ShowMessage.ShowErrorOK(ex.Message, "Error");
+            }
+        }
+        #endregion
     }
 
 }
