@@ -8,7 +8,7 @@
              xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="Destinationboard.Views.WhiteboardV" xmlns:Converters="clr-namespace:Destinationboard.Common.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" hlp:UserControlNameHelper.Name="{Binding UserControlName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+             d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
         <ViewModels:WhiteboardVM x:Key="vm"/>
@@ -43,7 +43,16 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                    <Button Content="マグネット" Height="50" Margin="5" Cursor="Hand">
+
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/magnet.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="マグネット"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="CreateMagnet"/>
@@ -51,51 +60,50 @@
                         </b:Interaction.Triggers>
                     </Button>
 
-                    <Button Content="背景選択" Height="50" Margin="5" Cursor="Hand">
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/background-chg.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="背景変更"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundChange"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
-                    
-                    <Button Content="背景削除" Height="50" Margin="5" Cursor="Hand">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundClear"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
 
-                    <Button Content="1つ戻る" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Undo"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-
-                    <Button Content="1つ進む" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Redo"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-
-                    <Button Content="全消し" Height="50" Margin="5">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="Click">
-                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Clear"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Button>
-
-
-                    <Button Content="保存" Height="50" Margin="5">
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/save-disk.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="保存"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
                                 <b:CallMethodAction TargetObject="{Binding}" MethodName="Save"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/background-none.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="背景削除"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BackgroundClear"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </Button>
@@ -175,6 +183,54 @@
                             </Viewbox>
                         </ToggleButton.Content>
                     </ToggleButton>
+
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/undo.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="1つ戻る"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Undo"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+                    
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/redo.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="1つ進む"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Redo"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
+
+                    <Button Width="55" Height="55" Style="{StaticResource MaterialDesignToolButton}" Margin="5" Cursor="Hand">
+                        <Button.Content>
+                            <Viewbox>
+                                <StackPanel>
+                                    <Image Width="40" Height="40" Source="/Common/Themes/icon/garbage-can.png" />
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="全消し"/>
+                                </StackPanel>
+                            </Viewbox>
+                        </Button.Content>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="Clear"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Button>
 
                 </StackPanel>
 

@@ -30,11 +30,15 @@
 
   <ItemGroup>
     <None Remove="Common\Themes\icon\app-icon.ico" />
+    <None Remove="Common\Themes\icon\background-chg.png" />
+    <None Remove="Common\Themes\icon\background-none.png" />
     <None Remove="Common\Themes\icon\black-color.png" />
     <None Remove="Common\Themes\icon\blue-color.png" />
     <None Remove="Common\Themes\icon\eraser1.png" />
     <None Remove="Common\Themes\icon\eraser2.png" />
+    <None Remove="Common\Themes\icon\garbage-can.png" />
     <None Remove="Common\Themes\icon\gesture.png" />
+    <None Remove="Common\Themes\icon\magnet.png" />
     <None Remove="Common\Themes\icon\media_pause.png" />
     <None Remove="Common\Themes\icon\media_play.png" />
     <None Remove="Common\Themes\icon\media_stop.png" />
@@ -44,6 +48,9 @@
     <None Remove="Common\Themes\icon\pencil.png" />
     <None Remove="Common\Themes\icon\pencil2.png" />
     <None Remove="Common\Themes\icon\red-color.png" />
+    <None Remove="Common\Themes\icon\redo.png" />
+    <None Remove="Common\Themes\icon\save-disk.png" />
+    <None Remove="Common\Themes\icon\undo.png" />
     <None Remove="Common\Themes\icon\yellow-color.png" />
     <None Remove="Common\Themes\pencil.svg" />
     <COMReference Include="Microsoft.Office.Interop.PowerPoint">
@@ -94,6 +101,12 @@
 
   <ItemGroup>
     <Resource Include="Common\Themes\icon\app-icon.ico" />
+    <Resource Include="Common\Themes\icon\background-chg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\background-none.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Themes\icon\black-color.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -106,7 +119,13 @@
     <Resource Include="Common\Themes\icon\eraser2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Common\Themes\icon\garbage-can.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Common\Themes\icon\gesture.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\magnet.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\media_pause.png">
@@ -131,6 +150,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\red-color.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\redo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\save-disk.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Common\Themes\icon\undo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Common\Themes\icon\yellow-color.png">
