@@ -252,10 +252,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        public void PutMagnet(WhiteboardV wnd)
-        {
-            
-        }
 
         #region Close処理
         /// <summary>
