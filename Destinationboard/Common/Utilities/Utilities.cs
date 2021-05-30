@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Core;
+using System.Windows.Xps.Packaging;
 
 namespace Destinationboard.Common.Utilities
 {
@@ -68,6 +71,51 @@ namespace Destinationboard.Common.Utilities
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fv.CompanyName, fv.ProductName);
         }
         #endregion
+
+        public static string GetTemporaryPath()
+        {
+
+            return Path.Combine(Utilities.GetApplicationFolder(), "temporary");
+
+        }
+
+        public static string GetTemporaryPath(string file_name)
+        {
+
+            return Path.Combine(GetTemporaryPath(), file_name);
+
+        }
+
+
+        /// <summary>
+        /// パワーポイントをXPSファイルに変換する
+        /// </summary>
+        /// <param name="pptFilename">pptxファイルパス</param>
+        /// <param name="xpsFilename">xpsファイルパス</param>
+        /// <returns></returns>
+        public static XpsDocument ConvertPowerPointToXps(string pptFilename, string xpsFilename)
+        {
+            var pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
+
+            var presentation = pptApp.Presentations.Open(pptFilename, MsoTriState.msoTrue, MsoTriState.msoFalse,
+            MsoTriState.msoFalse);
+
+            try
+            {
+                presentation.ExportAsFixedFormat(xpsFilename, PpFixedFormatType.ppFixedFormatTypeXPS);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                presentation.Close();
+                pptApp.Quit();
+            }
+
+            return new XpsDocument(xpsFilename, FileAccess.Read);
+        }
 
         #region 最上位のWindowの取得処理
         /// <summary>

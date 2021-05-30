@@ -234,6 +234,9 @@
                 <TabItem FontSize="20" Header="動画">
                     <Views:MediaV x:Name="media1"/>
                 </TabItem>
+                <TabItem FontSize="20" Header="パワポ">
+                    <Views:PowerPointV x:Name="ppt"/>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>
