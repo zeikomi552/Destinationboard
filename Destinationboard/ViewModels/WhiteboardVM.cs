@@ -164,7 +164,7 @@ namespace Destinationboard.ViewModels
 
                 if (wnd != null)
                 {
-                    CreateNoneImage(800, 600);
+                    CreateNoneImage(1, 1);
                     NotifyPropertyChanged("ImagePath");
                 }
             }
