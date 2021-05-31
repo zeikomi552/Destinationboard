@@ -132,7 +132,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region 入力文字列[InputText]プロパティ
         /// <summary>
         /// 入力文字列[InputText]プロパティ用変数
@@ -180,7 +179,6 @@ namespace Destinationboard.ViewModels
             return  depobj as RegistMemoV;
         }
         #endregion
-
         
         #region クリア処理
         /// <summary>
