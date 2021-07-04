@@ -237,6 +237,9 @@
                 <TabItem FontSize="20" Header="パワポ">
                     <Views:PowerPointV x:Name="ppt"/>
                 </TabItem>
+                <TabItem FontSize="20" Header="ウェブ">
+                    <Views:WebViewV x:Name="web"/>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>

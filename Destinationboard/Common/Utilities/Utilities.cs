@@ -141,5 +141,29 @@ namespace Destinationboard.Common.Utilities
             }
         }
         #endregion
+
+        const string DefaultURI = "https://www.google.com/";
+
+        public static string ConvertURI(string search_text)
+        {
+            string uri = DefaultURI;
+
+            if (string.IsNullOrEmpty(search_text))
+            {
+                // 空白なのでGoogleのトップ画面へ
+            }
+            // "http://" または "https://"が含まれているのでそのまま使用
+            else if ((search_text.Length >= 7 && search_text.Substring(0, 7).ToLower().Equals("http://"))
+                || (search_text.Length >= 8 && search_text.Substring(0, 8).ToLower().Equals("https://")))
+            {
+                uri = search_text; // そのまま使用
+            }
+            else
+            {
+                // URLではないのでGoogle検索を実行
+                uri = string.Format(DefaultURI + "search?q={0}", search_text);
+            }
+            return uri;
+        }
     }
 }

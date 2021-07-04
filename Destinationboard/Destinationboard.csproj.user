@@ -19,6 +19,9 @@
     <Compile Update="Views\PowerPointV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WebViewV.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\WhiteboardV.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PowerPointV.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WebViewV.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\WhiteboardV.xaml">
