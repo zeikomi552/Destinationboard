@@ -235,7 +235,10 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(this.Bookmarks.SelectedItem.URI));
+                if (this.Bookmarks != null && this.Bookmarks.SelectedItem != null)
+                {
+                    this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(this.Bookmarks.SelectedItem.URI));
+                }
             }
             catch (Exception e)
             {
@@ -388,7 +391,12 @@ namespace Destinationboard.ViewModels
                 string map_bk_path = Path.Combine(conf_dir, _BookmarkName);
 
 
+                var tmp = this.Bookmarks.SelectedItem;
+                this.Bookmarks.SelectedItem = null;
+
                 XMLUtil.Seialize<ModelList<BookmarkM>>(map_bk_path, this.Bookmarks);
+
+                this.Bookmarks.SelectedItem = tmp;
             }
             catch (Exception e)
             {
@@ -398,21 +406,87 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region タイマー切り替え[TimerSec]プロパティ
+        /// <summary>
+        /// タイマー切り替え[TimerSec]プロパティ用変数
+        /// </summary>
+        int _TimerSec = 30;
+        /// <summary>
+        /// タイマー切り替え[TimerSec]プロパティ
+        /// </summary>
+        public int TimerSec
+        {
+            get
+            {
+                return _TimerSec;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    value = 1;
+                }
+
+                if (!_TimerSec.Equals(value))
+                {
+                    // インターバルを設定
+                    _SlideShowTimer.Interval = new TimeSpan(0, 0, value);
+
+                    _TimerSec = value;
+                    NotifyPropertyChanged("TimerSec");
+                }
+            }
+        }
+        #endregion
+
+
+        #region スライドショーのスタート
+        /// <summary>
+        /// スライドショーのスタート
+        /// </summary>
         public void StartSlidShow()
         {
-            // インターバルを設定
-            _SlideShowTimer.Interval = new TimeSpan(0, 0, 5);
-            // タイマメソッドを設定
-            _SlideShowTimer.Tick += new EventHandler(SlideShowChange);
-            // タイマを開始
-            _SlideShowTimer.Start();
-        }
+            try
+            {
+                if (this.Bookmarks != null && this.Bookmarks.Items.Count > 0)
+                {
+                    this.Bookmarks.SelectedItem = this.Bookmarks.Items.ElementAt(0);
+                }
 
+                // インターバルを設定
+                _SlideShowTimer.Interval = new TimeSpan(0, 0, TimerSec);
+                // タイマメソッドを設定
+                _SlideShowTimer.Tick += new EventHandler(SlideShowChange);
+                // タイマを開始
+                _SlideShowTimer.Start();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region スライドショーのストップ
+        /// <summary>
+        /// スライドショーのストップ
+        /// </summary>
         public void StopSlidShow()
         {
-            // タイマを開始
-            _SlideShowTimer.Stop();
+            try
+            {
+                // タイマを開始
+                _SlideShowTimer.Stop();
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
         }
+        #endregion
 
         // タイマメソッド
         private void SlideShowChange(object sender, EventArgs ev)

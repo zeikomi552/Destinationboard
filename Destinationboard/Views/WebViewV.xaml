@@ -33,6 +33,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="5" VerticalAlignment="Center" Text="URL:"/>
             <TextBox Margin="5" VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam" />
@@ -60,6 +61,7 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ToggleButton>
+            <TextBox Grid.Column="5" Width="50" Text="{Binding TimerSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam"/>
         </Grid>
 
         <GroupBox Grid.Row="1" Header="ウェブ">
