@@ -32,6 +32,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="5" VerticalAlignment="Center" Text="URL:"/>
             <TextBox Margin="5" VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam" />
@@ -49,20 +50,68 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </Button>
+            <ToggleButton IsChecked="{Binding IsSlideShow}" Margin="5" Content="スライドショー" Grid.Column="4" Cursor="Hand">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Checked">
+                        <b:CallMethodAction TargetObject="{Binding}" MethodName="StartSlidShow"/>
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="Unchecked">
+                        <b:CallMethodAction TargetObject="{Binding}" MethodName="StopSlidShow"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ToggleButton>
         </Grid>
 
         <GroupBox Grid.Row="1" Header="ウェブ">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="325*"/>
-                    <ColumnDefinition Width="66*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <wv2:WebView2 x:Name="webView2" Source="{Binding URI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGrid Grid.Column="1" AutoGenerateColumns="False" ItemsSource="{Binding Bookmarks.Items}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="お気に入り" Binding="{Binding URI}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Expander ExpandDirection="Right" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Bookmarks.Items}" 
+                              SelectedItem="{Binding Bookmarks.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="お気に入り" Binding="{Binding URI}"/>
+                            </DataGrid.Columns>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="SelectionChanged">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMarkSelectionChanged"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </DataGrid>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+                            <Button Margin="5" Content="↑">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Button>
+                            <Button Margin="5" Content="-">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="Delete"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Button>
+                            <Button Margin="5" Content="↓" Cursor="Hand">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
             </Grid>
         </GroupBox>
     </Grid>
