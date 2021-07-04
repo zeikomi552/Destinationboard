@@ -39,7 +39,7 @@
 
         <GroupBox Grid.Row="1" Header="パワポ">
             <Grid>
-                <DocumentViewer Margin="5" Name="DocumentviewPowerPoint"/>
+                <DocumentViewer ScrollViewer.PanningMode="VerticalFirst" Margin="5" Name="DocumentviewPowerPoint"/>
                 <!--<WebBrowser Source="C:\Users\gohya\Desktop\test用パワポ.xps"/>-->
             </Grid>
         </GroupBox>
