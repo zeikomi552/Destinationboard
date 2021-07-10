@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
@@ -179,6 +180,7 @@ namespace Destinationboard.ViewModels
                 {
                     var tmp = sender as WebViewV;
                     this.WebView2Obj = tmp.webView2;
+                    this.WebView2Obj.NavigationCompleted += WebView2Obj_NavigationCompleted;
 
                     InitializeAsync();
                 }
@@ -189,6 +191,18 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+
+        #region 検索完了イベント処理
+        /// <summary>
+        /// 検索完了イベント処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WebView2Obj_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        {
+            this.URI = this.WebView2Obj.Source.ToString();
+        }
+        #endregion
         #endregion
 
         // タイマのインスタンス
@@ -239,7 +253,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        string _LastURI = string.Empty;
         #region 画面遷移処理
         /// <summary>
         /// 画面遷移処理
@@ -249,11 +262,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                if (!this._LastURI.Equals(uri))
-                {
-                    _LastURI = uri;
-                    this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(uri));
-                }
+                this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(uri));
             }
             catch (Exception e)
             {
@@ -263,6 +272,31 @@ namespace Destinationboard.ViewModels
 
         }
         #endregion
+
+        public void KeyDown(object sender, System.Windows.Input.KeyEventArgs ev)
+        {
+            try
+            {
+                // Enterキーが押されたときに
+                if (ev.Key != System.Windows.Input.Key.Enter)
+                {
+                    return;
+                }
+                if (!(sender is TextBox tb)) { return; }
+
+                // Bindingを取得してUpdateSource呼出し
+                var be = BindingOperations.GetBindingExpression(tb, TextBox.TextProperty);
+                be?.UpdateSource();
+
+                // 検索処理
+                WebMove(this.URI);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
 
         #region お気に入りの選択変更
         /// <summary>
