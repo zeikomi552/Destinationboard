@@ -23,7 +23,6 @@ namespace Destinationboard.ViewModels
             _SlideShowTimer.Interval = new TimeSpan(0, 0, 1);
 
             _SlideShowTimer.Tick += SlideShowChange;
-
         }
 
         #region スライドショーフラグ(true:スライドショー false:停止)[IsSlideShow]プロパティ
@@ -142,6 +141,26 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        private string _WebViewDir = "EBWebView";
+
+        #region 初期化処理(WebView2の配布)
+        /// <summary>
+        /// 初期化処理(WebView2の配布)
+        /// </summary>
+        private async void InitializeAsync()
+        {
+            var browserExecutableFolder = Path.Combine(Utilities.GetApplicationFolder(), _WebViewDir);
+
+            // カレントディレクトリの作成
+            Utilities.CreateDirectory(browserExecutableFolder);
+
+            // 環境の作成
+            var webView2Environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(null, browserExecutableFolder);
+
+            // 固定バージョンのブラウザを配布
+            await this.WebView2Obj.EnsureCoreWebView2Async(webView2Environment);
+        }
+        #endregion
 
         #region 画面の初期化処理
         /// <summary>
@@ -160,6 +179,8 @@ namespace Destinationboard.ViewModels
                 {
                     var tmp = sender as WebViewV;
                     this.WebView2Obj = tmp.webView2;
+
+                    InitializeAsync();
                 }
             }
             catch (Exception e)
