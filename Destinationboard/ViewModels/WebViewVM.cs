@@ -380,14 +380,63 @@ namespace Destinationboard.ViewModels
         /// <summary>
         /// ブックマーク処理
         /// </summary>
-        public void BookMark()
+        public void AddBookMark()
         {
             try
             {
-                this.Bookmarks.Add(new BookmarkM() { URI = this.URI, Name = this.URI });
+                string page_title = this.WebView2Obj.CoreWebView2.DocumentTitle;   // タイトルを取得する
+                string page_uri = this.WebView2Obj.CoreWebView2.Source;          // URLを取得する
+
+                // ブックマークの追加処理
+                this.Bookmarks.Add(new BookmarkM() { URI = page_uri, Name = page_title });
 
                 // ブックマークの保存
                 SaveBookMark();
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 次のページへ進む
+        /// <summary>
+        /// 次のページへ進む
+        /// </summary>
+        public void GoNextPage()
+        {
+            try
+            {
+                //進む
+                if (this.WebView2Obj.CanGoForward)
+                {
+                    this.WebView2Obj.GoForward();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region 前のページに戻る
+        /// <summary>
+        /// 前のページに戻る
+        /// </summary>
+        public void GoBackPage()
+        {
+            try
+            {
+                // 戻る
+                if (this.WebView2Obj.CanGoBack)
+                {
+                    this.WebView2Obj.GoBack();
+                }
 
             }
             catch (Exception e)
@@ -475,11 +524,9 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-
                 // Configフォルダのパス取得
                 string conf_dir = Path.Combine(Utilities.GetApplicationFolder(), _BookmarkDir);
                 string map_bk_path = Path.Combine(conf_dir, _BookmarkName);
-
 
                 if (File.Exists(map_bk_path))
                 {

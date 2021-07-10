@@ -52,24 +52,25 @@
             <Button Margin="5" Content="★" Grid.Column="2" Cursor="Hand">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
-                        <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMark"/>
+                        <b:CallMethodAction TargetObject="{Binding}" MethodName="AddBookMark"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </Button>
-            <ToggleButton Width="150" Grid.Column="3" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"/>
-
-
-            <ToggleButton Width="100" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding IsSlideShow}" Margin="5" Content="スライドショー" Grid.Column="3" Cursor="Hand">
+            <Button Margin="5" Content="戻る" Grid.Column="3" Cursor="Hand">
                 <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Checked">
-                        <b:CallMethodAction TargetObject="{Binding}" MethodName="StartSlidShow"/>
-                    </b:EventTrigger>
-                    <b:EventTrigger EventName="Unchecked">
-                        <b:CallMethodAction TargetObject="{Binding}" MethodName="StopSlidShow"/>
+                    <b:EventTrigger EventName="Click">
+                        <b:CallMethodAction TargetObject="{Binding}" MethodName="GoBackPage"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
-            </ToggleButton>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Grid.Column="4" Width="50" Text="{Binding TimerSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam" IsEnabled="{Binding IsSlideShow, Converter={StaticResource InverseBooloeanConverter}}"/>
+            </Button>
+            <Button Margin="5" Content="進む" Grid.Column="4" Cursor="Hand">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:CallMethodAction TargetObject="{Binding}" MethodName="GoNextPage"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Button>
+
         </Grid>
 
         <GroupBox Grid.Row="1" Header="ウェブ">
@@ -127,8 +128,26 @@
             </Grid>
         </GroupBox>
         <Grid Grid.Row="1">
-            <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" VerticalAlignment="Top" 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <ToggleButton Foreground="White" Width="100" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                              IsChecked="{Binding IsSlideShow}" Content="スライドショー" Grid.Column="3" Cursor="Hand">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Checked">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="StartSlidShow"/>
+                        </b:EventTrigger>
+                        <b:EventTrigger EventName="Unchecked">
+                            <b:CallMethodAction TargetObject="{Binding}" MethodName="StopSlidShow"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ToggleButton>
+                
+                <TextBox Foreground="White" VerticalAlignment="Center" 
+                         TextAlignment="Center" Width="50" Text="{Binding TimerSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Cursor="IBeam" IsEnabled="{Binding IsSlideShow, Converter={StaticResource InverseBooloeanConverter}}"/>
+
+                <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" VerticalAlignment="Top" 
                           HorizontalAlignment="Right" x:Name="toggleButton" Content="★" Foreground="White"/>
+            </StackPanel>
 
         </Grid>
 
