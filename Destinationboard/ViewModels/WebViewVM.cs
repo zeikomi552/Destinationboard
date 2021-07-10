@@ -226,7 +226,7 @@ namespace Destinationboard.ViewModels
         /// Web画面遷移
         /// </summary>
         public void WebMove()
-        {
+       {
             try
             {
                 WebMove(this.URI);
@@ -239,6 +239,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        string _LastURI = string.Empty;
         #region 画面遷移処理
         /// <summary>
         /// 画面遷移処理
@@ -248,7 +249,11 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(uri));
+                if (!this._LastURI.Equals(uri))
+                {
+                    _LastURI = uri;
+                    this.WebView2Obj.CoreWebView2.Navigate(Destinationboard.Common.Utilities.Utilities.ConvertURI(uri));
+                }
             }
             catch (Exception e)
             {

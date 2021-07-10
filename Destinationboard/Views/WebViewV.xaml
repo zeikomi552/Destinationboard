@@ -41,9 +41,10 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="5" VerticalAlignment="Center" Text="URL:"/>
-            <TextBox Margin="5" behavior:TextBoxEnterKeyBehavior.EnterDownBehavior="UpdateSourceAndSelectAll" VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam">
+            <TextBox Margin="5" behavior:TextBoxEnterKeyBehavior.EnterDownBehavior="UpdateSourceAndSelectAll"
+                     VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam">
                 <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="TargetUpdated">
+                    <b:EventTrigger EventName="TextChanged">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="WebMove"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
@@ -78,7 +79,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <wv2:WebView2 x:Name="webView2" Source="{Binding URI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <wv2:WebView2 x:Name="webView2" />
                 <Grid Grid.Column="1" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=toggleButton}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
