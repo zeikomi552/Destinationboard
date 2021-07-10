@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Destinationboard.Views"
+             xmlns:hlp="clr-namespace:Destinationboard.Common.Helpers"
              xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              x:Class="Destinationboard.Views.PowerPointV"
              mc:Ignorable="d" 
@@ -40,8 +41,8 @@
 
         <GroupBox Grid.Row="1" Header="パワポ">
             <Grid>
-                <DocumentViewer ScrollViewer.PanningMode="VerticalFirst" Margin="5" Name="DocumentviewPowerPoint"/>
-                <!--<WebBrowser Source="C:\Users\gohya\Desktop\test用パワポ.xps"/>-->
+                <DocumentViewer IsManipulationEnabled="True" hlp:DocumentViewerManipulationHelper.ManipulationFeedback="True" ScrollViewer.PanningMode="VerticalFirst" 
+                                Margin="5" Name="DocumentviewPowerPoint"/>
             </Grid>
         </GroupBox>
     </Grid>
