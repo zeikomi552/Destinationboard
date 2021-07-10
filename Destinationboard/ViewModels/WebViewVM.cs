@@ -16,6 +16,63 @@ namespace Destinationboard.ViewModels
 {
     public class WebViewVM : ViewModelBase
     {
+        #region プロパティ
+        #region キャッシュの保存先ディレクトリ
+        /// <summary>
+        /// キャッシュの保存先ディレクトリ
+        /// </summary>
+        private string _WebViewDir = "EBWebView";
+        #endregion
+
+        #region デフォルトのホームページ
+        /// <summary>
+        /// デフォルトのホームページ
+        /// </summary>
+        const string DefaultURI = "https://www.google.com/";
+        #endregion
+
+        #region スライドショーカウントダウンタイマー
+        /// <summary>
+        /// スライドショーカウントダウンタイマー
+        /// </summary>
+        private DispatcherTimer _SlideShowTimer;
+        #endregion
+
+        #region お気に入り保存ディレクトリ
+        /// <summary>
+        /// お気に入り保存ディレクトリ
+        /// </summary>
+        private string _BookmarkDir = "Config";
+        #endregion
+
+        #region お気に入り保存フォルダ
+        /// <summary>
+        /// お気に入り保存フォルダ
+        /// </summary>
+        private string _BookmarkName = "_bookmarks";
+        #endregion
+
+        #region DataGridの手動コミット
+        /// <summary>
+        /// DataGridの手動コミット
+        /// </summary>
+        private bool isManualEditCommit = false;
+        #endregion
+
+        #region タイマーカウント
+        /// <summary>
+        /// タイマーカウント
+        /// </summary>
+        private int _TimerMax = 30;
+        #endregion
+
+        #endregion
+
+        #region 関数
+        #region コンストラクタ
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public WebViewVM()
         {
             _SlideShowTimer = new DispatcherTimer();
@@ -25,6 +82,7 @@ namespace Destinationboard.ViewModels
 
             _SlideShowTimer.Tick += SlideShowChange;
         }
+        #endregion
 
         #region スライドショーフラグ(true:スライドショー false:停止)[IsSlideShow]プロパティ
         /// <summary>
@@ -51,8 +109,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
-        const string DefaultURI = "https://www.google.com/";
         #region 表示URI[URI]プロパティ
         /// <summary>
         /// 表示URI[URI]プロパティ用変数
@@ -116,7 +172,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
         #region WebView2オブジェクト[WebView2Obj]プロパティ
         /// <summary>
         /// WebView2オブジェクト[WebView2Obj]プロパティ用変数
@@ -141,8 +196,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
-        private string _WebViewDir = "EBWebView";
 
         #region 初期化処理(WebView2の配布)
         /// <summary>
@@ -204,9 +257,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
         #endregion
-
-        // タイマのインスタンス
-        private DispatcherTimer _SlideShowTimer;
 
         #region 画面の初期化処理
         /// <summary>
@@ -273,6 +323,12 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        #region キーダウンイベント
+        /// <summary>
+        /// キーダウンイベント
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
         public void KeyDown(object sender, System.Windows.Input.KeyEventArgs ev)
         {
             try
@@ -297,6 +353,7 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
 
         #region お気に入りの選択変更
         /// <summary>
@@ -410,10 +467,6 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-
-        private string _BookmarkDir = "Config";
-        private string _BookmarkName = "_bookmarks";
-
         #region マップ情報のロード処理
         /// <summary>
         /// マップ情報のロード処理
@@ -448,10 +501,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
-
-        // DataGridの手動コミット
-        private bool isManualEditCommit;
 
         #region ブックマークのセルが変更された場合の処理
         /// <summary>
@@ -537,8 +586,6 @@ namespace Destinationboard.ViewModels
             }
         }
         #endregion
-
-        private int _TimerMax = 30;
 
         #region スライドショーのスタート
         /// <summary>
@@ -650,6 +697,7 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
         #endregion
     }
 }
