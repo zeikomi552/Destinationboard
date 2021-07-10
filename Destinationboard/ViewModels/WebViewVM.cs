@@ -8,12 +8,24 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Destinationboard.ViewModels
 {
     public class WebViewVM : ViewModelBase
     {
+        public WebViewVM()
+        {
+            _SlideShowTimer = new DispatcherTimer();
+
+            // インターバルを設定
+            _SlideShowTimer.Interval = new TimeSpan(0, 0, 1);
+
+            _SlideShowTimer.Tick += SlideShowChange;
+
+        }
+
         #region スライドショーフラグ(true:スライドショー false:停止)[IsSlideShow]プロパティ
         /// <summary>
         /// スライドショーフラグ(true:スライドショー false:停止)[IsSlideShow]プロパティ用変数
@@ -169,7 +181,6 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                _SlideShowTimer = new DispatcherTimer();
             }
             catch (Exception e)
             {
@@ -256,7 +267,7 @@ namespace Destinationboard.ViewModels
         {
             try
             {
-                this.Bookmarks.Add(new BookmarkM() { URI = this.URI });
+                this.Bookmarks.Add(new BookmarkM() { URI = this.URI, Name = this.URI });
 
                 // ブックマークの保存
                 SaveBookMark();
@@ -378,11 +389,42 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        #region マップの配置情報の保存
+
+        // DataGridの手動コミット
+        private bool isManualEditCommit;
+
+        #region ブックマークのセルが変更された場合の処理
         /// <summary>
-        /// マップの配置情報の保存
+        /// ブックマークのセルが変更された場合の処理
         /// </summary>
-        private void SaveBookMark()
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
+        public void BookMarkCellEnding(object sender, DataGridCellEditEndingEventArgs ev)
+        {
+            try
+            {
+                if (!isManualEditCommit)
+                {
+                    isManualEditCommit = true;
+                    DataGrid grid = (DataGrid)sender;
+                    grid.CommitEdit(DataGridEditingUnit.Row, true);
+                    SaveBookMark();
+                    isManualEditCommit = false;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("fatal error", e);
+                ShowMessage.ShowErrorOK(e.Message, "Error");
+            }
+        }
+        #endregion
+
+        #region お気に入り情報の保存
+        /// <summary>
+        /// お気に入り情報の保存
+        /// </summary>
+        public void SaveBookMark()
         {
             try
             {
@@ -429,9 +471,6 @@ namespace Destinationboard.ViewModels
 
                 if (!_TimerSec.Equals(value))
                 {
-                    // インターバルを設定
-                    _SlideShowTimer.Interval = new TimeSpan(0, 0, value);
-
                     _TimerSec = value;
                     NotifyPropertyChanged("TimerSec");
                 }
@@ -439,6 +478,7 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
+        private int _TimerMax = 30;
 
         #region スライドショーのスタート
         /// <summary>
@@ -448,15 +488,13 @@ namespace Destinationboard.ViewModels
         {
             try
             {
+                _TimerMax = this.TimerSec;
+
                 if (this.Bookmarks != null && this.Bookmarks.Items.Count > 0)
                 {
                     this.Bookmarks.SelectedItem = this.Bookmarks.Items.ElementAt(0);
                 }
 
-                // インターバルを設定
-                _SlideShowTimer.Interval = new TimeSpan(0, 0, TimerSec);
-                // タイマメソッドを設定
-                _SlideShowTimer.Tick += new EventHandler(SlideShowChange);
                 // タイマを開始
                 _SlideShowTimer.Start();
             }
@@ -479,6 +517,9 @@ namespace Destinationboard.ViewModels
                 // タイマを開始
                 _SlideShowTimer.Stop();
 
+                // 最大値に戻す
+                this.TimerSec = this._TimerMax;
+
             }
             catch (Exception e)
             {
@@ -488,14 +529,33 @@ namespace Destinationboard.ViewModels
         }
         #endregion
 
-        // タイマメソッド
+        #region タイマー処理
+        /// <summary>
+        /// タイマー処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
         private void SlideShowChange(object sender, EventArgs ev)
         {
             try
             {
+                // 0秒になっていない場合
+                if (this.TimerSec > 1)
+                {
+                    this.TimerSec--;    // カウントダウン
+                    return;
+                }
+                else
+                {
+                    // 最大値に戻す
+                    this.TimerSec = this._TimerMax;
+                }
+
+                // ブックマークリストがあるかどうかをチェック
                 if (this.Bookmarks == null)
                     return;
 
+                // 選択されているものがあるかどうかをチェックする
                 if (this.Bookmarks.SelectedItem == null)
                 {
                     this.Bookmarks.SelectedItem = this.Bookmarks.Items.ElementAt(0);
@@ -503,19 +563,25 @@ namespace Destinationboard.ViewModels
                     return;
                 }
 
+                // 選択位置の取り出し
                 int index = this.Bookmarks.Items.IndexOf(this.Bookmarks.SelectedItem);
 
                 if (index < 0)
                 {
+                    ;   // スライド中に突然消された場合とか？
                 }
                 else if (index < this.Bookmarks.Items.Count - 1)
                 {
+                    // 次のスライドへ移動
                     this.Bookmarks.SelectedItem = this.Bookmarks.Items.ElementAt(index + 1);
                 }
                 else
                 {
+                    // 最後まで行ったので先頭に戻る
                     this.Bookmarks.SelectedItem = this.Bookmarks.Items.ElementAt(0);
                 }
+
+                // 画面遷移
                 WebMove(this.Bookmarks.SelectedItem.URI);
             }
             catch (Exception e)
@@ -524,5 +590,6 @@ namespace Destinationboard.ViewModels
                 ShowMessage.ShowErrorOK(e.Message, "Error");
             }
         }
+        #endregion
     }
 }

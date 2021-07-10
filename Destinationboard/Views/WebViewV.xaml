@@ -6,9 +6,15 @@
              xmlns:ViewModels="clr-namespace:Destinationboard.ViewModels" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:Destinationboard.Views"
+             xmlns:behavior="clr-namespace:Destinationboard.Common.Behaviors"
+             xmlns:Converters="clr-namespace:Destinationboard.Common.Converters"
              x:Class="Destinationboard.Views.WebViewV"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Converters:InverseBooloeanConverter x:Key="InverseBooloeanConverter"/>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <ViewModels:WebViewVM/>
     </UserControl.DataContext>
@@ -33,25 +39,27 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="5" VerticalAlignment="Center" Text="URL:"/>
-            <TextBox Margin="5" VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam" />
-            <Button Margin="5" Content="移動" Grid.Column="2" Cursor="Hand">
+            <TextBox Margin="5" behavior:TextBoxEnterKeyBehavior.EnterDownBehavior="UpdateSourceAndSelectAll" VerticalAlignment="Center" Text="{Binding URI}" Grid.Column="1" Cursor="IBeam">
                 <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Click">
+                    <b:EventTrigger EventName="TargetUpdated">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="WebMove"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
-            </Button>
-            <Button Margin="5" Content="お気に入り" Grid.Column="3" Cursor="Hand">
+            </TextBox>
+
+            <Button Margin="5" Content="★" Grid.Column="2" Cursor="Hand">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMark"/>
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </Button>
-            <ToggleButton IsChecked="{Binding IsSlideShow}" Margin="5" Content="スライドショー" Grid.Column="4" Cursor="Hand">
+            <ToggleButton Width="150" Grid.Column="3" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"/>
+
+
+            <ToggleButton Width="100" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding IsSlideShow}" Margin="5" Content="スライドショー" Grid.Column="3" Cursor="Hand">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Checked">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="StartSlidShow"/>
@@ -61,7 +69,7 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ToggleButton>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Grid.Column="5" Width="50" Text="{Binding TimerSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Grid.Column="4" Width="50" Text="{Binding TimerSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam" IsEnabled="{Binding IsSlideShow, Converter={StaticResource InverseBooloeanConverter}}"/>
         </Grid>
 
         <GroupBox Grid.Row="1" Header="ウェブ">
@@ -71,51 +79,59 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <wv2:WebView2 x:Name="webView2" Source="{Binding URI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Expander ExpandDirection="Right" Grid.Column="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" 
+                <Grid Grid.Column="1" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=toggleButton}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid AutoGenerateColumns="False" 
+                              CanUserAddRows="False"
                               ItemsSource="{Binding Bookmarks.Items}" 
                               SelectedItem="{Binding Bookmarks.SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="お気に入り" Binding="{Binding URI}"/>
-                            </DataGrid.Columns>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="お気に入り" Binding="{Binding Name}"/>
+                        </DataGrid.Columns>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMarkSelectionChanged"/>
+                            </b:EventTrigger>
+                            <b:EventTrigger EventName="CellEditEnding">
+                                <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMarkCellEnding"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DataGrid>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+                        <Button Margin="5" Content="↑">
                             <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="SelectionChanged">
-                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="BookMarkSelectionChanged"/>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
-                        </DataGrid>
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
-                            <Button Margin="5" Content="↑">
-                                <b:Interaction.Triggers>
-                                    <b:EventTrigger EventName="Click">
-                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveUp"/>
-                                    </b:EventTrigger>
-                                </b:Interaction.Triggers>
-                            </Button>
-                            <Button Margin="5" Content="-">
-                                <b:Interaction.Triggers>
-                                    <b:EventTrigger EventName="Click">
-                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="Delete"/>
-                                    </b:EventTrigger>
-                                </b:Interaction.Triggers>
-                            </Button>
-                            <Button Margin="5" Content="↓" Cursor="Hand">
-                                <b:Interaction.Triggers>
-                                    <b:EventTrigger EventName="Click">
-                                        <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
-                                    </b:EventTrigger>
-                                </b:Interaction.Triggers>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </Expander>
+                        </Button>
+                        <Button Margin="5" Content="-">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="Delete"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                        <Button Margin="5" Content="↓" Cursor="Hand">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction TargetObject="{Binding}" MethodName="MoveDown"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </GroupBox>
+        <Grid Grid.Row="1">
+            <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" VerticalAlignment="Top" 
+                          HorizontalAlignment="Right" x:Name="toggleButton" Content="★" Foreground="White"/>
+
+        </Grid>
+
     </Grid>
 
 </UserControl>
